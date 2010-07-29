@@ -1,0 +1,440 @@
+# Copyright 2008, 2009 Hugo Párraga Martín
+#
+# This file is part of PyCamimg.
+#
+# PyCamimg is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PyCamimg is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PyCamimg.  If not, see <http://www.gnu.org/licenses/>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-13 14:22+0100\n"
+"PO-Revision-Date: 2009-11-13 14:27+0100\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pycamimg/pycamimg.py:282
+msgid "English"
+msgstr "English"
+
+#: pycamimg/pycamimg.py:283
+msgid "Spanish"
+msgstr "Spanish"
+
+#: pycamimg/ui/ExecuteWindow.py:92 pycamimg/ui/ExecuteWindow.py:140
+#: pycamimg/ui/ExecuteWindow.py:537 pycamimg/ui/Main.py:592
+msgid "Execute"
+msgstr "Execute"
+
+#: pycamimg/ui/ExecuteWindow.py:139
+msgid "Exit"
+msgstr "Exit"
+
+#: pycamimg/ui/ExecuteWindow.py:139
+msgid "Close execute dialog"
+msgstr "Close execute dialog"
+
+#: pycamimg/ui/ExecuteWindow.py:140
+msgid "Execute current project"
+msgstr "Execute current project"
+
+#: pycamimg/ui/ExecuteWindow.py:141
+msgid "Cancel"
+msgstr "Cancel"
+
+#: pycamimg/ui/ExecuteWindow.py:141
+msgid "Cancel current execution"
+msgstr "Cancel current execution"
+
+#: pycamimg/ui/ExecuteWindow.py:169
+msgid "Log"
+msgstr "Log"
+
+#: pycamimg/ui/ExecuteWindow.py:217
+msgid "Press Accept to start"
+msgstr "Press Accept to start"
+
+#: pycamimg/ui/ExecuteWindow.py:219
+msgid "Execute project"
+msgstr "Execute project"
+
+#: pycamimg/ui/ExecuteWindow.py:230
+msgid "No items in project."
+msgstr "No items in project."
+
+#: pycamimg/ui/ExecuteWindow.py:296 pycamimg/ui/ExecuteWindow.py:518
+msgid "Begin process of project: "
+msgstr "Begin process of project: "
+
+#: pycamimg/ui/ExecuteWindow.py:304
+msgid "\tProcessing: "
+msgstr "\tProcessing: "
+
+#: pycamimg/ui/ExecuteWindow.py:342
+msgid ""
+"\n"
+"Process finished"
+msgstr ""
+"\n"
+"Process finished"
+
+#: pycamimg/ui/ExecuteWindow.py:446
+msgid "Current project is running. Are you sure you want to exit?"
+msgstr "Current project is running. Are you sure you want to exit?"
+
+#: pycamimg/ui/ExecuteWindow.py:447
+msgid "Close execution project"
+msgstr "Close execution project"
+
+#: pycamimg/ui/ExecuteWindow.py:487
+msgid "Are you sure you want to cancel project?"
+msgstr "Are you sure you want to cancel project?"
+
+#: pycamimg/ui/ExecuteWindow.py:488
+msgid "Cancel project"
+msgstr "Cancel project"
+
+#: pycamimg/ui/ExecuteWindow.py:536
+msgid "There aren't items"
+msgstr "There aren't items"
+
+#: pycamimg/ui/Explorer.py:141
+msgid "<b><u>Tree</u></b>"
+msgstr "<b><u>Tree</u></b>"
+
+#: pycamimg/ui/Explorer.py:156
+msgid "<b>Navigator</b>"
+msgstr "<b>Navigator</b>"
+
+#: pycamimg/ui/Explorer.py:177
+msgid "_Back"
+msgstr "_Back"
+
+#: pycamimg/ui/Explorer.py:177
+msgid "Go back in history"
+msgstr "Go back in history"
+
+#: pycamimg/ui/Explorer.py:178
+msgid "_Forward"
+msgstr "_Forward"
+
+#: pycamimg/ui/Explorer.py:178
+msgid "Go forward in history"
+msgstr "Go forward in history"
+
+#: pycamimg/ui/Explorer.py:179
+msgid "Up"
+msgstr "Up"
+
+#: pycamimg/ui/Explorer.py:179
+msgid "Go up level in explorer"
+msgstr "Go up level in explorer"
+
+#: pycamimg/ui/Explorer.py:180
+msgid "_Home"
+msgstr "_Home"
+
+#: pycamimg/ui/Explorer.py:180
+msgid "Go Home"
+msgstr "Go Home"
+
+#: pycamimg/ui/FactoryControls.py:149
+msgid "Progress"
+msgstr "Progress"
+
+#: pycamimg/ui/FileExplorer.py:133 pycamimg/ui/TabProject.py:166
+msgid "Name"
+msgstr "Name"
+
+#: pycamimg/ui/FileExplorer.py:135
+msgid "Size"
+msgstr "Size"
+
+#: pycamimg/ui/FileExplorer.py:137
+msgid "Type"
+msgstr "Type"
+
+#: pycamimg/ui/FileExplorer.py:139
+msgid "Modify Date"
+msgstr "Modify Date"
+
+#: pycamimg/ui/FileExplorer.py:350 pycamimg/ui/FileExplorer.py:352
+#: pycamimg/ui/FileExplorer.py:401 pycamimg/ui/FileExplorer.py:403
+#: pycamimg/ui/TreeExplorer.py:269
+msgid "Loading..."
+msgstr "Loading..."
+
+#: pycamimg/ui/Main.py:208
+msgid "_File"
+msgstr "_File"
+
+#: pycamimg/ui/Main.py:209
+msgid "New Project"
+msgstr "New Project"
+
+#: pycamimg/ui/Main.py:210
+msgid "_Open"
+msgstr "_Open"
+
+#: pycamimg/ui/Main.py:210
+msgid "Open PyCamimg project"
+msgstr "Open PyCamimg project"
+
+#: pycamimg/ui/Main.py:211
+msgid "_Save"
+msgstr "_Save"
+
+#: pycamimg/ui/Main.py:211 pycamimg/ui/Main.py:212
+msgid "Save current project"
+msgstr "Save current project"
+
+#: pycamimg/ui/Main.py:212
+msgid "Save _As"
+msgstr "Save _As"
+
+#: pycamimg/ui/Main.py:213
+msgid "_Quit"
+msgstr "_Quit"
+
+#: pycamimg/ui/Main.py:213
+msgid "Quit PyCamimg"
+msgstr "Quit PyCamimg"
+
+#: pycamimg/ui/Main.py:214
+msgid "_Tools"
+msgstr "_Tools"
+
+#: pycamimg/ui/Main.py:215 pycamimg/ui/TabProject.py:172
+msgid "Operations"
+msgstr "Operations"
+
+#: pycamimg/ui/Main.py:216
+msgid "_Preferences"
+msgstr "_Preferences"
+
+#: pycamimg/ui/Main.py:216 pycamimg/ui/Main.py:218
+msgid "Preferences of PyCamimg"
+msgstr "Preferences of PyCamimg"
+
+#: pycamimg/ui/Main.py:217
+msgid "_Help"
+msgstr "_Help"
+
+#: pycamimg/ui/Main.py:218
+msgid "_About PyCamimg"
+msgstr "_About PyCamimg"
+
+#: pycamimg/ui/Main.py:219
+msgid "Add Images"
+msgstr "Add Images"
+
+#: pycamimg/ui/Main.py:219
+msgid "Add selected images"
+msgstr "Add selected images"
+
+#: pycamimg/ui/Main.py:220
+msgid "Delete Images"
+msgstr "Delete Images"
+
+#: pycamimg/ui/Main.py:220
+msgid "Delete selected images"
+msgstr "Delete selected images"
+
+#: pycamimg/ui/Main.py:221
+msgid "Run"
+msgstr "Run"
+
+#: pycamimg/ui/Main.py:221
+msgid "Run current project"
+msgstr "Run current project"
+
+#: pycamimg/ui/Main.py:222
+msgid "Toggle view"
+msgstr "Toggle view"
+
+#: pycamimg/ui/Main.py:222
+msgid "Toggle between differents views"
+msgstr "Toggle between differents views"
+
+#: pycamimg/ui/Main.py:361
+msgid "Project"
+msgstr "Project"
+
+#: pycamimg/ui/Main.py:536
+msgid "It can not show image"
+msgstr "It can not show image"
+
+#: pycamimg/ui/Main.py:537 pycamimg/ui/Main.py:543
+msgid "Preview"
+msgstr "Preview"
+
+#: pycamimg/ui/Main.py:542
+msgid "Select one item"
+msgstr "Select one item"
+
+#: pycamimg/ui/Main.py:591
+msgid "There isn't current project"
+msgstr "There isn't current project"
+
+#: pycamimg/ui/Main.py:632 pycamimg/ui/Main.py:659
+msgid "Open project"
+msgstr "Open project"
+
+#: pycamimg/ui/Main.py:641 pycamimg/ui/Main.py:722
+msgid "PyCamimg file"
+msgstr "PyCamimg file"
+
+#: pycamimg/ui/Main.py:657
+#, python-format
+msgid "An error was occurred when it was loading project from %s"
+msgstr "An error was occurred when it was loading project from %s"
+
+#: pycamimg/ui/Main.py:686 pycamimg/ui/Main.py:697 pycamimg/ui/Main.py:742
+#, python-format
+msgid "An error was occurred when it was saving current project to %s"
+msgstr "An error was occurred when it was saving current project to %s"
+
+#: pycamimg/ui/Main.py:688 pycamimg/ui/Main.py:699 pycamimg/ui/Main.py:714
+#: pycamimg/ui/Main.py:744
+msgid "Save project"
+msgstr "Save project"
+
+#: pycamimg/ui/Main.py:787
+msgid "Are you sure you want to close PyCamimg?"
+msgstr "Are you sure you want to close PyCamimg?"
+
+#: pycamimg/ui/Main.py:788
+msgid "Close PyCamimg"
+msgstr "Close PyCamimg"
+
+#: pycamimg/ui/MimeInfo.py:351
+msgid "File"
+msgstr "File"
+
+#: pycamimg/ui/OptionsDialog.py:71
+msgid "Preferences"
+msgstr "Preferences"
+
+#: pycamimg/ui/OptionsDialog.py:115
+msgid "Show hidden files"
+msgstr "Show hidden files"
+
+#: pycamimg/ui/OptionsDialog.py:141
+msgid "Number of columns"
+msgstr "Number of columns"
+
+#: pycamimg/ui/OptionsDialog.py:143
+msgid "Height of images"
+msgstr "Height of images"
+
+#: pycamimg/ui/OptionsDialog.py:146
+msgid "View of images"
+msgstr "View of images"
+
+#: pycamimg/ui/OptionsDialog.py:161
+msgid "Image Options"
+msgstr "Image Options"
+
+#: pycamimg/ui/OptionsDialog.py:168
+msgid "Show image in list"
+msgstr "Show image in list"
+
+#: pycamimg/ui/OptionsDialog.py:192
+msgid "Maximum Height"
+msgstr "Maximum Height"
+
+#: pycamimg/ui/OptionsDialog.py:194
+msgid "Percent to resize"
+msgstr "Percent to resize"
+
+#: pycamimg/ui/OptionsDialog.py:201
+msgid "List of images"
+msgstr "List of images"
+
+#: pycamimg/ui/OptionsDialog.py:211
+msgid "Interface"
+msgstr "Interface"
+
+#: pycamimg/ui/OptionsDialog.py:223 pycamimg/ui/OptionsDialog.py:238
+msgid "Language"
+msgstr "Language"
+
+#: pycamimg/ui/OptionsDialog.py:227
+msgid "Need to Restart"
+msgstr "Need to Restart"
+
+#: pycamimg/ui/OptionsDialog.py:246
+msgid "Add recursive"
+msgstr "Add recursive"
+
+#: pycamimg/ui/OptionsDialog.py:259
+msgid "Recursive Level"
+msgstr "Recursive Level"
+
+#: pycamimg/ui/OptionsDialog.py:274
+msgid "Core"
+msgstr "Core"
+
+#: pycamimg/ui/RegOperations.py:74
+msgid "<b>Operations</b>"
+msgstr "<b>Operations</b>"
+
+#: pycamimg/ui/RegOperations.py:113
+msgid "Process"
+msgstr "Process"
+
+#: pycamimg/ui/TabProject.py:168
+msgid "Photo Date"
+msgstr "Photo Date"
+
+#: pycamimg/ui/TabProject.py:170
+msgid "Target Name"
+msgstr "Target Name"
+
+#: pycamimg/ui/TabProject.py:622
+msgid "Adding images..."
+msgstr "Adding images..."
+
+#: pycamimg/ui/TreeExplorer.py:91
+msgid "home"
+msgstr "home"
+
+#: pycamimg/ui/TreeExplorer.py:122
+msgid "Explorer"
+msgstr "Explorer"
+
+msgid "Delete Operations"
+msgstr "Delete Operations"
+
+msgid "Delete selected operations"
+msgstr "Delete selected operations"
+
+msgid "Delete operations"
+msgstr "Delete operations"
+
+msgid "It can not get item"
+msgstr "It can not get item"
+
+msgid "Operation"
+msgstr "Operation"
+
+msgid "Parameters"
+msgstr "Parameters"
+
+msgid "Delete"
+msgstr "Delete"

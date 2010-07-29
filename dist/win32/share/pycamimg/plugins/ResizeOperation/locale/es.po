@@ -1,0 +1,63 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-16 11:52+0100\n"
+"PO-Revision-Date: 2009-11-16 11:59+0100\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: camimgplugin.py:51
+msgid "Resize Operation"
+msgstr "Operación Redimensionar"
+
+msgid "Resize Images"
+msgstr "Redimensionar Imágenes"
+
+msgid "Resize selected images"
+msgstr "Redimensionar imágenes seleccionadas"
+
+msgid "Select one or more items"
+msgstr "Seleccione uno o más elementos"
+
+msgid "Resize"
+msgstr "Redimensionar"
+
+msgid "Resizing..."
+msgstr "Redimensionando..."
+
+msgid "Pixels"
+msgstr "Pixels"
+
+msgid "CM"
+msgstr "CM"
+
+msgid "Percentaje"
+msgstr "Porcentaje"
+
+msgid "Width"
+msgstr "Ancho"
+
+msgid "Height"
+msgstr "Alto"
+
+msgid "Width must be getter than 0"
+msgstr "Ancho debe ser mayor que 0"
+
+msgid "Wrong width"
+msgstr "Ancho erróneo"
+
+msgid "Height must be getter than 0"
+msgstr "Alto debe ser mayor que 0"
+
+msgid "Wrong height"
+msgstr "Alto erróneo"

@@ -1,0 +1,43 @@
+<ui>
+	<menubar name="MenuPyCaming">
+		<menu name="FileMenu" action="FileMenuAction">
+			<menu name="NewProject" action="NewProjectAction">
+				<placeholder name="NewProjectAdditions" />
+			</menu>
+			<menuitem name="OpenProject" action="OpenProjectAction" />
+			<menuitem name="SaveProject" action="SaveProjectAction" />
+			<menuitem name="SaveAsProject" action="SaveAsProjectAction" />
+			<separator />
+			<menuitem name="Quit" action="QuitAction" />
+			<separator />
+			<placeholder name="FileMenuAdditions" />
+		</menu>
+		<menu name="ToolsMenu" action="ToolsMenuAction">
+			<menu name="Operations" action="OperationsAction">
+				<placeholder name="OperationsMenuAdditions" />
+			</menu>
+			<separator />
+			<placeholder name="ToolsMenuAdditions" />
+			<separator />
+			<menuitem name="Preferences" action="PreferencesAction" />
+    	</menu>
+    	<menu name="HelpMenu" action="HelpMenuAction">
+    		<placeholder name="HelpMenuAdditions" />
+    		<separator />
+    		<menuitem name="About" action="AboutAction" />
+    	</menu>
+  	</menubar>
+  	<toolbar name="ToolsPyCamimg">
+  		<toolitem name="SaveProject" action="SaveProjectAction" />
+  		<separator/>
+  		<toolitem name="ChangeView" action="ChangeViewAction" />
+  		<separator/>
+  		<toolitem name="AddItem" action="AddItemAction" />
+  		<toolitem name="DelItem" action="DelItemAction" />
+  		<toolitem name="DelOperations" action="DelOperationsAction" />
+  		<separator/>
+  		<placeholder name="ActionsToolItems" />
+      	<separator/>
+      	<toolitem name="Run" action="RunAction" />
+  	</toolbar>
+</ui>

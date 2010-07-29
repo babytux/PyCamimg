@@ -1,0 +1,19 @@
+include MANIFEST MANIFEST.in
+include setup.py
+
+recursive-include share/pycamimg/plugins *.py *.po *.mo *.pot
+recursive-include src *.py *.po *.mo
+
+include src/share/pycamimg/COPYING
+include src/share/pycamimg/config/*.cfg
+include src/share/pycamimg/locale/pycamimg.pot
+include src/share/pycamimg/locale/es.po
+include src/share/pycamimg/locale/en.po
+include src/share/pycamimg/locale/es/LC_MESSAGES/pycamimg.mo
+include src/share/pycamimg/locale/en/LC_MESSAGES/pycamimg.mo
+include src/share/pycamimg/icons/*.png
+include src/share/pycamimg/icons/*.jpg
+include src/share/pycamimg/icons/*.bmp
+include src/share/pycamimg/icons/*.ico
+include src/share/pycamimg/icons/*.gif
+include src/share/pycamimg/xml/*.xml

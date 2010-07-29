@@ -1,0 +1,63 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-16 11:52+0100\n"
+"PO-Revision-Date: 2009-11-16 11:59+0100\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: camimgplugin.py:51
+msgid "Resize Operation"
+msgstr "Resize Operation"
+
+msgid "Resize Images"
+msgstr "Resize Images"
+
+msgid "Resize selected images"
+msgstr "Resize selected images"
+
+msgid "Select one or more items"
+msgstr "Select one or more items"
+
+msgid "Resize"
+msgstr "Resize"
+
+msgid "Resizing..."
+msgstr "Resizing..."
+
+msgid "Pixels"
+msgstr "Pixels"
+
+msgid "CM"
+msgstr "CM"
+
+msgid "Percentaje"
+msgstr "Percentaje"
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Height"
+msgstr "Height"
+
+msgid "Width must be getter than 0"
+msgstr "Width must be getter than 0"
+
+msgid "Wrong width"
+msgstr "Wrong width"
+
+msgid "Height must be getter than 0"
+msgstr "Height must be getter than 0"
+
+msgid "Wrong height"
+msgstr "Wrong height"

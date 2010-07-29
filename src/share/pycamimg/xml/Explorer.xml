@@ -1,0 +1,11 @@
+<ui>
+	<toolbar name="ToolsExplorer">
+  		<toolitem name="Back" action="BackExplorerAction" />
+  		<toolitem name="Forward" action="ForwardExplorerAction" />
+  		<toolitem name="Up" action="UpExplorerAction" />
+  		<separator/>
+  		<toolitem name="Home" action="HomeExplorerAction" />
+  		<separator/>
+  		<placeholder name="ActionsToolItems" />
+  	</toolbar>
+</ui>

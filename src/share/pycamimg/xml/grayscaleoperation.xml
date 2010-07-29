@@ -1,0 +1,17 @@
+<ui>
+	<menubar name="MenuPyCaming">
+		<menu name="ToolsMenu" action="ToolsMenuAction">
+			<menu name="Operations" action="OperationsAction">
+					<placeholder name="OperationsMenuAdditions">
+						<menuitem name="GrayScale" action="GrayScaleAction" />
+						<separator />	
+					</placeholder>
+				</menu>
+    	</menu>
+	</menubar>
+	<toolbar name="ToolsPyCamimg">
+		<placeholder name="ActionsToolItems">
+			<toolitem name="GrayScale" action="GrayScaleAction" />
+		</placeholder>
+	</toolbar>
+</ui>

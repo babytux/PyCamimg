@@ -1,0 +1,2 @@
+LogName = "PyCamimg"
+gettextName = "pycamimg"

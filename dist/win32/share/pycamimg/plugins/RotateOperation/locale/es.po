@@ -1,0 +1,73 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-16 12:07+0100\n"
+"PO-Revision-Date: 2009-11-16 12:16+0100\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: camimgplugin.py:51
+msgid "Rotate Operation"
+msgstr "Operación Rotar"
+
+msgid "Rotate Images"
+msgstr "Rotar Imágenes"
+
+msgid "Rotate selected images"
+msgstr "Rotar imágenes seleccionadas"
+
+msgid "Rotate On Left"
+msgstr "Rotar a la Izquierda"
+
+msgid "Rotate selected images on the left"
+msgstr "Rotar las imágenes seleccionadas a la izquierda"
+
+msgid "Rotate On Right"
+msgstr "Rotar a la Derecha"
+
+msgid "Rotate selected images on the right"
+msgstr "Rotar las imágenes seleccionadas a la derecha"
+
+msgid "Select one or more items"
+msgstr "Seleccione uno o más elementos"
+
+msgid "Rotate"
+msgstr "Rotar"
+
+msgid "Rotating..."
+msgstr "Rotando..."
+
+msgid "Select one option"
+msgstr "Seleccione una opción"
+
+msgid "0º"
+msgstr "0º"
+
+msgid "90º"
+msgstr "90º"
+
+msgid "180º"
+msgstr "180º"
+
+msgid "270º"
+msgstr "270º"
+
+msgid "Custom"
+msgstr "Personalizado"
+
+msgid ""
+"There is not valid degrees selected.\n"
+"Please select correct degrees"
+msgstr ""
+"No se ha seleccionado un ángulo correcto.\n"
+"Por favor seleccione un ángulo correcto"

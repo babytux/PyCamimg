@@ -1,0 +1,12 @@
+<ui>
+	<menubar name="MenuPyCaming">
+		<menu name="ToolsMenu" action="ToolsMenuAction">
+			<menu name="Operations" action="OperationsAction">
+				<placeholder name="OperationsMenuAdditions">
+					<menuitem name="SepiaTone" action="SepiaToneAction" />
+					<separator />	
+				</placeholder>
+			</menu>
+    	</menu>
+	</menubar>
+</ui>

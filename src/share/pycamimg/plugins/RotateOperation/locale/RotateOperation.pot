@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-16 12:07+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: camimgplugin.py:51
+msgid "Rotate Operation"
+msgstr ""
+
+msgid "Rotate Images"
+msgstr ""
+
+msgid "Rotate selected images"
+msgstr ""
+
+msgid "Rotate On Left"
+msgstr ""
+
+msgid "Rotate selected images on the left"
+msgstr ""
+
+msgid "Rotate On Right"
+msgstr ""
+
+msgid "Rotate selected images on the right"
+msgstr ""
+
+msgid "Select one or more items"
+msgstr ""
+
+msgid "Rotate"
+msgstr ""
+
+msgid "Rotating..."
+msgstr ""
+
+msgid "Select one option"
+msgstr ""
+
+msgid "0º"
+msgstr ""
+
+msgid "90º"
+msgstr ""
+
+msgid "180º"
+msgstr ""
+
+msgid "270º"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "There is not valid degrees selected.\nPlease select correct degrees"
+msgstr ""
+
+

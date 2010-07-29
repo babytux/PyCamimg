@@ -1,0 +1,12 @@
+gtk
+gtk.glade
+pygtk
+gobject
+PIL
+gettext
+jpeg
+pkg_resources
+ctypes
+win32api
+win32com
+win32con
