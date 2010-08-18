@@ -57,5 +57,7 @@ except Exception, ex:
 finally:
     if p:
         del p
+        p = None
 del path
+path = None
 
