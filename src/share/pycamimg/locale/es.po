@@ -438,3 +438,21 @@ msgstr "Parámetros"
 
 msgid "Delete"
 msgstr "Borrar"
+
+msgid "Photo Album folder"
+msgstr "Directorio del álbum de fotos"
+
+msgid "Enable Photo Album"
+msgstr "Habilitar álbum de fotos"
+
+msgid "Photo Album Path"
+msgstr "Ruta del Albúm"
+
+msgid "Photo Album"
+msgstr "Álbum de Fotos"
+
+msgid "P_lugins"
+msgstr "Co_mplementos"
+
+msgid "Plugins of PyCamimg"
+msgstr "Complmentos de PyCamimg"

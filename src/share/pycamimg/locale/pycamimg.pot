@@ -436,3 +436,20 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "Photo Album folder"
+msgstr ""
+
+msgid "Enable Photo Album"
+msgstr ""
+
+msgid "Photo Album Path"
+msgstr ""
+
+msgid "Photo Album"
+msgstr ""
+
+msgid "P_lugins"
+msgstr ""
+
+msgid "Plugins of PyCamimg"
+msgstr ""

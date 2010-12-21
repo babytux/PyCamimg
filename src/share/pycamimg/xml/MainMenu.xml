@@ -20,6 +20,7 @@
 			<placeholder name="ToolsMenuAdditions" />
 			<separator />
 			<menuitem name="Preferences" action="PreferencesAction" />
+			<menuitem name="Plugins" action="PluginsAction" />
     	</menu>
     	<menu name="HelpMenu" action="HelpMenuAction">
     		<placeholder name="HelpMenuAdditions" />

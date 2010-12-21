@@ -67,6 +67,7 @@ class Configuration:
         config.set("UI_CORE", "xmlui_path", "")
         config.set("UI_CORE", "add_recursive", ("%d" % True))
         config.set("UI_CORE", "recursive_level", ("%d" % 1))
+        config.set("UI_CORE", "enable_db", ("%d" % 1))
         config.add_section("LOG")
         config.set("LOG", "filename", "pycamimg.log")
         config.set("LOG", "level", ("%d" % 20))

@@ -45,10 +45,10 @@ msgid "Select a target album"
 msgstr "Seleccionar un álbum"
 
 msgid ""
-"You are not signed in facebook\n"
+"You are signed in facebook\n"
 "Do you like sign in facebook?"
 msgstr ""
-"No estás autentificado en facebook\n"
+"Estás autentificado en facebook\n"
 "¿Quieres conectarte a facebook?"
 
 msgid "Facebook Login"

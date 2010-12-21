@@ -97,6 +97,8 @@ class ExecuteWindow(gtk.Window):
             super(ExecuteWindow, self).set_position(gtk.WIN_POS_CENTER)
         
         self.__parent__ = parent
+        self.__core__.setMainWindow(self)
+        self.__core__.getProjectType().setBlockWindow(self)
         
         super(ExecuteWindow, self).set_size_request(450, 300)
         super(ExecuteWindow, self).set_icon_from_file(os.path.join(__ICONS_FOLDER__, "pycamimg.png"))
@@ -119,6 +121,12 @@ class ExecuteWindow(gtk.Window):
         """
         self.__vMain__ = gtk.VBox()
         self.__initToolbar__()
+        
+        self.__chAddPhotoAlbum__ = gtk.CheckButton(label=_("Add to Photo Album"))
+        
+        hbPhotoAlbum = gtk.HBox()
+        hbPhotoAlbum.pack_start(self.__chAddPhotoAlbum__, False, False)
+        self.__vMain__.pack_start(hbPhotoAlbum, False, False)
         
         self.__initLog__()
         
@@ -420,7 +428,8 @@ class ExecuteWindow(gtk.Window):
         """
         if (self.__queryClose__()):
             self.hide()
-            self.destroy()        
+            self.destroy()
+            self.__core__.getProjectType().setBlockWindow(None)
 
     def __queryQuitEvent__(self, window, event=None):
         """
@@ -469,6 +478,8 @@ class ExecuteWindow(gtk.Window):
         self.__core__.setCallbackBeginItem(self.__beginItemOnExecute__)
         self.__core__.setCallbackEndItem(self.__endItemOnExecute__)
         self.__core__.setCallbackEndProcess(self.endExecutionAsync)
+        
+        self.__core__.setAddPhotoAlbum(self.__chAddPhotoAlbum__.get_active())
 
         __log__.debug("All callbacks are defined.");
 

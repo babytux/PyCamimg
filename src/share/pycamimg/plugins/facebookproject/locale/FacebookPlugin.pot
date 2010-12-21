@@ -43,7 +43,7 @@ msgstr ""
 msgid "Select a target album"
 msgstr ""
 
-msgid "You are not signed in facebook\nDo you like sign in facebook?"
+msgid "You are signed in facebook\nDo you like sign in facebook?"
 msgstr ""
 
 msgid "Facebook Login"

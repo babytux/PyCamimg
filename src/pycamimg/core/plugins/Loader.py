@@ -45,12 +45,21 @@ __classplugin__ = "camimgplugin"
 __package__ = "pycamimg"
 __plugindir__ = "plugins"
 pluginsLoaded = {}
+pluginsLoadedArray = []
+pluginDepsWait = []
+
+INDEX_PLUGIN = 0
+INDEX_PLUGIN_INSTANCE = 1
 
 def load(dictPaths={}):
     """
     @summary: Load plugins
     """
     pluginsLoaded.clear()
+    while (len(pluginsLoadedArray) > 0):
+        pluginsLoadedArray.pop()
+    while (len(pluginDepsWait) > 0):
+        pluginDepsWait.pop()
     pathPluginsTypes = None
     
     iou = IOUtils()
@@ -69,93 +78,165 @@ def load(dictPaths={}):
             dictPaths[__plugindir__] = pathPluginsTypes
     
     for key, path in dictPaths.iteritems():
-        pathPluginsTypes = os.path.join(path, __plugindir__);
-        sys.path.append(pathPluginsTypes)
+        __loadDirPlugin__(key, path, iou)
         
-        # import plugin module to set plugin reference. 
-        try:
-            imp.load_source(key, os.path.join(pathPluginsTypes, "__init__.py"))
-        except Exception, ex:
-            __log__.error("It could not load %s. Skip it" % pathPluginsTypes)
-            continue
+        
+    toTry = len(pluginDepsWait)
+    if (toTry > 0):
+        attempt = -1
+        while ((attempt != 0) and (attempt != toTry)):
+            curr = 0
+            attempt = len(pluginDepsWait)
+            while (curr < attempt):
+                pathPluginsTypes, plugin, key = pluginDepsWait.pop(curr)
+                if (__loadPlugin__(pathPluginsTypes, plugin, key, iou) == 1):
+                    pluginDepsWait.append((pathPluginsTypes, plugin, key))
+                curr += 1
+            attempt = len(pluginDepsWait)
+    del iou
+    
+def __loadDirPlugin__(key, path, iou = None):
+    """
+    @summary: Load plugins from a directory.
+    @param key: Name of directory where plugins are.
+    @param path: Parent where directory is.
+    @param iou: IOUtils object. 
+    """
+    delIou = False
+    if iou == None:
+        delIou = True
+        iou = IOUtils()
+    
+    pathPluginsTypes = os.path.join(path, key)
+    sys.path.append(pathPluginsTypes)
+    next = True
+    # import plugin module to set plugin reference. 
+    try:
+        imp.load_source(key, os.path.join(pathPluginsTypes, "__init__.py"))
+    except Exception, ex:
+        __log__.error("It could not load %s. Skip it" % pathPluginsTypes)
+        next = False
+        
+    if (next):
         import plugins
         
         plugins = iou.getDirectories(pathPluginsTypes)
         if (plugins != None):
             for plugin in plugins:
-                py_mod = None
-                filesPluginPath = os.path.join(pathPluginsTypes, plugin)
-                files = iou.getFiles(filesPluginPath)
-                isPlugin = False
-                isCompilled = False
-                
-                if ((files.count("camimgplugin.py") > 0) and (files.count("__init__.py") > 0)):
-                    isCompilled = False
-                    isPlugin = True
-                """
-                if ((files.count("camimgplugin.pyc") > 0) and (files.count("__init__.pyc") > 0)):
-                    isCompilled = True
-                    isPlugin = True
-                """
-                if (isPlugin):
-                    pluginPath = os.path.join(filesPluginPath, "camimgplugin.pyc" if isCompilled else "camimgplugin.py")
-                    pluginModAccess = ("%s.%s" % (key, plugin))
-                    
-                    sys.path.append(filesPluginPath)
-            
-                    if (not isCompilled):
-                        pluginPackagePath = os.path.join(filesPluginPath, "__init__.py")
-                        imp.load_source(pluginModAccess, pluginPackagePath)
-                        __log__.debug("__init__.py imported from package %s", filesPluginPath)
-                        py_mod = imp.load_source("%s.cammingplugin" % pluginModAccess, pluginPath)
-                    else:
-                        pluginPackagePath = os.path.join(filesPluginPath, "__init__.pyc")
-                        imp.load_compiled(pluginModAccess, pluginPackagePath)
-                        __log__.debug("__init__.pyc imported from package %s", filesPluginPath)
-                        py_mod = imp.load_compiled("%s.cammingplugin" % pluginModAccess, pluginPath)
-                        
-                    __log__.info("It detected a plugin in %s" % pluginPath)
-
-                if (isPlugin and (py_mod != None)):
-                    if __classplugin__ in dir(py_mod):
-                        __log__.debug("Loading %s..." % pluginPath)
-                        plugin = py_mod.camimgplugin()
-                        if (plugin.getType() != None):
-                            if (plugin.isCompiled()):
-                                __log__.debug("\t%s is compiled plugin." % pluginPath)
-                                
-                                pluginPath = os.path.join(filesPluginPath, "%s.pyc" % plugin.getPluginModule())
-                                pluginModName = "%s.%s" % (pluginModAccess, plugin.getPluginModule())
-                                try:
-                                    py_mod_class = imp.load_compiled(pluginModName, pluginPath)
-                                except ImportError, ie:
-                                    __log__.error("It could not load %s from %s. %s" % (pluginModName, pluginPath, ie))
-                                    continue
-                            else:
-                                __log__.debug("\t%s is source plugin." % pluginPath)
-                                
-                                pluginPath = os.path.join(filesPluginPath, "%s.py" % plugin.getPluginModule())
-                                pluginModName = "%s.%s" % (pluginModAccess, plugin.getPluginModule())
-                                try:
-                                    py_mod_class = imp.load_source(pluginModName, pluginPath)
-                                except ImportError, ie:
-                                    __log__.error("It could not load %s from %s. %s" % (pluginModName, pluginPath, ie))
-                                    continue
-                                
-                            if (pluginsLoaded.has_key(plugin.getType())):
-                                pluginsLoaded[plugin.getType()].append((plugin.getName(), py_mod_class.CamimgPlugin))
-                            else:
-                                pluginsLoaded[plugin.getType()] = [(plugin.getName(), py_mod_class.CamimgPlugin)]
-                                
-                            plugin.initialize()
-                        else:
-                            __log__.warning("It can not determinate type of the plugin %s" % pluginPath)
-                else:
-                    __log__.warning("It did not set py_mod variable.")
+                if (__loadPlugin__(pathPluginsTypes, plugin, key, iou) == 1):
+                    pluginDepsWait.append((pathPluginsTypes, plugin, key))
         else:
             __log__.warning("There aren't plugins in %s" % pathPluginsTypes)
-    del iou
     
+    if (delIou):
+        del iou
+    
+def __loadPlugin__(pathPluginsTypes, plugin, key, iou = None):
+    """
+    @summary: Load a plugin.
+    @param pathPluginsTypes: Path of directory where plugin is.
+    @param key: Name of directory parent.
+    @param plugin: Name of plugin.
+    @param iou: IOUtils object. 
+    @return: Int with value of op.
+        0 - Ok
+        1 - No deps
+        2 - Fail
+    """
+    iRes = 0
+    delIou = False
+    if iou == None:
+        delIou = True
+        iou = IOUtils()
+    
+    py_mod = None
+    filesPluginPath = os.path.join(pathPluginsTypes, plugin)
+    files = iou.getFiles(filesPluginPath)
+    isPlugin = False
+    isCompilled = False
+    
+    if ((files.count("camimgplugin.py") > 0) and (files.count("__init__.py") > 0)):
+        isCompilled = False
+        isPlugin = True
+    """
+    if ((files.count("camimgplugin.pyc") > 0) and (files.count("__init__.pyc") > 0)):
+        isCompilled = True
+        isPlugin = True
+    """
+    if (isPlugin):
+        pluginPath = os.path.join(filesPluginPath, "camimgplugin.pyc" if isCompilled else "camimgplugin.py")
+        pluginModAccess = ("%s.%s" % (key, plugin))
+        
+        if (not isCompilled):
+            pluginPackagePath = os.path.join(filesPluginPath, "__init__.py")
+            imp.load_source(pluginModAccess, pluginPackagePath)
+            __log__.debug("__init__.py imported from package %s", filesPluginPath)
+            py_mod = imp.load_source("%s.cammingplugin" % pluginModAccess, pluginPath)
+        else:
+            pluginPackagePath = os.path.join(filesPluginPath, "__init__.pyc")
+            imp.load_compiled(pluginModAccess, pluginPackagePath)
+            __log__.debug("__init__.pyc imported from package %s", filesPluginPath)
+            py_mod = imp.load_compiled("%s.cammingplugin" % pluginModAccess, pluginPath)
+            
+        __log__.info("It detected a plugin in %s" % pluginPath)
+
+    if (isPlugin and (py_mod != None)):
+        
+        sys.path.append(filesPluginPath)
+        if __classplugin__ in dir(py_mod):
+            __log__.debug("Loading %s..." % pluginPath)
+            plugin = py_mod.camimgplugin()
+            if (plugin.getType() != None):
+                py_mod_class = None
+                if (plugin.isNeedLoad()):
+                    if ((plugin.getPluginDependecies() != None) and (len(plugin.getPluginDependecies()) > 0)):
+                        for dep in plugin.getPluginDependecies():
+                            if not (dep in pluginsLoadedArray):
+                                iRes = 1
+                                __log__.info("\t%s deps no satisfied." % pluginPath)
+                                break
+                    if (iRes == 0):
+                        if (plugin.isCompiled()):
+                            __log__.debug("\t%s is compiled plugin." % pluginPath)
+                            
+                            pluginPath = os.path.join(filesPluginPath, "%s.pyc" % plugin.getPluginModule())
+                            pluginModName = "%s.%s" % (pluginModAccess, plugin.getPluginModule())
+                            try:
+                                py_mod_class = imp.load_compiled(pluginModName, pluginPath)
+                            except ImportError, ie:
+                                __log__.error("It could not load %s from %s. %s" % (pluginModName, pluginPath, ie))
+                                iRes = 2
+                        else:
+                            __log__.debug("\t%s is source plugin." % pluginPath)
+                            
+                            pluginPath = os.path.join(filesPluginPath, "%s.py" % plugin.getPluginModule())
+                            pluginModName = "%s.%s" % (pluginModAccess, plugin.getPluginModule())
+                            try:
+                                py_mod_class = imp.load_source(pluginModName, pluginPath)
+                            except ImportError, ie:
+                                __log__.error("It could not load %s from %s. %s" % (pluginModName, pluginPath, ie))
+                                iRes = 2
+                else:
+                    __log__.debug("\t%s is need load." % pluginPath)
+                
+                if (iRes == 0):
+                    if (pluginsLoaded.has_key(plugin.getType())):
+                        pluginsLoaded[plugin.getType()].append((plugin, (py_mod_class.CamimgPlugin if py_mod_class else None)))
+                    else:
+                        pluginsLoaded[plugin.getType()] = [(plugin, (py_mod_class.CamimgPlugin if py_mod_class else None))]
+                        
+                    pluginsLoadedArray.append(plugin.getId())
+                        
+                    plugin.initialize()
+            else:
+                __log__.warning("It can not determinate type of the plugin %s" % pluginPath)
+    else:
+        __log__.warning("It did not set py_mod variable.")
+        
+    if (delIou):
+        del iou
+    return iRes
+
 def getPluginsType(type):
     """
     @summary: Gets a list with the plugins of a type.

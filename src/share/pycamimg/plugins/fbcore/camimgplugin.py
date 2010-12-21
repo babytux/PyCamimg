@@ -25,7 +25,7 @@ from pycamimg.core.plugins.ICamimgPlugin import ICamimgPlugin
 from pycamimg.core.plugins.ICamimgPlugin import PLUGIN_TYPE
 import gettext
 
-camimgpluginName = "FacebookPlugin"
+camimgpluginName = "fbcore"
 
 class camimgplugin(ICamimgPlugin):
     """
@@ -37,7 +37,7 @@ class camimgplugin(ICamimgPlugin):
         @summary: Gets type of the plugin
         @return: PLUGIN_TYPE 
         """
-        return PLUGIN_TYPE.PROJECT
+        return PLUGIN_TYPE.SDK
     
     def getId(self):
         """
@@ -52,14 +52,14 @@ class camimgplugin(ICamimgPlugin):
         @return: String with name of the plugin.
         """
         return gettext.translation(camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext("Facebook Project")
+                                   languages=[__LANGKEY__], fallback = True).gettext("Facebook Core")
     
     def getPluginModule(self):
         """
         @summary: Gets module to load plugin.
         @return: String with name of the file to load.
         """
-        return "FacebookProj"
+        return None
     
     def isCompiled(self):
         """
@@ -68,14 +68,33 @@ class camimgplugin(ICamimgPlugin):
         """
         return False
     
+    def isNeedLoad(self):
+        """
+        @summary:  Gets if plugin needs to pre-load.
+        @return: True to load.
+        """
+        return False
+    
+    def showPluginConfiguration(self, parent=None):
+        """
+        @summary: Shows plugin configuratiion dialog.
+        @param parent: Parent window. 
+        """
+        from fbcore import AuthDialog
+        dialog = AuthDialog.AuthDialog(parent=parent)
+        dialog.run()
+        del dialog
+        dialog = None
+    
+    def hasConfiguration(self):
+        """
+        @summary: Gets if plugin has configuration.
+        @return: True when has configuration.
+        """
+        return True
+    
     def initialize(self):
         """
         @summary: Initialize plugin.
         """
         gettext.bindtextdomain(camimgpluginName, __LOCALE_FOLDER__)
-        
-    def getPluginDependecies(self):
-        """
-        @summary: Gets plugins dependencies
-        """
-        return ['fbcore',]

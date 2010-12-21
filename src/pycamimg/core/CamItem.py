@@ -69,6 +69,7 @@ class CamItem:
         self.__target__ = target
         self.__thumbnail__ = None
         self.__metaData__ = None
+        self.__addPhotoAlbum__ = False
         
         # Generate thumbnail of CamItem
         self.__thThumbLoad__ = Thread(target=self.__generateThumbnail__)
@@ -164,6 +165,22 @@ class CamItem:
         @return: PIL.Image
         """
         return self.__thumbnail__
+   
+    def setAddPhotoAlbum(self, addPhotoAlbum):
+        """
+        @summary: Sets if result of camitem will
+        add to photo album.
+        @param addPhotoAlbum: True to add to photo album. 
+        """
+        self.__addPhotoAlbum__ = addPhotoAlbum
+        
+    def isAddPhotoAlbum(self):
+        """
+        @summary: Gets if result of camitem will
+        add to photo album.
+        @return: True to add to photo album.
+        """
+        return self.__addPhotoAlbum__
     
     def setProperty(self, key, value):
         """
@@ -333,6 +350,11 @@ class CamItem:
                 __log__.debug("There are not operations for %s" % self.__path__)
         else:
             __log__.debug("There are not operations for %s" % self.__path__)
+
+        
+        if (self.isAddPhotoAlbum()):
+            pass
+            #TODO: Add to photo album
 
         if (self.__target__ != None):
             head, filename = os.path.split(fileop)
