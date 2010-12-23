@@ -75,7 +75,7 @@ class CamimgPlugin(IProjectType.Project):
         self.__gtkAction__.set_menu_item_type(gtk.ImageMenuItem)
         
         # Execution window actions
-        self.__gtkActionLogin__ = gtk.Action("LoginAction", self.__trans__("Login"), self.__trans__("Do login on facebook"), gtk.STOCK_CONNECT)
+        self.__gtkActionLogin__ = gtk.Action("LoginAction", self.__trans__("Sign Up"), self.__trans__("Sign Up on facebook"), gtk.STOCK_CONNECT)
         self.__gtkActionLogin__.set_menu_item_type(gtk.ImageMenuItem)
         self.__gtkActionLogin__.set_tool_item_type(gtk.ToolButton)
         self.__gtkActionLogin__.connect("activate", self.__loginEvent__)
@@ -103,8 +103,8 @@ class CamimgPlugin(IProjectType.Project):
         """
         doLogin = True
         if (self.__fb__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed in facebook\nDo you like sign in facebook?"), 
-                                                          title=self.__trans__("Facebook Login"), parent=self.__blockWindow__, gtkLock=gtkLock, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"), 
+                                                          title=self.__trans__("Facebook Sign Up"), parent=self.__blockWindow__, gtkLock=gtkLock, 
                                                           returnBoolean=True)
         self.__fb__.login(self.__waitLogin__, forceLogin=doLogin)
         
@@ -113,8 +113,8 @@ class CamimgPlugin(IProjectType.Project):
         """
         @summary: Function that runs when facebook login is doing.
         """
-        FactoryControls.getMessage(self.__trans__("Close after sign in facebook"), 
-                                           title=self.__trans__("Facebook Login"), 
+        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"), 
+                                           title=self.__trans__("Facebook Sign Up"), 
                                            parent=self.__blockWindow__)
         
     def __selectAlbumEvent__(self, b):

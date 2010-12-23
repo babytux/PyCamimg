@@ -144,8 +144,8 @@ class AuthDialog (gtk.Dialog):
         """
         @summary: Function that runs when facebook login is doing.
         """
-        FactoryControls.getMessage(self.__trans__("Close after sign in facebook"), 
-                                   title=self.__trans__("Facebook Login"), 
+        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"), 
+                                   title=self.__trans__("Facebook Sign Up"), 
                                    parent=self)
     
     def __loginEvent__(self, b):
@@ -155,8 +155,8 @@ class AuthDialog (gtk.Dialog):
         """
         doLogin = True
         if (self.__fbsession__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed in facebook\nDo you like sign in facebook?"), 
-                                                          title=self.__trans__("Facebook Login"), parent=self, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"), 
+                                                          title=self.__trans__("Facebook Sign Up"), parent=self, gtkLock=False, 
                                                           returnBoolean=True)
         self.__fbsession__.login(self.__waitLogin__, forceLogin=doLogin)
     

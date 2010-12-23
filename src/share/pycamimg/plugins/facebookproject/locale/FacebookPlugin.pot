@@ -37,19 +37,19 @@ msgstr ""
 msgid "Target Album"
 msgstr ""
 
-msgid "Do login on facebook"
+msgid "Sign up on facebook"
 msgstr ""
 
 msgid "Select a target album"
 msgstr ""
 
-msgid "You are signed in facebook\nDo you like sign in facebook?"
+msgid "You are signed up facebook\nDo you like sign up facebook?"
 msgstr ""
 
-msgid "Facebook Login"
+msgid "Facebook Sign Up"
 msgstr ""
 
-msgid "Close after sign in facebook"
+msgid "Close after sign up on facebook"
 msgstr ""
 
 msgid "Album selection - Facebook"
@@ -62,5 +62,5 @@ msgid "Select Album"
 msgstr ""
 
 #: FacebookProj.py:88
-msgid "Login"
+msgid "Sign Up"
 msgstr ""
