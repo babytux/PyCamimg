@@ -45,6 +45,7 @@ import ConfigParser
 import FactoryControls
 import UIUtils
 from pycamimg.core.plugins import Loader
+from pycamimg.core.plugins.ICamimgPlugin import PLUGIN_TYPE
 
 class PluginsDialog (gtk.Dialog):
     """
@@ -148,7 +149,7 @@ class PluginsDialog (gtk.Dialog):
                 for plugin, pluginRef in lPlugins:
                     obj = gobject.GObject()
                     obj.set_data("plugin", plugin)
-                    newRowData = [plugin.getId(), plugin.getName(), plugin.getType(), obj]
+                    newRowData = [plugin.getId(), plugin.getName(), PLUGIN_TYPE.getTypeDescription(plugin.getType()), obj]
                     UIUtils.addIterListView(self.__model__, 
                                             newRowData,
                                             doGObject=gtkLock)

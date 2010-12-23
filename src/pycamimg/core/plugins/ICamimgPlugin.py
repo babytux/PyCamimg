@@ -137,3 +137,21 @@ class PLUGIN_TYPE:
     PROJECT = 1
     OPERATION = 2
     SDK = 3
+    
+    
+    def getTypeDescription(type):
+        """
+        @summary: Gets description about a plugin type.
+        @param type: Type of get its description.
+        @return: Str within description. 
+        """
+        if (type == PLUGIN_TYPE.PROJECT):
+            return _("Project")
+        elif (type == PLUGIN_TYPE.OPERATION):
+            return _("Operation")
+        elif (type == PLUGIN_TYPE.SDK):
+            return _("Framework")
+        else:
+            return _("Unknown")
+        
+    getTypeDescription = staticmethod(getTypeDescription)

@@ -453,3 +453,6 @@ msgstr ""
 
 msgid "Plugins of PyCamimg"
 msgstr ""
+
+msgid "Framework"
+msgstr ""

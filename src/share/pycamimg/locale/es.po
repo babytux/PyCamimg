@@ -456,3 +456,6 @@ msgstr "Co_mplementos"
 
 msgid "Plugins of PyCamimg"
 msgstr "Complmentos de PyCamimg"
+
+msgid "Framework"
+msgstr "Sistema"
