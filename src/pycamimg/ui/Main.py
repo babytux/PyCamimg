@@ -52,6 +52,7 @@ import FactoryControls
 import UIUtils
 from OptionsDialog import OptionsDialog
 from OperationsDialog import OperationsDialog
+from PluginsDialog import PluginsDialog
 import ExecuteWindow
 from ExecuteWindow import ExecuteWindow
 from Explorer import Explorer
@@ -195,6 +196,7 @@ class MainWindow:
                                      ("ToolsMenuAction", None, _("_Tools")),
                                      ("OperationsAction", None, _("Operations")),
                                      ("PreferencesAction", gtk.STOCK_PREFERENCES, _("_Preferences"), None, _("Preferences of PyCamimg"), self.__openOptionsEvent__),
+                                     ("PluginsAction", gtk.STOCK_CONNECT, _("P_lugins"), None, _("Plugins of PyCamimg"), self.__openPlunginsEvent__),
                                      ("HelpMenuAction", None, _("_Help")),
                                      ("AboutAction", gtk.STOCK_ABOUT, _("_About PyCamimg"), None, _("Preferences of PyCamimg"), self.__openAboutEvent__),
                                      ("AddItemAction", gtk.STOCK_ADD, _("Add Images"), None, _("Add selected images"), self.__addImageEvent__),
@@ -229,19 +231,19 @@ class MainWindow:
         """
         __log__.debug("Project modules are loaded")
         
-        projectTypes = Loader.pluginsLoaded[pycamimg.core.plugins.ICamimgPlugin.PLUGIN_TYPE.PROJECT]
+        projectTypes = Loader.getPluginsType(pycamimg.core.plugins.ICamimgPlugin.PLUGIN_TYPE.PROJECT)
         actionGroupProjectPlugins = gtk.ActionGroup("ActionGroupProjectPlugins")
         self.__uiManager__.insert_action_group(actionGroupProjectPlugins, pos=-1)
         
         for project in projectTypes:
-            __log__.debug("Processing plugin %s" % project[0])    
+            __log__.debug("Processing plugin %s" % project[Loader.INDEX_PLUGIN].getName())    
                         
-            projectInstance = project[1]()
+            projectInstance = project[Loader.INDEX_PLUGIN_INSTANCE]()
             __log__.debug("Creating new menu item for project type %s" % projectInstance.getTypeName())
             
             aAction = projectInstance.getGtkAction()
             if (aAction != None):
-                aAction.connect("activate", self.__newProjectEvent__, project[1])
+                aAction.connect("activate", self.__newProjectEvent__, project[Loader.INDEX_PLUGIN_INSTANCE])
                 __log__.debug("Add activate signal to  %s" % projectInstance.getTypeName())
                 actionGroupProjectPlugins.add_action(aAction)
             else:
@@ -268,14 +270,14 @@ class MainWindow:
         """
         __log__.debug("Project modules are loaded")
         
-        operationsPlugins = Loader.pluginsLoaded[pycamimg.core.plugins.ICamimgPlugin.PLUGIN_TYPE.OPERATION]
+        operationsPlugins = Loader.getPluginsType(pycamimg.core.plugins.ICamimgPlugin.PLUGIN_TYPE.OPERATION)
         actionGroupOperationPlugins = gtk.ActionGroup("ActionGroupOperationPlugins")
         self.__uiManager__.insert_action_group(actionGroupOperationPlugins, pos=-1)
         
         for operation in operationsPlugins:
-            __log__.debug("Processing plugin %s" % operation[0])    
+            __log__.debug("Processing plugin %s" % operation[Loader.INDEX_PLUGIN])    
                         
-            operationInstance = operation[1]()
+            operationInstance = operation[Loader.INDEX_PLUGIN_INSTANCE]()
             __log__.debug("Creating operation %s" % operationInstance.getOperationName())
             
             lActions = operationInstance.getActions()
@@ -571,6 +573,18 @@ class MainWindow:
             FactoryControls.getMessage(_("Select one item"), 
                                        title=_("Preview"),
                                        parent = self.__mainWindow__)
+
+    def __openPlunginsEvent__(self, b):
+        """
+        @summary: Open plugins window.
+        @param b: Button that threw event.
+        """
+        pluginsDialog = PluginsDialog(parent = self.__mainWindow__)
+        __log__.debug("Plugins dialog created. %s" % pluginsDialog)
+        pluginsDialog.run()
+            
+        del pluginsDialog
+        pluginsDialog = None
 
     def __openOptionsEvent__ (self, b):
         """
