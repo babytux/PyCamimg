@@ -48,19 +48,14 @@ import gettext
 
 __canRun__ = True
 try:
-    import facebook
     import plugins
     import facebookproject
     import facebookproject.camimgplugin
     from facebookproject.AlbumSelection import AlbumSelection
+    from fbcore.SessionFB import SessionFB
 except ImportError, ie:
     __log__.error("It can not import dependency modules. %s" % ie)
     __canRun__ = False
-
-__appName__ = "PyCamimg"
-__apiid__ = "47637377689"
-__apiKey__ = "f259d2d4c5dcaf16391ff58ed2820226"
-__secretKey__ = "318c6a3cb7a60fe40c3b0d73ff53c607"
 
 class CamimgPlugin(IProjectType.Project):
     """
@@ -71,13 +66,6 @@ class CamimgPlugin(IProjectType.Project):
         """
         Initialize plugin.
         """
-        self.__facebookOk__ = False
-        self.__albums__ = None
-        self.__fb__ = None
-        self.__session__ = None
-        self.__token__ = None
-        self.__loginDid__ = False
-    
         self.__waitAction__ = None
         self.__targetAlbum__ = None
         self.__blockWindow__ = None
@@ -87,7 +75,7 @@ class CamimgPlugin(IProjectType.Project):
         self.__gtkAction__.set_menu_item_type(gtk.ImageMenuItem)
         
         # Execution window actions
-        self.__gtkActionLogin__ = gtk.Action("LoginAction", self.__trans__("Login"), self.__trans__("Do login on facebook"), gtk.STOCK_CONNECT)
+        self.__gtkActionLogin__ = gtk.Action("LoginAction", self.__trans__("Sign Up"), self.__trans__("Sign Up on facebook"), gtk.STOCK_CONNECT)
         self.__gtkActionLogin__.set_menu_item_type(gtk.ImageMenuItem)
         self.__gtkActionLogin__.set_tool_item_type(gtk.ToolButton)
         self.__gtkActionLogin__.connect("activate", self.__loginEvent__)
@@ -96,6 +84,8 @@ class CamimgPlugin(IProjectType.Project):
         self.__gtkActionAlbum__.set_menu_item_type(gtk.ImageMenuItem)
         self.__gtkActionAlbum__.set_tool_item_type(gtk.ToolButton)
         self.__gtkActionAlbum__.connect("activate", self.__selectAlbumEvent__)
+        
+        self.__fb__ = SessionFB()
     
     def __trans__(self, msg):
         """
@@ -111,7 +101,21 @@ class CamimgPlugin(IProjectType.Project):
         @summary: Process login event.
         @param b: Action associated with event.
         """
-        self.login()
+        doLogin = True
+        if (self.__fb__.isLogged()):
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"), 
+                                                          title=self.__trans__("Facebook Sign Up"), parent=self.__blockWindow__, gtkLock=gtkLock, 
+                                                          returnBoolean=True)
+        self.__fb__.login(self.__waitLogin__, forceLogin=doLogin)
+        
+        
+    def __waitLogin__(self):
+        """
+        @summary: Function that runs when facebook login is doing.
+        """
+        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"), 
+                                           title=self.__trans__("Facebook Sign Up"), 
+                                           parent=self.__blockWindow__)
         
     def __selectAlbumEvent__(self, b):
         """
@@ -119,6 +123,12 @@ class CamimgPlugin(IProjectType.Project):
         @param b: Action associated with event. 
         """
         self.__selectAlbumOption__()
+    
+    def setBlockWindow(self, window):
+        """
+        @summary: Sets window as parent window.
+        """
+        self.__blockWindow__ = window
     
     def getActionWait(self):
         """
@@ -216,7 +226,7 @@ class CamimgPlugin(IProjectType.Project):
             else:
                 try:
                     albumName = self.__targetAlbum__[0]
-                    albumId = self.__fb__.photos.createAlbum(albumName)["aid"]
+                    albumId = self.__fb__.getFacebookAccess().photos.createAlbum(albumName)["aid"]
                     __log__.info("Album %s created. Id: %s" % (albumName, albumId))
                     self.__targetAlbum__ = (albumName, albumId)
                 except Exception, ex:
@@ -235,7 +245,7 @@ class CamimgPlugin(IProjectType.Project):
         bReturn = False
         if (self.__targetAlbum__ != None):
             try:
-                self.__fb__.photos.upload(source, self.__targetAlbum__[1])
+                self.__fb__.getFacebookAccess().photos.upload(source, self.__targetAlbum__[1])
                 __log__.info("Photo %s uploaded in album %s created. Id: %s" % (source, self.__targetAlbum__[0], self.__targetAlbum__[1]))
                 os.remove(source)
                 bReturn = True
@@ -252,8 +262,8 @@ class CamimgPlugin(IProjectType.Project):
         @return: True when album was selected.
         """
         bReturn = False
-        self.login(forceLogin=False, gtkLock=gtkLock)
-        if (self.isLogged()):
+        self.__fb__.login(self.__waitLogin__, forceLogin=False)
+        if (self.__fb__.isLogged()):
             alSelection = AlbumSelection(self, parent=self.__blockWindow__)
             if (gtkLock):
                 gtk.gdk.threads_enter()
@@ -278,86 +288,15 @@ class CamimgPlugin(IProjectType.Project):
         
         return bReturn
     
-    def __initializeFacebookSession__(self):
-        """
-        @summary: Initialize a facebook session.
-        """
-        if ((__canRun__) and (not self.__facebookOk__)):
-            __log__.debug("Initializating facebook api")
-            __log__.debug("Creating facebook object with apikey = '%s' and secretkey = '%s'" % (__apiKey__, __secretKey__))
-            self.__fb__ = facebook.Facebook(__apiKey__, __secretKey__, app_name=__appName__)
-            __log__.debug("Created facebook object.")
-            self.__token__ = self.__fb__.auth.createToken()
-            __log__.debug("Created facebook token %s , with api key %s" % (self.__token__,__apiKey__))
-            
-            self.__facebookOk__ = True
-        elif (not __canRun__):
-            __log__.error("It can not import facebook module. Check if facebook library for python is installed")
-    
-    def checkLogin(self):
-        """
-        @summary: Checks if there is a session.
-        @return: True if there is a user on session. Otherwise False. 
-        """
-        try:
-            if ((self.__fb__ != None) and (self.__token__ != None) and self.__loginDid__):
-                self.__session__ = self.__fb__.auth.getSession()
-            else:
-                self.__session__ = None
-        except facebook.FacebookError, e:
-            self.__session__ = None
-            __log__.warning("An error was ocurred when it was checking session. %s" % e)
-            
-        return (self.__session__ != None)
-            
-    def isLogged(self):
-        """
-        @summary: Check if there is a session.
-        @return: True when it just exists a session.
-        """
-        return (self.__session__ != None)
-    
-    def login(self, forceLogin=True, gtkLock=False):
-        """
-        @summary: Login into facebook.
-        """
-        bFirst = True
-        self.__initializeFacebookSession__()
-        if (not self.isLogged() or forceLogin):
-            #Login facebook
-        
-            while (not self.isLogged() or (bFirst and forceLogin)):
-                bFirst = False
-                confirmRes = FactoryControls.getConfirmMessage(self.__trans__("You are not signed in facebook\nDo you like sign in facebook?"), 
-                                                      title=self.__trans__("Facebook Login"), parent=self.__blockWindow__, gtkLock=gtkLock, 
-                                                      returnBoolean=True)
-                if (not confirmRes):
-                    break
-                
-                self.__loginDid__ = False
-                
-                self.__fb__.login()
-                __log__.info("Facebook login thrown")
-                self.__loginDid__ = True
-                
-                FactoryControls.getMessage(self.__trans__("Close after sign in facebook"), 
-                                           title=self.__trans__("Facebook Login"), parent=self.__blockWindow__,
-                                           gtkLock=gtkLock)
-                self.checkLogin()
-                
-            if (not self.isLogged()):
-                raise Exception("Login failed")
-        else:
-            __log__.info("Just login")
-    
     def getPhotoAlbums(self):
         """
         @summary: Gets all photo albums of a user.
         @return: List with all photo albums.
         """
-        self.login(forceLogin=False)
-        if (self.isLogged()):
+        albums = None
+        self.__fb__.login(self.__waitLogin__, forceLogin=False)
+        if (self.__fb__.isLogged()):
             __log__.debug("Getting photo albums...")
-            self.__albums__ = self.__fb__.photos.getAlbums()
+            albums = self.__fb__.getFacebookAccess().photos.getAlbums(self.__fb__.getUid())
         
-        return self.__albums__
+        return albums

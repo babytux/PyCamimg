@@ -38,23 +38,23 @@ msgstr "Crear nuevo proyecto de facebook"
 msgid "Target Album"
 msgstr "Álbum Destino"
 
-msgid "Do login on facebook"
+msgid "Sign up on facebook"
 msgstr "Autentificar en facebook"
 
 msgid "Select a target album"
 msgstr "Seleccionar un álbum"
 
 msgid ""
-"You are not signed in facebook\n"
-"Do you like sign in facebook?"
+"You are signed up facebook\n"
+"Do you like sign up facebook?"
 msgstr ""
-"No estás autentificado en facebook\n"
+"Estás autentificado en facebook\n"
 "¿Quieres conectarte a facebook?"
 
-msgid "Facebook Login"
-msgstr "Autentificación de Facebook"
+msgid "Facebook Sign Up"
+msgstr "Acceso a Facebook"
 
-msgid "Close after sign in facebook"
+msgid "Close after sign up on facebook"
 msgstr "Cerrar después de autentificar"
 
 msgid "Album selection - Facebook"
@@ -67,5 +67,5 @@ msgid "Select Album"
 msgstr "Seleccionar Álbum"
 
 #: FacebookProj.py:88
-msgid "Login"
+msgid "Sign Up"
 msgstr "Autentificar"

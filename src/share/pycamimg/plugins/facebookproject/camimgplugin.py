@@ -38,6 +38,13 @@ class camimgplugin(ICamimgPlugin):
         @return: PLUGIN_TYPE 
         """
         return PLUGIN_TYPE.PROJECT
+    
+    def getId(self):
+        """
+        @summary: Gets ID of the plugin.
+        @return: String with ID of the plugin.
+        """
+        return camimgpluginName
         
     def getName(self):
         """
@@ -66,3 +73,9 @@ class camimgplugin(ICamimgPlugin):
         @summary: Initialize plugin.
         """
         gettext.bindtextdomain(camimgpluginName, __LOCALE_FOLDER__)
+        
+    def getPluginDependecies(self):
+        """
+        @summary: Gets plugins dependencies
+        """
+        return ['fbcore',]
