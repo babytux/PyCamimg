@@ -29,6 +29,12 @@ class Project:
     def __init__(self):
         return
     
+    def setBlockWindow(self, window):
+        """
+        @summary: Sets window as parent window.
+        """
+        return
+        
     def getIconName(self):
         """
         @summary: Gets name of icon that represents this project type.
