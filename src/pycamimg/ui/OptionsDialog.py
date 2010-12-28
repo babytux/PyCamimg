@@ -44,6 +44,7 @@ except Exception, e:
 import ConfigParser
 import FactoryControls
 import UIUtils
+from pycamimg.core.db.ConfigurationDB import ConfigurationDB
 from pycamimg.core.Configuration import Configuration
 
 __COLUMN_TEXT__ = 0
@@ -99,6 +100,7 @@ class OptionsDialog (gtk.Dialog):
         self.__initTabInterface__()
         self.__initTabLanguages__()
         self.__initTabCore__()
+        self.__initTabPhotoAlbum__()
         
         self.get_child().pack_start(self.__nbTabs__, True, True)
         
@@ -275,6 +277,47 @@ class OptionsDialog (gtk.Dialog):
         vBoxTabCore.pack_start(fRecursive, False, True)
         
         self.__addTab__(_("Core"), vBoxTabCore)
+        
+    def __initTabPhotoAlbum__(self):
+        """
+        @summary: Initialize tab of photoalbum.
+        """
+        vBoxPhotoAlbum = gtk.VBox()
+        
+        self.__chkEnablePhotoAlbum__ = gtk.CheckButton(label=_("Enable Photo Album"))
+        self.__chkEnablePhotoAlbum__.connect("toggled", self.__enablePhotoAlbumToggledEvent__)
+        
+        hBoxPhotoAlbumPath = gtk.HBox()
+        
+        self.__txtPathPhotoAlbum__ = gtk.Entry()
+        self.__txtPathPhotoAlbum__.set_editable(False)
+        self.__txtPathPhotoAlbum__.set_name("__txtPathPhotoAlbum__")
+        
+        self.__bPathSelection__ = gtk.Button(label=None, stock=None, use_underline=False)
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_OPEN, gtk.ICON_SIZE_BUTTON)
+        self.__bPathSelection__.set_relief(gtk.RELIEF_NONE)
+        self.__bPathSelection__.set_border_width(0)
+        self.__bPathSelection__.set_image(image)
+        self.__bPathSelection__.connect("clicked", self.__selectPhotoAlbumPath__)
+        
+        hBoxPhotoAlbumPath.pack_start(gtk.Label(str=_("Photo Album Path")), False, False)
+        hBoxPhotoAlbumPath.pack_start(self.__txtPathPhotoAlbum__, True, True, padding=10)
+        hBoxPhotoAlbumPath.pack_start(self.__bPathSelection__, False, False)
+        
+        
+        aFramePhotoAlbum = gtk.Alignment(xalign=0.5, yalign=0.5, xscale=1.0, yscale=1.0)
+        aFramePhotoAlbum.set_padding(0, 0, 12, 0)
+        aFramePhotoAlbum.add(hBoxPhotoAlbumPath)
+        
+        fPhotoAlbum = gtk.Frame()
+        fPhotoAlbum.set_label_widget(self.__chkEnablePhotoAlbum__)
+        fPhotoAlbum.set_shadow_type(gtk.SHADOW_NONE)
+        
+        fPhotoAlbum.add(aFramePhotoAlbum)
+        vBoxPhotoAlbum.pack_start(fPhotoAlbum, False, True)
+        
+        self.__addTab__(_("Photo Album"), vBoxPhotoAlbum)
 
     def __fillLanguages__(self, gtkLock = False):
         """
@@ -332,6 +375,16 @@ class OptionsDialog (gtk.Dialog):
             config.getboolean("UI_CORE", "add_recursive"))
         self.__spRecursiveLevel__.set_value(
             config.getint("UI_CORE", "recursive_level"))
+        
+        self.__chkEnablePhotoAlbum__.set_active(
+            config.getboolean("UI_CORE", "enable_db"))
+        
+        if (config.getboolean("UI_CORE", "enable_db") and 
+            (ConfigurationDB().getPhotoFolder() != None)):
+            self.__txtPathPhotoAlbum__.set_text(
+                ConfigurationDB().getPhotoFolder())
+        else:
+            self.__txtPathPhotoAlbum__.set_text("")
 
         self.__spMaxHeight__.set_sensitive(self.__chkShowImageList__.get_active())
         self.__spPercentResize__.set_sensitive(self.__chkShowImageList__.get_active())
@@ -346,6 +399,43 @@ class OptionsDialog (gtk.Dialog):
         @param b: GtkButton associated. 
         """
         self.__spRecursiveLevel__.set_sensitive(self.__chkAddRecursive__.get_active())
+        
+    def __enablePhotoAlbumToggledEvent__(self, b):
+        """
+        @summary: Handle enable photo album check toggled.
+        @param b: GtkButton associated. 
+        """
+        self.__bPathSelection__.set_sensitive(self.__chkEnablePhotoAlbum__.get_active())
+        self.__txtPathPhotoAlbum__.set_sensitive(self.__chkEnablePhotoAlbum__.get_active())
+    
+    def __selectPhotoAlbumPath__(self, b):
+        '''
+        @summary: Create a selection folder dialog 
+            and set selected folder as target folder
+        @param doBlock: True to block gtk-loop. 
+        '''
+        try:
+            targetSel = gtk.FileChooserDialog(title=_("Photo Album folder"),
+                                              parent=self,
+                                              action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER,
+                                              buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                                                       gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT))
+        
+            targetSel.set_default_response(gtk.RESPONSE_CANCEL)
+            targetSel.set_modal(True)
+            targetSel.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+            if (ConfigurationDB().getPhotoFolder() != None):
+                __log__.debug("Set target before open. %s" % ConfigurationDB().getPhotoFolder())
+                targetSel.set_current_folder(ConfigurationDB().getPhotoFolder())
+            targetSel.show()
+            if (targetSel.run() == gtk.RESPONSE_ACCEPT):
+                self.__target__ = targetSel.get_current_folder()
+                filename = targetSel.get_filename()
+                if (filename != None):
+                    self.__txtPathPhotoAlbum__.set_text(os.path.join(self.__target__, filename))
+                __log__.info("Set %s as target folder" % ConfigurationDB().getPhotoFolder())
+        finally:
+            targetSel.destroy()
         
     def __imageShowToggledEvent__(self, b):
         """
@@ -418,9 +508,20 @@ class OptionsDialog (gtk.Dialog):
                 config.set("UI_CORE",
                            "recursive_level",
                            ("%d" % self.__spRecursiveLevel__.get_value_as_int()))
+                
+            if (config.getint("UI_CORE", "enable_db") != self.__chkEnablePhotoAlbum__.get_active()):
+                hasChanged = True 
+                config.set("UI_CORE",
+                           "enable_db",
+                           ("%d" % self.__chkEnablePhotoAlbum__.get_active()))
+            if (ConfigurationDB().getPhotoFolder() != self.__txtPathPhotoAlbum__.get_text()):
+                hasChanged = True
+                ConfigurationDB().setPhotoFolder(self.__txtPathPhotoAlbum__.get_text())
+                
 
             if (hasChanged):
                 Configuration().saveConfiguration()
+                ConfigurationDB().save()
                 if (self.__callback__ != None):
                     self.__callback__(self if res == gtk.RESPONSE_APPLY else None)
            
