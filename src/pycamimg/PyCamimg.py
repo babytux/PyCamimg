@@ -48,7 +48,9 @@ except Exception, e:
     raise e
 
 import pycamimg
+from pycamimg.core.db.ConfigurationDB import ConfigurationDB
 from pycamimg.core.Configuration import Configuration
+from pycamimg.core.db import Util
 
 class PyCamimg:
     
@@ -114,6 +116,8 @@ class PyCamimg:
         gtk.gdk.threads_init()
 
         # Load plugins
+        sys.path.append(os.path.join(__SHARE_PATH__, "plugins"))
+        sys.path.append(os.path.join(__PERSONAL_PLUGINS__, "addons"))
         from pycamimg.core.plugins import Loader
         Loader.load(dictPaths={"plugins": __SHARE_PATH__, "addons": __PERSONAL_PLUGINS__})
         # Create a list of cores
@@ -132,6 +136,8 @@ class PyCamimg:
                 coreLoaded = None
         else:
             self.__log__.debug("There are not cores to load.")   
+
+        self.__initDB__()
 
         # Init UI
         self.__initUI__()
@@ -164,12 +170,16 @@ class PyCamimg:
         __builtin__.__CONFIG_FILE__ = os.path.join(__SHARE_PATH__, "config", "config.cfg")
         __builtin__.__VERSION_FILE__ = os.path.join(__SHARE_PATH__, "config", "version.cfg")
         __builtin__.__COPYING_FILE__ = os.path.join(__SHARE_PATH__, "COPYING")
+        __builtin__.__DB_SCRIPT_FILE__ = os.path.join(__SHARE_PATH__, "scripts", "db_scheme.sql")
         
         __builtin__.__PYCAMIMG_FOLDER__ = os.path.join(os.path.expanduser("~"), ".pycamimg")
         __builtin__.__LOG_FOLDER__ = os.path.join(__PYCAMIMG_FOLDER__, "log")
         __builtin__.__TEMP_FOLDER__ = os.path.join(__PYCAMIMG_FOLDER__, "temp")
         __builtin__.__CONFIG_FILE_SAVED__ = os.path.join(__PYCAMIMG_FOLDER__, "config", "config.cfg")
         __builtin__.__PERSONAL_PLUGINS__ = os.path.join(os.path.expanduser("~"), ".pycamimg", "addons")
+        __builtin__.__DB_FOLDER__ = os.path.join(os.path.expanduser("~"), ".pycamimg", "db")
+        
+        __builtin__.__DB_FILENAME__ = "photoalbum.db"
         
         __builtin__.__STOUTPUT_FILE__ = "output.log"
         __builtin__.__STERR_FILE__ = "error.log"
@@ -187,6 +197,9 @@ class PyCamimg:
                 
         if (not os.path.exists(__PERSONAL_PLUGINS__)):
             os.mkdir(__PERSONAL_PLUGINS__)
+            
+        if (not os.path.exists(__DB_FOLDER__)):
+            os.mkdir(__DB_FOLDER__)
                 
         if (os.path.exists(__TEMP_FOLDER__)):
             if (not os.path.isdir(__TEMP_FOLDER__)):
@@ -343,6 +356,15 @@ class PyCamimg:
         __builtin__.__LANGKEY__ = localeKey
         __builtin__._ = gettext.translation("pycamimg", __LOCALE_FOLDER__, 
                                             languages=[__LANGKEY__], fallback = True).gettext
+
+    def __initDB__(self):
+        """
+        @summary: Initialize DB when db option is activated. 
+        """
+        if (Configuration().getConfiguration().getboolean("UI_CORE", "enable_db")):
+            Util.generateDB()
+            #Initialize configuration from database.
+            ConfigurationDB()
 
     def __initUI__(self):
         """
