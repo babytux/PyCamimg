@@ -438,3 +438,24 @@ msgstr "Parameters"
 
 msgid "Delete"
 msgstr "Delete"
+
+msgid "Photo Album folder"
+msgstr "Photo Album folder"
+
+msgid "Enable Photo Album"
+msgstr "Enable Photo Album"
+
+msgid "Photo Album Path"
+msgstr "Photo Album Path"
+
+msgid "Photo Album"
+msgstr "Photo Album"
+
+msgid "P_lugins"
+msgstr "P_lugins"
+
+msgid "Plugins of PyCamimg"
+msgstr "Plugins of PyCamimg"
+
+msgid "Framework"
+msgstr "Framework"
