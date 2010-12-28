@@ -79,6 +79,7 @@ class CamCore:
         self.__threadExec__ = None
         self.__semaphore__ = Semaphore()
         self.__cancel__ = False
+        self.__addPhotoAlbum__ = False
         
         if (projectType != None):
             self.__projectType__ = projectType()
@@ -118,6 +119,7 @@ class CamCore:
                 __log__.debug("Processing %s item..." % key)
                 item  = self.__items__[key]
                 if (item != None):
+                    item.setAddPhotoAlbum(self.isAddPhotoAlbum())
                     if (self.__callbackBeginItem__ != None):
                         __log__.debug("There is begin item callback. It is going to do it. %s" % self.__callbackBeginItem__)
                         self.__callbackBeginItem__(item)
@@ -201,6 +203,22 @@ class CamCore:
         @return: GtkWindow to set. 
         """
         return self.__mainWindow__
+    
+    def setAddPhotoAlbum(self, addPhotoAlbum):
+        """
+        @summary: Sets if result of each camitem will
+        add to photo album.
+        @param addPhotoAlbum: True to add to photo album. 
+        """
+        self.__addPhotoAlbum__ = addPhotoAlbum
+        
+    def isAddPhotoAlbum(self):
+        """
+        @summary: Gets if result of each camitem will
+        add to photo album.
+        @return: True to add to photo album.
+        """
+        return self.__addPhotoAlbum__
 
     def getProjectType (self):
         """
