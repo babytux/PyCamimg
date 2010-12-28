@@ -112,7 +112,6 @@ __dependencies__ = ["gtk",
                     "PIL",
                     "PIL.ImageOps",
                     "jpeg",
-                    "facebook",
                     "gettext",
                     "pkg_resources",
                     "pango"]
@@ -153,7 +152,8 @@ __data_files__ = [
             path.join("src", "share", "pycamimg", "locale", "en", "LC_MESSAGES", "RotateOperation.mo"),
             path.join("src", "share", "pycamimg", "locale", "en", "LC_MESSAGES", "GrayScaleOperation.mo"),
             path.join("src", "share", "pycamimg", "locale", "en", "LC_MESSAGES", "SepiaToneOperation.mo"),
-            path.join("src", "share", "pycamimg", "locale", "en", "LC_MESSAGES", "FlipOperation.mo")                             
+            path.join("src", "share", "pycamimg", "locale", "en", "LC_MESSAGES", "FlipOperation.mo"),
+            path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "fbcore.mo")                             
             ]),
     (path.join("share", "pycamimg", "locale", "es", "LC_MESSAGES"), [
             path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "FacebookPlugin.mo"),
@@ -164,7 +164,8 @@ __data_files__ = [
             path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "RotateOperation.mo"),
             path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "GrayScaleOperation.mo"),
             path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "SepiaToneOperation.mo"),
-            path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "FlipOperation.mo")
+            path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "FlipOperation.mo"),
+            path.join("src", "share", "pycamimg", "locale", "es", "LC_MESSAGES", "fbcore.mo")
             ]),
     (path.join("share", "pycamimg", "icons"), [
             path.join("src", "share", "pycamimg", "icons", "pycamimg.bmp"),
@@ -182,7 +183,8 @@ __data_files__ = [
             path.join("src", "share", "pycamimg", "icons", "grayscale.png"),
             path.join("src", "share", "pycamimg", "icons", "sepiatone.png"),
             path.join("src", "share", "pycamimg", "icons", "mirror.png"),
-            path.join("src", "share", "pycamimg", "icons", "flip.png")
+            path.join("src", "share", "pycamimg", "icons", "flip.png"),
+            path.join("src", "share", "pycamimg", "icons", "fb-connect.png")
             ]),
     (path.join("share", "pycamimg", "plugins"), [
             path.join("src", "share", "pycamimg", "plugins", "__init__.py")
@@ -207,6 +209,21 @@ __data_files__ = [
             path.join("src", "share", "pycamimg", "plugins", "facebookproject", "locale", "FacebookPlugin.pot"),
             path.join("src", "share", "pycamimg", "plugins", "facebookproject", "locale", "en.po"),
             path.join("src", "share", "pycamimg", "plugins", "facebookproject", "locale", "es.po")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "fbcore"), [
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "__init__.py"),
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "camimgplugin.py"),
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "AuthDialog.py"),
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "SessionFB.py")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "fbcore", "lib"), [
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "lib", "__init__.py"),
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "lib", "facelib.py")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "fbcore", "locale"), [
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "locale", "fbcore.pot"),
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "locale", "en.po"),
+            path.join("src", "share", "pycamimg", "plugins", "fbcore", "locale", "es.po")
             ]),
     (path.join("share", "pycamimg", "plugins", "RenameOperation"), [
             path.join("src", "share", "pycamimg", "plugins", "RenameOperation", "__init__.py"),
@@ -278,6 +295,9 @@ __data_files__ = [
             path.join("src", "share", "pycamimg", "plugins", "FlipOperation", "locale", "en.po"),
             path.join("src", "share", "pycamimg", "plugins", "FlipOperation", "locale", "es.po")
             ]),
+    (path.join("share", "pycamimg", "scripts"), [
+            path.join("src", "share", "pycamimg", "scripts", "db_scheme.sql"),
+            ]),
     (path.join("share", "pycamimg", "xml"), [
             path.join("src", "share", "pycamimg", "xml", "MainMenu.xml"),
             path.join("src", "share", "pycamimg", "xml", "execute.xml"),
@@ -297,7 +317,9 @@ __script__ = path.join("src", "camimg.py")
 
 __packages__ = ["pycamimg",
                "pycamimg.core",
+               "pycamimg.core.db",
                "pycamimg.core.operations",
+               "pycamimg.core.photoalbum",
                "pycamimg.core.plugins",
                "pycamimg.ui",
                "pycamimg.util",
@@ -566,7 +588,7 @@ def add_win32_options(options):
             "compressed": True,
             "excludes":   ["PyLucene", "Tkconstants", "Tkinter", "tcl", "translate.misc._csv"],
             "dist_dir": path.join("dist", "win32"),
-            "includes" : ["cairo", "pango", "pangocairo", "atk", "gobject", "jpeg", "facebook", "PIL", "PIL.ImageOps"],
+            "includes" : ["cairo", "pango", "pangocairo", "atk", "gobject", "jpeg", "PIL", "PIL.ImageOps"],
             "optimize":   2,
             #"bundle_files": 1, 
         }
