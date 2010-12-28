@@ -75,6 +75,13 @@ class ICamimgPlugin(object):
         """
         return ""
     
+    def getId(self):
+        """
+        @summary: Gets ID of the plugin.
+        @return: String with ID of the plugin.
+        """
+        return ""
+    
     def getPluginModule(self):
         """
         @summary: Gets module to load plugin.
@@ -95,6 +102,33 @@ class ICamimgPlugin(object):
         """
         return
     
+    def isNeedLoad(self):
+        """
+        @summary:  Gets if plugin needs to pre-load.
+        @return: True to load.
+        """
+        return True
+    
+    def getPluginDependecies(self):
+        """
+        @summary: Gets plugins dependencies
+        """
+        return []
+    
+    def hasConfiguration(self):
+        """
+        @summary: Gets if plugin has configuration.
+        @return: True when has configuration.
+        """
+        return False
+    
+    def showPluginConfiguration(self, parent=None):
+        """
+        @summary: Shows plugin configuratiion dialog.
+        @param parent: Parent window. 
+        """
+        return None
+    
 class PLUGIN_TYPE:
     """
     @summary: Class that will be used as enumeration.
@@ -102,3 +136,22 @@ class PLUGIN_TYPE:
     UNKNOWN = 0
     PROJECT = 1
     OPERATION = 2
+    SDK = 3
+    
+    
+    def getTypeDescription(type):
+        """
+        @summary: Gets description about a plugin type.
+        @param type: Type of get its description.
+        @return: Str within description. 
+        """
+        if (type == PLUGIN_TYPE.PROJECT):
+            return _("Project")
+        elif (type == PLUGIN_TYPE.OPERATION):
+            return _("Operation")
+        elif (type == PLUGIN_TYPE.SDK):
+            return _("Framework")
+        else:
+            return _("Unknown")
+        
+    getTypeDescription = staticmethod(getTypeDescription)
