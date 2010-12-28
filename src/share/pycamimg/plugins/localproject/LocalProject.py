@@ -90,6 +90,12 @@ class CamimgPlugin(IProjectType.Project):
         """
         self.setTargetFolder(doBlock=False)
     
+    def setBlockWindow(self, window):
+        """
+        @summary: Sets window as parent window.
+        """
+        self.__mainWindow__ = window
+    
     def setTargetFolder(self, doBlock=True):
         """
         @summary: Create a selection folder dialog 

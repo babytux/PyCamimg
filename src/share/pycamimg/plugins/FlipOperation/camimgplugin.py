@@ -40,6 +40,13 @@ class camimgplugin(ICamimgPlugin):
         @return: PLUGIN_TYPE 
         """
         return PLUGIN_TYPE.OPERATION
+    
+    def getId(self):
+        """
+        @summary: Gets ID of the plugin.
+        @return: String with ID of the plugin.
+        """
+        return camimgpluginName
         
     def getName(self):
         """
