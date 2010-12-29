@@ -1,2 +1,0 @@
-LogName = "PyCamimg"
-gettextName = "pycamimg"
