@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright 2008, 2009, 2010 Hugo Párraga Martín
+Copyright 2008, 2009, 2010, 2011 Hugo Párraga Martín
 
 This file is part of PyCamimg.
 
@@ -104,9 +104,9 @@ class CamimgPlugin(IProjectType.Project):
         doLogin = True
         if (self.__fb__.isLogged()):
             doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"), 
-                                                          title=self.__trans__("Facebook Sign Up"), parent=self.__blockWindow__, gtkLock=gtkLock, 
+                                                          title=self.__trans__("Facebook Sign Up"), parent=self.__blockWindow__, gtkLock=False, 
                                                           returnBoolean=True)
-        self.__fb__.login(self.__waitLogin__, forceLogin=doLogin)
+        self.__fb__.login(self.__waitLogin__, forceLogin=doLogin, store=False)
         
         
     def __waitLogin__(self):

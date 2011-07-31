@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright 2008, 2009, 2010 Hugo Párraga Martín
+Copyright 2008, 2009, 2010, 2011 Hugo Párraga Martín
 
 This file is part of PyCamimg.
 
@@ -103,6 +103,10 @@ class AuthDialog (gtk.Dialog):
         self.__btAuthentication__.connect("activate", self.__loginEvent__)
         self.__btAuthentication__.connect("clicked", self.__loginEvent__)
         
+        self.__btRevoke__ = gtk.Button(label=self.__trans__("Revoke"))
+        self.__btRevoke__.connect("activate", self.__revokeEvent__)
+        self.__btRevoke__.connect("clicked", self.__revokeEvent__)
+        
         tData = gtk.Table(rows=3, columns=2)
         
         tData.attach(gtk.Label(self.__trans__("Username")), 0, 1, 0, 1, xoptions=0, yoptions=0, xpadding=1, ypadding=1)
@@ -118,8 +122,10 @@ class AuthDialog (gtk.Dialog):
         #hbButton.pack_start(self.__imgLogin__, False, False)
         self.__btAuthentication__.set_image(self.__imgLogin__)
         hbButton.pack_start(self.__btAuthentication__, False, False)
+        hbButton.pack_start(self.__btRevoke__, False, False)
         hAlign = gtk.Alignment(xalign=1, yalign=0.5)
         hAlign.add(hbButton)
+        
         
         tData.attach(hAlign, 1, 2, 2, 3, xoptions=gtk.EXPAND | gtk.FILL, yoptions=gtk.FILL, xpadding=0, ypadding=0)
         
@@ -147,6 +153,7 @@ class AuthDialog (gtk.Dialog):
         FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"), 
                                    title=self.__trans__("Facebook Sign Up"), 
                                    parent=self)
+        self.__initData__()
     
     def __loginEvent__(self, b):
         """
@@ -159,6 +166,18 @@ class AuthDialog (gtk.Dialog):
                                                           title=self.__trans__("Facebook Sign Up"), parent=self, gtkLock=False, 
                                                           returnBoolean=True)
         self.__fbsession__.login(self.__waitLogin__, forceLogin=doLogin)
+    
+    def __revokeEvent__(self, b):
+        """
+        @summary: Process to revoke or remove previous login
+        @param b: Action associated with event. 
+        """
+        if (FactoryControls.getConfirmMessage(self.__trans__("Do you like remove store user of facebook?"),
+                                              title=self.__trans__("Facebook remove"), parent=self, gtkLock=False,
+                                              returnBoolean=True)):
+            self.__fbsession__.remove()
+            self.__initData__()
+        
     
     def __closeEvent__(self, w, res):
         """

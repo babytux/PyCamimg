@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-Copyright 2008, 2009, 2010 Hugo Párraga Martín
+Copyright 2008, 2009, 2010, 2011 Hugo Párraga Martín
 
 This file is part of PyCamimg.
 
@@ -89,7 +89,7 @@ class SessionFB(object):
         elif (not __canRun__):
             __log__.error("It can not import facebook module. Check if facebook library for python is installed")
     
-    def checkLogin(self):
+    def checkLogin(self, store=True):
         """
         @summary: Checks if there is a session.
         @return: True if there is a user on session. Otherwise False. 
@@ -109,7 +109,7 @@ class SessionFB(object):
                 if (info != None):
                     self.__username__ = str(info['name'])
                 
-                if (self.__expire__ == 0):
+                if ((self.__expire__ == 0) and store):
                     self.save()
             else:
                 self.__session__ = None
@@ -119,12 +119,8 @@ class SessionFB(object):
                 
                 self.__expire__ = -1
         except facebook.FacebookError, e:
-            self.__session__ = None
-            self.__secretKey__ = None
-            self.__sessionKey__ = None
-            self.__uid__ = None
-            self.__expire__ = -1
             __log__.warning("An error was ocurred when it was checking session. %s" % e)
+            self.remove()
             
         return (self.__session__ != None)
     
@@ -233,8 +229,31 @@ class SessionFB(object):
             
         f.close()
         __log__.info("Facebook session saved on %s" % filename)
+        
+    def remove(self):
+        """
+        @summary: Remove stored session
+        """
+        filename = os.path.join(__PYCAMIMG_FOLDER__, fbcore.FILENAME)
+        __log__.debug("Removing facebook session. %s" % filename)
+        try:
+            os.remove(filename)
+            __log__.info("Facebook session removed. %s" % filename)
+            self.__session__ = None
+            self.__secretKey__ = None
+            self.__sessionKey__ = None
+            self.__uid__ = None
+            self.__expire__ = -1
+            self.__fb__.session_key = self.__sessionKey__
+            self.__fb__.session_key_expires = self.__expire__
+            self.__fb__.auth_token = self.__token__
+            self.__fb__.secret = self.__secretKey__
+            self.__fb__.uid = self.__uid__
+        except OSError, e:
+            __log__.error("It can not remove Facebook session from %s. %s" % (filename, e))
+        
     
-    def login(self, functionWait, forceLogin=True):
+    def login(self, functionWait, forceLogin=True, store=True):
         """
         @summary: Login into facebook.
         """
@@ -252,7 +271,7 @@ class SessionFB(object):
                 
                 functionWait()
                 
-                self.checkLogin()
+                self.checkLogin(store=store)
                 
             if (not self.isLogged()):
                 raise Exception("Login failed")
