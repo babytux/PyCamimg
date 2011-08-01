@@ -75,7 +75,7 @@ class CamimgPlugin(IProjectType.Project):
         self.__gtkAction__.set_menu_item_type(gtk.ImageMenuItem)
         
         # Execution window actions
-        self.__gtkActionLogin__ = gtk.Action("LoginAction", self.__trans__("Sign Up"), self.__trans__("Sign Up on Picasa"), gtk.STOCK_CONNECT)
+        self.__gtkActionLogin__ = gtk.Action("LoginAction", self.__trans__("Sign In"), self.__trans__("Sign in on Picasa"), gtk.STOCK_CONNECT)
         self.__gtkActionLogin__.set_menu_item_type(gtk.ImageMenuItem)
         self.__gtkActionLogin__.set_tool_item_type(gtk.ToolButton)
         self.__gtkActionLogin__.connect("activate", self.__loginEvent__)
@@ -103,8 +103,8 @@ class CamimgPlugin(IProjectType.Project):
         """
         doLogin = True
         if (self.__gdata__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up picasa\nDo you like sign up picasa?"), 
-                                                          title=self.__trans__("Picasa Sign Up"), parent=self.__blockWindow__, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed in picasa\nDo you like sign in with another user in picasa?"), 
+                                                          title=self.__trans__("Picasa Sign In"), parent=self.__blockWindow__, gtkLock=False, 
                                                           returnBoolean=True)
         self.__gdata__.login(parent=self, forceLogin=doLogin, store=False)
         

@@ -1,0 +1,63 @@
+# Copyright 2008, 2009 Hugo Párraga Martín
+#
+# This file is part of PyCamimg.
+#
+# PyCamimg is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PyCamimg is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PyCamimg.  If not, see <http://www.gnu.org/licenses/>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-14 00:36+0100\n"
+"PO-Revision-Date: 2009-11-14 00:47+0100\n"
+"Last-Translator: Babytux <hugo.parraga.martin@gmail.com>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: camimgplugin.py:47
+msgid "Picasa Project"
+msgstr "Proyecto Picasa"
+
+msgid "Create new picasa project"
+msgstr "Crea un nuevo proyecto de picasa"
+
+msgid "Target Album"
+msgstr "Album de Destino"
+
+msgid "Sign in on Picasa"
+msgstr "Identificación en Picasa"
+
+msgid "Select a target album"
+msgstr "Selecciona un album de destino"
+
+msgid "You are signed in picasa\nDo you like sign in with another user in picasa?"
+msgstr "Ya estás identificado en picasa\n¿Quiere identificarte con otro usuario en picasa?"
+
+msgid "Picasa Sign In"
+msgstr "Identificación Picasa"
+
+msgid "Album selection - Picasa"
+msgstr "Selección de Album - Picasa"
+
+msgid "Album selection"
+msgstr "Selcción de Album"
+
+msgid "Select Album"
+msgstr "Seleccione un Album"
+
+msgid "Sign In"
+msgstr "Identificación"
