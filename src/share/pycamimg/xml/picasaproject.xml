@@ -1,0 +1,11 @@
+<ui>
+	<menubar name="MenuPyCaming">
+		<menu name="FileMenu" action="FileMenuAction">
+			<menu name="NewProject" action="NewProjectAction">
+				<placeholder name="NewProjectAdditions">
+					<menuitem name="PicasaProject" action="PicasaProjectAction" />
+				</placeholder>
+			</menu>
+		</menu>
+	</menubar>
+</ui>
