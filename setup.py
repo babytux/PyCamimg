@@ -114,7 +114,9 @@ __dependencies__ = ["gtk",
                     "jpeg",
                     "gettext",
                     "pkg_resources",
-                    "pango"]
+                    "pango",
+                    "gdata",
+                    "elementtree"]
 
 if (sys.platform == "win32"):
     __dependencies__.append("ctypes")
@@ -294,6 +296,29 @@ __data_files__ = [
             path.join("src", "share", "pycamimg", "plugins", "FlipOperation", "locale", "FlipOperation.pot"),
             path.join("src", "share", "pycamimg", "plugins", "FlipOperation", "locale", "en.po"),
             path.join("src", "share", "pycamimg", "plugins", "FlipOperation", "locale", "es.po")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "picasaproject"), [
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "__init__.py"),
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "camimgplugin.py"),
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "PicasaProj.py"),
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "AlbumSelection.py")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "picasaproject", "locale"), [
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "locale", "PicasaPlugin.pot"),
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "locale", "en.po"),
+            path.join("src", "share", "pycamimg", "plugins", "picasaproject", "locale", "es.po")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "gdatacore"), [
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "__init__.py"),
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "camimgplugin.py"),
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "AuthDialog.py"),
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "Session.py"),
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "LoginDialog.py")
+            ]),
+    (path.join("share", "pycamimg", "plugins", "gdatacore", "locale"), [
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "locale", "gdatacore.pot"),
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "locale", "en.po"),
+            path.join("src", "share", "pycamimg", "plugins", "gdatacore", "locale", "es.po")
             ]),
     (path.join("share", "pycamimg", "scripts"), [
             path.join("src", "share", "pycamimg", "scripts", "db_scheme.sql"),
