@@ -50,7 +50,7 @@ class LoginDialog (gtk.Dialog):
     @summary: Class that manage google data authentication dialog.
     """
     __DEFAULT_WINDOW_WIDTH__ = 400
-    __DEFAULT_WINDOW_HEIGHT__ = 250
+    __DEFAULT_WINDOW_HEIGHT__ = 175
     
     def __init__(self, parent=None, callback=None):
         """
@@ -62,7 +62,7 @@ class LoginDialog (gtk.Dialog):
         import gdatacore.Session
         self.__session__ = gdatacore.Session.Session()
         
-        super(LoginDialog, self).set_title(self.__trans__("Google Login"))
+        super(LoginDialog, self).set_title(self.__trans__("Google Sign In"))
         super(LoginDialog, self).set_flags(gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
         super(LoginDialog, self).add_buttons(gtk.STOCK_OK, gtk.RESPONSE_OK, gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
         

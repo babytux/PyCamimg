@@ -153,8 +153,8 @@ class AuthDialog (gtk.Dialog):
         """
         doLogin = True
         if (self.__session__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up picasa\nDo you like sign up picasa?"), 
-                                                          title=self.__trans__("Picasa Sign Up"), parent=self, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up picasa\nDo you like change current user of picasa?"), 
+                                                          title=self.__trans__("Picasa Sign In"), parent=self, gtkLock=False, 
                                                           returnBoolean=True)
         self.__session__.login(parent=self, forceLogin=doLogin)
     
@@ -163,7 +163,7 @@ class AuthDialog (gtk.Dialog):
         @summary: Process to revoke or remove previous login
         @param b: Action associated with event. 
         """
-        if (FactoryControls.getConfirmMessage(self.__trans__("Do you like remove store user of picasa?"),
+        if (FactoryControls.getConfirmMessage(self.__trans__("Do you like remove stored user of picasa?"),
                                               title=self.__trans__("Picasa remove"), parent=self, gtkLock=False,
                                               returnBoolean=True)):
             self.__session__.remove()

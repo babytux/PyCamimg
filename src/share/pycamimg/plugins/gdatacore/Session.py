@@ -207,7 +207,7 @@ class Session(object):
     
     def login(self, parent=None, forceLogin=True, store=True):
         """
-        @summary: Login into facebook.
+        @summary: Login into picasa.
         """
         bFirst = True
         self.__initializeGDataSession__(checkLogin=True)
