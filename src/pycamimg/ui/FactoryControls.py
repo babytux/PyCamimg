@@ -276,11 +276,20 @@ def getPixbufFromStock(iconName, size = gtk.ICON_SIZE_MENU):
         if (theme.has_icon(iconName)):
             pixelSize = gtk.icon_size_lookup(size)
             icon = theme.load_icon(iconName, pixelSize[0], 0)
-        elif (iconName != gtk.STOCK_MISSING_IMAGE):
-            icon = getPixbufFromStock(gtk.STOCK_FILE)
         else:
-            __log__.warning("There is not an icon with name %s" % iconName)
-            icon = None
+        	if (icon == None):
+	        	lk = gtk.stock_lookup(iconName)
+    	    	if (lk != None):
+        			ctrl = gtk.MenuItem()
+        			icon = ctrl.render_icon(lk[0], size)
+	        		ctrl = None
+		elif (iconName == gtk.STOCK_FILE):
+			icon = None
+		elif (iconName != gtk.STOCK_MISSING_IMAGE):
+			icon = getPixbufFromStock(gtk.STOCK_FILE)
+    	    	else:
+			__log__.warning("There is not an icon with name %s" % iconName)
+            		icon = None
     else:
         __log__.warning("iconName is None.")
         icon = None
