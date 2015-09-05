@@ -1,0 +1,57 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-16 12:07+0100\n"
+"PO-Revision-Date: 2009-11-16 12:16+0100\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: camimgplugin.py:51
+msgid "Google Data Core"
+msgstr "Google Data Core"
+
+msgid "Google Authentication"
+msgstr "Autenticación Google"
+
+msgid "Revoke"
+msgstr "Revocar"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "State"
+msgstr "Estado"
+
+msgid "Authenticated"
+msgstr "Autenticado"
+
+msgid "No Authenticated"
+msgstr "No Autenticado"
+
+msgid "Picasa Sign In"
+msgstr "Identificación de Picasa"
+
+msgid "You are signed up picasa\nDo you like change current user of picasa?"
+msgstr "Ya estás identificado en picasa\n¿Quieres cambiar el usuario actual de picasa?"
+
+msgid "Picasa remove"
+msgstr "Eliminar Picasa"
+
+msgid "Do you like remove stored user of picasa?"
+msgstr "¿Quieres eliminar el usuario almacenado de picasa?"
+
+msgid "Google Sign In"
+msgstr "Identificación de Google"
+
+msgid "Password"
+msgstr "Contraseña"
