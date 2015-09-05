@@ -110,14 +110,14 @@ class CamCore:
 
             # Do each item.
             for key in self.__orderItemProcess__:
-                #for key, item in self.__items__.iteritems():
+                # for key, item in self.__items__.iteritems():
                 self.__semaphore__.acquire()
                 if (self.__cancel__ == True):
                     thread.exit()
                 self.__semaphore__.release()
                 
                 __log__.debug("Processing %s item..." % key)
-                item  = self.__items__[key]
+                item = self.__items__[key]
                 if (item != None):
                     item.setAddPhotoAlbum(self.isAddPhotoAlbum())
                     if (self.__callbackBeginItem__ != None):

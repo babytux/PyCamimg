@@ -38,7 +38,7 @@ try:
     import gtk, gobject
     
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.ui import FactoryControls
@@ -86,8 +86,8 @@ class AuthDialog (gtk.Dialog):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(fbcore.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(fbcore.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
 
     def __initUI__(self):
         """
@@ -119,7 +119,7 @@ class AuthDialog (gtk.Dialog):
         self.__imgLogin__.set_from_file(os.path.join(__ICONS_FOLDER__, "fb-connect.png"))
         
         hbButton = gtk.HBox()
-        #hbButton.pack_start(self.__imgLogin__, False, False)
+        # hbButton.pack_start(self.__imgLogin__, False, False)
         self.__btAuthentication__.set_image(self.__imgLogin__)
         hbButton.pack_start(self.__btAuthentication__, False, False)
         hbButton.pack_start(self.__btRevoke__, False, False)
@@ -135,7 +135,7 @@ class AuthDialog (gtk.Dialog):
         self.get_child().pack_start(vBox, True, True)
         vBox.show_all()
 
-    def __initData__(self, gtkLock = False):
+    def __initData__(self, gtkLock=False):
         """
         @summary: Set data to dialog.
         """
@@ -150,8 +150,8 @@ class AuthDialog (gtk.Dialog):
         """
         @summary: Function that runs when facebook login is doing.
         """
-        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"), 
-                                   title=self.__trans__("Facebook Sign Up"), 
+        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"),
+                                   title=self.__trans__("Facebook Sign Up"),
                                    parent=self)
         self.__initData__()
     
@@ -162,8 +162,8 @@ class AuthDialog (gtk.Dialog):
         """
         doLogin = True
         if (self.__fbsession__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"), 
-                                                          title=self.__trans__("Facebook Sign Up"), parent=self, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"),
+                                                          title=self.__trans__("Facebook Sign Up"), parent=self, gtkLock=False,
                                                           returnBoolean=True)
         self.__fbsession__.login(self.__waitLogin__, forceLogin=doLogin)
     

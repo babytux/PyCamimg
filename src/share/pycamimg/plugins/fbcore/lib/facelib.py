@@ -226,7 +226,7 @@ METHODS = {
         'setStatus': [
             ('status', str, []),
             ('status_includes_verb', bool, []),
-            #('clear', bool, []),
+            # ('clear', bool, []),
         ],
     },
 
@@ -435,7 +435,7 @@ def __generate_proxies():
 
             methods[method] = eval(method)
 
-        proxy = type('%sProxy' % namespace.title(), (Proxy, ), methods)
+        proxy = type('%sProxy' % namespace.title(), (Proxy,), methods)
 
         globals()[proxy.__name__] = proxy
 
@@ -557,7 +557,7 @@ class PhotosProxy(PhotosProxy):
             l.append(str(value))
         for (filename, value) in files:
             l.append('--' + boundary)
-            l.append('Content-Disposition: form-data; filename="%s"' % (str(filename), ))
+            l.append('Content-Disposition: form-data; filename="%s"' % (str(filename),))
             l.append('Content-Type: %s' % self.__get_content_type(filename))
             l.append('')
             l.append(value.getvalue())
@@ -699,7 +699,7 @@ class Facebook(object):
         elif node.nodeType == node.ELEMENT_NODE and \
             node.hasAttributes() and \
             node.hasAttribute('list') and \
-            node.getAttribute('list')=="true":
+            node.getAttribute('list') == "true":
             return self._parse_response_list(node)
         elif len([x for x in node.childNodes if x.nodeType == x.ELEMENT_NODE]) > 0:
             return self._parse_response_dict(node)

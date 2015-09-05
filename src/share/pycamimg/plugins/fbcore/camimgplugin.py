@@ -51,8 +51,8 @@ class camimgplugin(ICamimgPlugin):
         @summary: Gets name of the plugin.
         @return: String with name of the plugin.
         """
-        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext("Facebook Core")
+        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext("Facebook Core")
     
     def getPluginModule(self):
         """

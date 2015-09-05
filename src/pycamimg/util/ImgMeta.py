@@ -169,8 +169,8 @@ class ImgMeta:
                 infoHandler = self.__handler__._getexif()
                 if (infoHandler != None):
                     # decode every tags of image
-                    for tag,value in infoHandler.items():
-                        decodedKey = TAGS.get(tag,tag)
+                    for tag, value in infoHandler.items():
+                        decodedKey = TAGS.get(tag, tag)
                         self.__info__[decodedKey] = value
                 else:
                     __log__.debug("It could not retrieve exif information from %s" % self.__file__)

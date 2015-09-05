@@ -24,10 +24,10 @@ along with PyCamimg.  If not, see <http://www.gnu.org/licenses/>.
 from pycamimg.core.plugins.ICamimgPlugin import ICamimgPlugin
 from pycamimg.core.plugins.ICamimgPlugin import PLUGIN_TYPE
 
-#from plugins.RenameOperation import Operation
+# from plugins.RenameOperation import Operation
 
 import gettext
-camimgpluginName="RenameOperation"
+camimgpluginName = "RenameOperation"
 
 class camimgplugin(ICamimgPlugin):
     """
@@ -53,8 +53,8 @@ class camimgplugin(ICamimgPlugin):
         @summary: Gets name of the plugin.
         @return: String with name of the plugin.
         """
-        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext("Rename Operation")
+        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext("Rename Operation")
     
     def getPluginModule(self):
         """

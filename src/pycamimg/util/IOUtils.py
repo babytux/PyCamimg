@@ -137,7 +137,7 @@ class IOUtils:
         """
         return self.__drives__
     
-    def getDirectories(self, path, showhidden=True, insensitive=True, getFullpath = False):
+    def getDirectories(self, path, showhidden=True, insensitive=True, getFullpath=False):
         """
         @summary: Gets directories from a path.
         @param path: Path to get its directory.
@@ -188,7 +188,7 @@ class IOUtils:
         
         return result
 
-    def getFiles(self, path, showhidden=True, insensitive=True, getFullpath = False):
+    def getFiles(self, path, showhidden=True, insensitive=True, getFullpath=False):
         """
         @summary: Gets files from a path.
         @param path: Path to get its files.

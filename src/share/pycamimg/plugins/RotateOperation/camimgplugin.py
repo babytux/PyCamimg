@@ -27,7 +27,7 @@ from pycamimg.core.operations import Operations
 
 import plugins
 import gettext
-camimgpluginName="RotateOperation"
+camimgpluginName = "RotateOperation"
 
 class camimgplugin(ICamimgPlugin):
     """
@@ -53,8 +53,8 @@ class camimgplugin(ICamimgPlugin):
         @summary: Gets name of the plugin.
         @return: String with name of the plugin.
         """
-        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext("Rotate Operation")    
+        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext("Rotate Operation")    
     
     def getPluginModule(self):
         """

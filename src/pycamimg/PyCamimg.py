@@ -72,7 +72,7 @@ class PyCamimg:
                     # TODO: process parameters
                     pass
                 else:
-                    #Parameter with whitespace. Eg. -o python.py
+                    # Parameter with whitespace. Eg. -o python.py
                     # TODO: process parameters
                     pass
         
@@ -326,7 +326,7 @@ class PyCamimg:
             
         try:
             if (localeKey != ""):
-                #locale.setlocale(locale.LC_ALL, (localeKey, currentEncoding))
+                # locale.setlocale(locale.LC_ALL, (localeKey, currentEncoding))
                 locale.setlocale(locale.LC_ALL, localeKey)
             else:
                 locale.setlocale(locale.LC_ALL, "")
@@ -354,8 +354,8 @@ class PyCamimg:
         # Get the language to use
         __builtin__.__LANGS__ = langsTrans
         __builtin__.__LANGKEY__ = localeKey
-        __builtin__._ = gettext.translation("pycamimg", __LOCALE_FOLDER__, 
-                                            languages=[__LANGKEY__], fallback = True).gettext
+        __builtin__._ = gettext.translation("pycamimg", __LOCALE_FOLDER__,
+                                            languages=[__LANGKEY__], fallback=True).gettext
 
     def __initDB__(self):
         """
@@ -363,20 +363,20 @@ class PyCamimg:
         """
         if (Configuration().getConfiguration().getboolean("UI_CORE", "enable_db")):
             Util.generateDB()
-            #Initialize configuration from database.
+            # Initialize configuration from database.
             ConfigurationDB()
 
     def __initUI__(self):
         """
         @summary: Initialize UI of PyCamimg.
         """
-        #Initialize locks
+        # Initialize locks
         self.__expandTree__ = threading.Lock()
         
         from pycamimg.ui.Main import MainWindow
         
         self.__mainWindow__ = MainWindow(
-            self.__lsCores__, 
+            self.__lsCores__,
             domain=pycamimg.gettextName,
             languages=self.__langs__,
             currentLang=self.__currLang__,

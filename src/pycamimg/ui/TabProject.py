@@ -37,7 +37,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import os.path
@@ -132,16 +132,16 @@ class TabProject:
         iconview = gtk.IconView()
         treeview = gtk.TreeView()
 
-        model = gtk.ListStore(gtk.gdk.Pixbuf, 
-                              gobject.TYPE_STRING, 
+        model = gtk.ListStore(gtk.gdk.Pixbuf,
                               gobject.TYPE_STRING,
                               gobject.TYPE_STRING,
                               gobject.TYPE_STRING,
-                              gtk.gdk.Pixbuf, 
+                              gobject.TYPE_STRING,
+                              gtk.gdk.Pixbuf,
                               gobject.TYPE_BOOLEAN,
                               gobject.TYPE_BOOLEAN)
 
-        model.set_default_sort_func(lambda *args: -1)
+        model.set_default_sort_func(lambda *args:-1)
         
         __log__.debug("Created model for new project")
     
@@ -179,24 +179,24 @@ class TabProject:
         __log__.debug("Columns added")
     
         # Enabled as drag source
-        treeview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK, 
-                                          self.FROM_ITSELF, 
+        treeview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
+                                          self.FROM_ITSELF,
                                           gtk.gdk.ACTION_MOVE)
     
-        iconview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK, 
-                                          self.FROM_ITSELF, 
+        iconview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
+                                          self.FROM_ITSELF,
                                           gtk.gdk.ACTION_MOVE)
             
         # Enabled as drop target
-        treeview.enable_model_drag_dest(self.TO_TEXT, 
+        treeview.enable_model_drag_dest(self.TO_TEXT,
                                         gtk.gdk.ACTION_DEFAULT
-                                        |gtk.gdk.ACTION_COPY
-                                        |gtk.gdk.ACTION_MOVE)
+                                        | gtk.gdk.ACTION_COPY
+                                        | gtk.gdk.ACTION_MOVE)
         
-        iconview.enable_model_drag_dest(self.TO_TEXT, 
+        iconview.enable_model_drag_dest(self.TO_TEXT,
                                         gtk.gdk.ACTION_DEFAULT
-                                        |gtk.gdk.ACTION_COPY
-                                        |gtk.gdk.ACTION_MOVE)
+                                        | gtk.gdk.ACTION_COPY
+                                        | gtk.gdk.ACTION_MOVE)
         
         treeview.connect("drag-data-get", self.__dragTarget__)
         treeview.connect("drag-data-received", self.__dropTarget__)
@@ -247,12 +247,12 @@ class TabProject:
         self.__model__ = model
         self.__scroll__ = scroll
     
-    def __addTargetFiles__(self, files, defaultIcon, 
-                           iterOp, 
-                           iter = None, 
-                           position = gtk.TREE_VIEW_DROP_AFTER,
-                           recursiveLevel = 0,
-                           gtkLock = True):
+    def __addTargetFiles__(self, files, defaultIcon,
+                           iterOp,
+                           iter=None,
+                           position=gtk.TREE_VIEW_DROP_AFTER,
+                           recursiveLevel=0,
+                           gtkLock=True):
         """
         @summary: Add files to target listview.
         @param files: List of files to add.
@@ -292,9 +292,9 @@ class TabProject:
                         __log__.debug("Adding images from folder %s" % file)
                         
                         operations.addElements(iterOp, len(listNewFiles), gtkLock=gtkLock)
-                        self.__addTargetFiles__(listNewFiles, defaultIcon, iterOp, 
+                        self.__addTargetFiles__(listNewFiles, defaultIcon, iterOp,
                                                 iter=iter, position=position,
-                                                recursiveLevel=(recursiveLevel+1), gtkLock=gtkLock)
+                                                recursiveLevel=(recursiveLevel + 1), gtkLock=gtkLock)
                         
                         del ioUtils
                     else:
@@ -306,16 +306,16 @@ class TabProject:
                 __log__.debug("New CamItem created for filename %s. %s" % (filename, item))
                     
                 # Create a new row
-                newRowData = [defaultIcon, 
-                              file, 
-                              _("Loading..."), 
-                              filename , 
+                newRowData = [defaultIcon,
+                              file,
+                              _("Loading..."),
+                              filename ,
                               item.getDescription(),
                               defaultIcon,
                               False,
                               True]
                 
-                iterAdd = UIUtils.insertIterAtPathPosition(self.__model__, newRowData, 
+                iterAdd = UIUtils.insertIterAtPathPosition(self.__model__, newRowData,
                                                            iter, position=position,
                                                            doGObject=gtkLock)
                 __log__.info("New file inserted into target treeview. %s" % file)
@@ -467,7 +467,7 @@ class TabProject:
         """
         return self.__tabWidget__
     
-    def addToNotebook(self, notebook, threadBlock = True, focused = True):
+    def addToNotebook(self, notebook, threadBlock=True, focused=True):
         """
         @summary: Add tab to notebook.
         @param notebook: Notebook where tab will be added.
@@ -475,10 +475,10 @@ class TabProject:
         @param focused: True for focus tab when will be added.   
         """
         self.__notebook__ = notebook
-        UIUtils.addTabControl(notebook, 
+        UIUtils.addTabControl(notebook,
                               self.__scroll__,
                               self.__tabWidget__,
-                              doGObject = threadBlock)
+                              doGObject=threadBlock)
         if (focused):
             self.__notebook__.set_current_page(self.__notebook__.page_num(self.__scroll__)) 
     
@@ -563,7 +563,7 @@ class TabProject:
                         self.__scroll__.remove(self.__iconview__)
                         self.__scroll__.add(self.__treeview__)
                         
-                        #Update treeview selection
+                        # Update treeview selection
                         treeselection = self.__treeview__.get_selection()
                         treeselection.unselect_all()
                         paths = self.getSelection()
@@ -578,7 +578,7 @@ class TabProject:
                         self.__scroll__.remove(self.__treeview__)
                         self.__scroll__.add(self.__iconview__)
                         
-                        #Update iconview selection
+                        # Update iconview selection
                         self.__iconview__.unselect_all()
                         paths = self.getSelection()
                         if (paths != None):
@@ -603,9 +603,9 @@ class TabProject:
     
     def moveTargetFiles(self,
                         paths,
-                        iterRef = None,
-                        position = gtk.TREE_VIEW_DROP_AFTER,
-                        gtkLock = True):
+                        iterRef=None,
+                        position=gtk.TREE_VIEW_DROP_AFTER,
+                        gtkLock=True):
         """
         @summary: Move files into target view.
         @param paths:  A list of TreePath to move.
@@ -623,11 +623,11 @@ class TabProject:
         else:
             __log__.debug("There are not paths to move")
     
-    def addTargetFiles(self, 
+    def addTargetFiles(self,
                        files,
-                       iter = None, 
-                       position = gtk.TREE_VIEW_DROP_AFTER,
-                       gtkLock = True):
+                       iter=None,
+                       position=gtk.TREE_VIEW_DROP_AFTER,
+                       gtkLock=True):
         """
         @summary: Add a file list into target view.
         @param files:  A list of files to add.
@@ -647,7 +647,7 @@ class TabProject:
             iterOp = None
             if (operations != None):
                 opData = operations.getDataOperation("AddImg",
-                                                     _("Adding images..."), 
+                                                     _("Adding images..."),
                                                      iNImages)
                 # Add new operation to operation treeview
                 iterOp = operations.addOperation(opData)
@@ -655,8 +655,8 @@ class TabProject:
             # Gets pixbuf file 
             icon = FactoryControls.getPixbufFromStock(gtk.STOCK_FILE)
 
-            self.__addTargetFiles__(files, icon, iterOp, 
-                                    iter=iter, position=position, 
+            self.__addTargetFiles__(files, icon, iterOp,
+                                    iter=iter, position=position,
                                     gtkLock=gtkLock)
 
             if (iterOp != None):
@@ -704,7 +704,7 @@ class TabProject:
             return
         self.deleteImages(paths, gtkLock=gtkLock)
     
-    def doOperation (self, name, parameters = {}, description = "", gtkLock=True):
+    def doOperation (self, name, parameters={}, description="", gtkLock=True):
         """
         @summary: Do operation on selected items.
         @param name: New size for images.
@@ -748,7 +748,7 @@ class TabProject:
                     item.addOperation(name, op)
                 
                 if (op != None):
-                    #the value of dictionary is a tuple that contains, new value
+                    # the value of dictionary is a tuple that contains, new value
                     # and a callback to do before assignment. (newValue, callback)
                     # callback must be return new value, and accept two parameters.
                     # old value and new value.
@@ -769,7 +769,7 @@ class TabProject:
         if (iterOp != None):
             operations.removeOperation(iterOp)
     
-    def doOperationOnItem (self, name, parameters = {}, description = "", gtkLock=True):
+    def doOperationOnItem (self, name, parameters={}, description="", gtkLock=True):
         """
         @summary: Do operation on properties of item.
         @param name: New size for images.
@@ -809,7 +809,7 @@ class TabProject:
                 __log__.debug("Get item %s from file %s" % (item, file))
                 
                 for keyProperty, parameter in parameters.iteritems():
-                    #the value of dictionary is a tuple that contains, new value
+                    # the value of dictionary is a tuple that contains, new value
                     # and a callback to do before assignment. (newValue, callback)
                     # callback must be return new value, and accept four parameters.
                     # item: pycamimg.core.CamItem, iter: GtkTreeIter, count: int, newValue.
@@ -886,15 +886,15 @@ class TabProject:
             metaData = item.getMetadata()
             
             # Create a new row
-            newRowData = [icon, 
-                          item.getPath(), 
-                          metaData.getDateTimeDigitized(), 
-                          item.getTarget() , 
+            newRowData = [icon,
+                          item.getPath(),
+                          metaData.getDateTimeDigitized(),
+                          item.getTarget() ,
                           item.getDescription(),
                           icon,
                           False]
             
-            iterAdd = UIUtils.insertIterAtPathPosition(self.__model__, newRowData, 
+            iterAdd = UIUtils.insertIterAtPathPosition(self.__model__, newRowData,
                                                         None, position=gtk.TREE_VIEW_DROP_AFTER)
             __log__.info("File inserted into target treeview. %s" % file)
             
@@ -986,7 +986,7 @@ class TabProject:
                 context.finish(False, False, etime)
                 
             # Add items
-            Thread(target=self.addTargetFiles, 
+            Thread(target=self.addTargetFiles,
                    args=(files, iter, position,)).start()
 
             context.finish(True, False, etime)
@@ -1007,7 +1007,7 @@ class TabProject:
                         UIUtils.setColumnOrder(self.__model__, -2, gtk.SORT_ASCENDING, False)
                 else:
                     UIUtils.setColumnOrder(self.__model__, -2, gtk.SORT_ASCENDING, False)
-                self.moveTargetFiles(paths, iter, position, gtkLock = False)
+                self.moveTargetFiles(paths, iter, position, gtkLock=False)
             
             context.finish(True, False, etime)
         else:

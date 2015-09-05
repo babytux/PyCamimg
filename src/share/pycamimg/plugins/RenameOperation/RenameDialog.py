@@ -39,7 +39,7 @@ try:
     import gtk, gobject
 
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import gettext
@@ -90,8 +90,8 @@ class RenameDialog (gtk.Dialog):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(RenameOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(RenameOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
      
     def __initUI__(self):
         """

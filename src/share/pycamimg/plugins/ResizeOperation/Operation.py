@@ -35,7 +35,7 @@ except:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
     
@@ -53,7 +53,7 @@ class Resize(Operation):
     @see: Operation 
     """
     
-    def __init__(self, size = (100, 100), scale = ImageUtils.PERCENT):
+    def __init__(self, size=(100, 100), scale=ImageUtils.PERCENT):
         """
         @summary: Create a resize operation.
         @param size: Tuple with Width x Height that input file will resize. Default = (100,100)
@@ -80,14 +80,14 @@ class Resize(Operation):
         __log__.debug("Get scale: %d" % scale)
         
         if (scale == ImageUtils.CM):
-            size = ImageUtils.cmToPixel((self.__args__["width"], 
+            size = ImageUtils.cmToPixel((self.__args__["width"],
                                          self.__args__["height"]), DEFAULT_DPI)
         elif (scale == ImageUtils.PIXEL):
             size = (int(self.__args__["width"]), int(self.__args__["height"]))
         elif (scale == ImageUtils.PERCENT):
             srcSize = imgobj.size
             size = (int(srcSize[0] * (float(self.__args__["width"]) / 100)),
-                    int(srcSize[1] * (float(self.__args__["height"]) /100)))
+                    int(srcSize[1] * (float(self.__args__["height"]) / 100)))
         else:
             __log__.error("Scale has non-valid value. %d" % scale)
             raise ValueError("Scale has non-valid value. %d" % scale)

@@ -32,7 +32,7 @@ class OperationPlugin:
         """
         return
     
-    def callbackAction(self, action, currentTab, userData = None):
+    def callbackAction(self, action, currentTab, userData=None):
         """
         @summary: Callback that will be thrown when any action is actived.
         @param action: gtk.Action activated.

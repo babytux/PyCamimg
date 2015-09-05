@@ -38,7 +38,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import time
@@ -47,7 +47,7 @@ import FactoryControls
 import UIUtils
 from pycamimg.util.Singleton import Singleton
 
-#Store class to access as singleton
+# Store class to access as singleton
 __instanceRegOp__ = 1
 __instanceRegOp__ = None
 
@@ -57,7 +57,7 @@ class RegOperations:
     """        
     __metaclass__ = Singleton
     
-    #Index of each column
+    # Index of each column
     __ID_COLUMN__ = 0
     __NAME_COLUMN__ = 1
     __VALUE_COLUMN__ = 2
@@ -81,7 +81,7 @@ class RegOperations:
         
         self.__opsModel__ = None
         
-        #Initialize operation TreeView
+        # Initialize operation TreeView
         self.__initOperations__()
         
     def __call__(self):
@@ -94,7 +94,7 @@ class RegOperations:
         """
         @summary: Initialize operations TreeView
         """
-        self.__opsModel__ = gtk.ListStore(gobject.TYPE_STRING, 
+        self.__opsModel__ = gtk.ListStore(gobject.TYPE_STRING,
                                           gobject.TYPE_STRING,
                                           gobject.TYPE_FLOAT,
                                           gobject.TYPE_FLOAT,
@@ -165,7 +165,7 @@ class RegOperations:
         """
         return UIUtils.addIterListView(self.__opsModel__, data)
 
-    def addElements(self, iter, elements, gtkLock = True):
+    def addElements(self, iter, elements, gtkLock=True):
         """
         @summary: Sets new values of progress bar.
         @param iter: GtkTreeIter where progress bar is.
@@ -178,7 +178,7 @@ class RegOperations:
             currElems = self.__opsModel__.get_value(iter, self.__ELEMNS_COLUMN__)
             newStep = float(1) / (float(currElems) + float(elements))
             
-            currValue = float(self.__opsModel__.get_value(iter, self.__VALUE_COLUMN__))/100
+            currValue = float(self.__opsModel__.get_value(iter, self.__VALUE_COLUMN__)) / 100
             currStep = self.__opsModel__.get_value(iter, self.__STEP_COLUMN__)
             
             newValue = newStep * (currValue / currStep)
@@ -194,10 +194,10 @@ class RegOperations:
         @summary: Does a step.
         @param iter: Do a step on a iter.
         """
-        value = float(self.__opsModel__.get_value(iter, self.__VALUE_COLUMN__))/100
+        value = float(self.__opsModel__.get_value(iter, self.__VALUE_COLUMN__)) / 100
         step = self.__opsModel__.get_value(iter, self.__STEP_COLUMN__)
         value += step
-        UIUtils.setIterData(self.__opsModel__, iter, self.__VALUE_COLUMN__, value*100)
+        UIUtils.setIterData(self.__opsModel__, iter, self.__VALUE_COLUMN__, value * 100)
     
     def stepOperationById(self, id):
         """
@@ -227,4 +227,4 @@ class RegOperations:
         if (iter != None):
             self.removeOperation(iter)
         else:
-            __log__.warning("It could not get a iter with operation %s" % id )
+            __log__.warning("It could not get a iter with operation %s" % id)

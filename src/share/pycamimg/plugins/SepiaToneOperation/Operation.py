@@ -35,7 +35,7 @@ except:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
     from PIL import ImageOps
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
@@ -51,7 +51,7 @@ def make_linear_ramp(white):
     ramp = []
     r, g, b = white
     for i in range(255):
-        ramp.extend((r*i/255, g*i/255, b*i/255))
+        ramp.extend((r * i / 255, g * i / 255, b * i / 255))
     return ramp
 
 # make sepia ramp (tweak color as necessary)

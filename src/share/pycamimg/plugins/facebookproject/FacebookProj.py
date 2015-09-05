@@ -38,7 +38,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.core.plugins import IProjectType
@@ -93,8 +93,8 @@ class CamimgPlugin(IProjectType.Project):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(facebookproject.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(facebookproject.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
     
     def __loginEvent__(self, b):
         """
@@ -103,8 +103,8 @@ class CamimgPlugin(IProjectType.Project):
         """
         doLogin = True
         if (self.__fb__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"), 
-                                                          title=self.__trans__("Facebook Sign Up"), parent=self.__blockWindow__, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up facebook\nDo you like sign up facebook?"),
+                                                          title=self.__trans__("Facebook Sign Up"), parent=self.__blockWindow__, gtkLock=False,
                                                           returnBoolean=True)
         self.__fb__.login(self.__waitLogin__, forceLogin=doLogin, store=False)
         
@@ -113,8 +113,8 @@ class CamimgPlugin(IProjectType.Project):
         """
         @summary: Function that runs when facebook login is doing.
         """
-        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"), 
-                                           title=self.__trans__("Facebook Sign Up"), 
+        FactoryControls.getMessage(self.__trans__("Close after sign up on facebook"),
+                                           title=self.__trans__("Facebook Sign Up"),
                                            parent=self.__blockWindow__)
         
     def __selectAlbumEvent__(self, b):

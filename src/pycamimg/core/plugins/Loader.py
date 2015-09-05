@@ -95,7 +95,7 @@ def load(dictPaths={}):
             attempt = len(pluginDepsWait)
     del iou
     
-def __loadDirPlugin__(key, path, iou = None):
+def __loadDirPlugin__(key, path, iou=None):
     """
     @summary: Load plugins from a directory.
     @param key: Name of directory where plugins are.
@@ -131,7 +131,7 @@ def __loadDirPlugin__(key, path, iou = None):
     if (delIou):
         del iou
     
-def __loadPlugin__(pathPluginsTypes, plugin, key, iou = None):
+def __loadPlugin__(pathPluginsTypes, plugin, key, iou=None):
     """
     @summary: Load a plugin.
     @param pathPluginsTypes: Path of directory where plugin is.

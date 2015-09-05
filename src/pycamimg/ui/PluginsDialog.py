@@ -38,7 +38,7 @@ try:
     import gtk, gobject
     
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import ConfigParser
@@ -71,7 +71,7 @@ class PluginsDialog (gtk.Dialog):
         
         super(PluginsDialog, self).set_title(_("Plugins"))
         super(PluginsDialog, self).set_flags(gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
-        #super(PluginsDialog, self).add_buttons(gtk.STOCK_PREFERENCES, self.__RESPONSE_PREFERENCE__,
+        # super(PluginsDialog, self).add_buttons(gtk.STOCK_PREFERENCES, self.__RESPONSE_PREFERENCE__,
         #                                       gtk.STOCK_OK, gtk.RESPONSE_OK)
         
         super(PluginsDialog, self).set_transient_for(parent)
@@ -100,11 +100,11 @@ class PluginsDialog (gtk.Dialog):
         
         treeview = gtk.TreeView()
         self.__model__ = gtk.ListStore(gobject.TYPE_STRING,
-                              gobject.TYPE_STRING, 
+                              gobject.TYPE_STRING,
                               gobject.TYPE_STRING,
                               gobject.TYPE_OBJECT)
 
-        #self.__model__.set_default_sort_func(lambda *args: -1)
+        # self.__model__.set_default_sort_func(lambda *args: -1)
         
         __log__.debug("Created model for new project")
     
@@ -120,7 +120,7 @@ class PluginsDialog (gtk.Dialog):
         treeview.set_reorderable(False)
         
         treeview.connect_after("cursor-changed", self.__changedRow__)
-        #treeview.connect("cursor-changed", self.__changedRow__)
+        # treeview.connect("cursor-changed", self.__changedRow__)
         
         # Creates columns of the TreeView of target files
         columnPlugin = FactoryControls.getTreeColumnText(_("Plugin"), self.COLUMN_PLUGIN, sortable=True)
@@ -139,7 +139,7 @@ class PluginsDialog (gtk.Dialog):
         self.get_child().pack_start(vBox, True, True)
         vBox.show_all()
 
-    def __initData__(self, gtkLock = False):
+    def __initData__(self, gtkLock=False):
         """
         @summary: Set data to dialog.
         """
@@ -150,7 +150,7 @@ class PluginsDialog (gtk.Dialog):
                     obj = gobject.GObject()
                     obj.set_data("plugin", plugin)
                     newRowData = [plugin.getId(), plugin.getName(), PLUGIN_TYPE.getTypeDescription(plugin.getType()), obj]
-                    UIUtils.addIterListView(self.__model__, 
+                    UIUtils.addIterListView(self.__model__,
                                             newRowData,
                                             doGObject=gtkLock)
                     __log__.info("New file inserted into plugins treeview. %s" % plugin.getId())

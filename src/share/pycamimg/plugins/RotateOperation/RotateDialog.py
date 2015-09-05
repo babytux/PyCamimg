@@ -38,7 +38,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.ui import FactoryControls
@@ -94,8 +94,8 @@ class RotateDialog (gtk.Dialog):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(RotateOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)    
+        return gettext.translation(RotateOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)    
     
     def __initUI__(self):
         """
@@ -186,10 +186,10 @@ class RotateDialog (gtk.Dialog):
         if (res == gtk.RESPONSE_OK):
             degrees = self.getData()
             if (degrees == -1):
-                FactoryControls.getMessage(self.__trans__("There is not valid degrees selected.\nPlease select correct degrees"), 
-                                           title=self.__trans__("Rotate"), 
+                FactoryControls.getMessage(self.__trans__("There is not valid degrees selected.\nPlease select correct degrees"),
+                                           title=self.__trans__("Rotate"),
                                            type=gtk.MESSAGE_ERROR,
-                                           parent = self)
+                                           parent=self)
                 return gtk.FALSE
             
             if (self.__callback__ != None):

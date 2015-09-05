@@ -37,7 +37,7 @@ except:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
     
@@ -136,7 +136,7 @@ class Operation:
                     desc += ";"
                 else:
                     bFirst = False
-                desc += "%s: %s"%(key, value)
+                desc += "%s: %s" % (key, value)
         return desc
 
     def doOnPath(self, path):
@@ -171,7 +171,7 @@ class Operation:
                 CamFormatOptions.saveWithOptions(img2do, path, ext)
                 
                 if (ext == "JPEG"):
-                    __log__.debug("It is a JPEG image. It will set EXIF information..." )
+                    __log__.debug("It is a JPEG image. It will set EXIF information...")
                     ImageUtils.setJpegInfo(path, (infoExif, infoExif2, infoComments))
             except IOError, ioe:
                 __log__.error("It could not save %s. Please check your permissions. %s" % (path, ioe))

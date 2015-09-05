@@ -38,17 +38,17 @@ try:
     import pygtk
     pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 try:
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?")
     raise e
 
 try:
     from PIL import Image
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
 
@@ -93,10 +93,10 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(FlipOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)    
+        return gettext.translation(FlipOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)    
         
-    def callbackAction(self, action, currentTab, userData = None):
+    def callbackAction(self, action, currentTab, userData=None):
         """
         @summary: Callback that will be thrown when any action is actived.
         @param action: gtk.Action activated.
@@ -128,9 +128,9 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
             elif(action.get_name() == "MirrorAction"):
                 self.__doFlip__(None, Operation.HORIZONTAL)
             elif(action.get_name() == "FlipMirrorAction"):
-                flipDialog = FlipDialog(callback = self.__doFlip__,
-                                            parent = parentWindow)
-                __log__.debug("Flip dialog created. %s" % flipDialog )
+                flipDialog = FlipDialog(callback=self.__doFlip__,
+                                            parent=parentWindow)
+                __log__.debug("Flip dialog created. %s" % flipDialog)
                 if (iNRows == 1):
                     iter = model.get_iter(paths[0])
                     itemPath = model.get_value(iter, self.__currentTab__.COLUMN_SOURCE)
@@ -139,9 +139,9 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
                 flipDialog.run()
             pass
         else:
-            FactoryControls.getMessage(self.__trans__("Select one or more items"), 
+            FactoryControls.getMessage(self.__trans__("Select one or more items"),
                                        title=self.__trans__("Flip"),
-                                       parent = parentWindow)
+                                       parent=parentWindow)
         
         return
     

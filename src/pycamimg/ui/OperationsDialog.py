@@ -38,7 +38,7 @@ try:
     import gtk, gobject
     
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import ConfigParser
@@ -94,11 +94,11 @@ class OperationsDialog (gtk.Dialog):
         """
         treeview = gtk.TreeView()
         self.__model__ = gtk.ListStore(gobject.TYPE_STRING,
-                              gobject.TYPE_STRING, 
+                              gobject.TYPE_STRING,
                               gobject.TYPE_STRING,
                               gobject.TYPE_BOOLEAN)
 
-        #self.__model__.set_default_sort_func(lambda *args: -1)
+        # self.__model__.set_default_sort_func(lambda *args: -1)
         
         __log__.debug("Created model for new project")
     
@@ -118,7 +118,7 @@ class OperationsDialog (gtk.Dialog):
         treeview.append_column(columnOperation)
         columnParams = FactoryControls.getTreeColumnText(_("Parameters"), self.COLUMN_PARAMETERS, sortable=False)
         treeview.append_column(columnParams)
-        columnDel = FactoryControls.getTreeColumnToggle( _("Delete"), self.__model__, self.COLUMN_DELETE)
+        columnDel = FactoryControls.getTreeColumnToggle(_("Delete"), self.__model__, self.COLUMN_DELETE)
         treeview.append_column(columnDel)
         
         self.__treeview__ = treeview
@@ -132,7 +132,7 @@ class OperationsDialog (gtk.Dialog):
         self.get_child().pack_start(vBox, True, True)
         vBox.show_all()
 
-    def __initData__(self, gtkLock = False):
+    def __initData__(self, gtkLock=False):
         """
         @summary: Set data to dialog.
         """        
@@ -141,7 +141,7 @@ class OperationsDialog (gtk.Dialog):
             if (lOperations != None):
                 for key, op in lOperations.iteritems():
                     newRowData = [key, op.getOp(), op.toString(), False]
-                    UIUtils.addIterListView(self.__model__, 
+                    UIUtils.addIterListView(self.__model__,
                                             newRowData,
                                             doGObject=gtkLock)
                     __log__.info("New file inserted into operations treeview. %s" % key)

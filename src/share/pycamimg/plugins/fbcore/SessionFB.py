@@ -65,7 +65,7 @@ class SessionFB(object):
         
         self.load()
         
-    def __initializeFacebookSession__(self, authToken = None, checkLogin = False):
+    def __initializeFacebookSession__(self, authToken=None, checkLogin=False):
         """
         @summary: Initialize a facebook session.
         """
@@ -168,21 +168,21 @@ class SessionFB(object):
             f = open(filename, 'r')
             
             self.__token__ = f.readline()
-            self.__token__  = self.__token__[:len(self.__token__)-1]
+            self.__token__ = self.__token__[:len(self.__token__) - 1]
             
             if (self.__fb__ == None):
                 self.__initializeFacebookSession__(authToken=self.__token__)
-                #self.__initializeFacebookSession__()
+                # self.__initializeFacebookSession__()
             
             self.__secretKey__ = f.readline()
-            self.__secretKey__  = self.__secretKey__[:len(self.__secretKey__)-1]
+            self.__secretKey__ = self.__secretKey__[:len(self.__secretKey__) - 1]
             self.__sessionKey__ = f.readline()
-            self.__sessionKey__  = self.__sessionKey__[:len(self.__sessionKey__)-1]
+            self.__sessionKey__ = self.__sessionKey__[:len(self.__sessionKey__) - 1]
             self.__uid__ = f.readline()
-            self.__uid__  = self.__uid__[:len(self.__uid__)-1]
+            self.__uid__ = self.__uid__[:len(self.__uid__) - 1]
             self.__expire__ = int(f.readline())
             self.__username__ = f.readline()
-            self.__username__  = self.__username__[:len(self.__username__)-1]
+            self.__username__ = self.__username__[:len(self.__username__) - 1]
             
             
             self.__fb__.api_key = fbcore.API_KEY
@@ -193,12 +193,12 @@ class SessionFB(object):
             self.__fb__.secret = self.__secretKey__
             self.__fb__.uid = self.__uid__
             
-            #self.__fb__.auth.getSession()
+            # self.__fb__.auth.getSession()
             
-            restoreSession = {'session_key': self.__sessionKey__, 
+            restoreSession = {'session_key': self.__sessionKey__,
                               'secret': self.__secretKey__,
                               'uid': self.__uid__,
-                              'expires': self.__expire__,}
+                              'expires': self.__expire__, }
             
             self.__session__ = restoreSession
             
@@ -260,7 +260,7 @@ class SessionFB(object):
         bFirst = True
         self.__initializeFacebookSession__(checkLogin=True)
         if (not self.isLogged() or forceLogin):
-            #Login facebook
+            # Login facebook
             while (not self.isLogged() or (bFirst and forceLogin)):
                 bFirst = False
                 self.__loginDid__ = False

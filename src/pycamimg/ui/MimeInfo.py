@@ -37,7 +37,7 @@ try:
     if (not (sys.platform == "win32")):
         pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import time
@@ -62,7 +62,7 @@ except ImportError:
 try:
     import gtk
 except ImportError, ie:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise ie
 
 if (WINDOWS):
@@ -77,7 +77,7 @@ if (WINDOWS):
             cgtk = CDLL("libgtk-win32-2.0-0.dll")
         except Exception, ex:
             __log__.fatal("Load libgtk-win32-2.0-0.dll failed. Loading by find_library. %s", ex)
-            cgtk= CDLL(find_library("libgtk-win32-2.0-0.dll"))
+            cgtk = CDLL(find_library("libgtk-win32-2.0-0.dll"))
         try:
             cgdk = CDLL("libgdk-win32-2.0-0.dll")
         except Exception, ex:
@@ -104,14 +104,14 @@ class MimeInfo:
     @summary: Manager to get info of a mime.
     """
    
-    def __init__( self ):
+    def __init__(self):
         """
         @summary: Create a new MimeInfo.
         """
         self.icons = gtk.icon_theme_get_default().list_icons()
         self.cache = {}
 
-    def __getSizeDescription__(self, size, exactly = False):
+    def __getSizeDescription__(self, size, exactly=False):
         """
         @summary: Gets size description from size.
         @param size: Size to format.
@@ -172,10 +172,10 @@ class MimeInfo:
             return gtk.STOCK_DIRECTORY
         
         sys_encoded_path = path.encode(sys.getfilesystemencoding())
-        sys_encoded_path = sys_encoded_path.replace('/', '\\') #SHGetFileInfo doesn't work with Unix style paths
+        sys_encoded_path = sys_encoded_path.replace('/', '\\')  # SHGetFileInfo doesn't work with Unix style paths
         ret, info = shell.SHGetFileInfo(sys_encoded_path, 0, shellcon.SHGFI_ICONLOCATION, 0)
         if ret and (info[1] or info[3]):
-            icon = "gtk-win32-shell-icon;%s;%d" %(info[3], info[1])
+            icon = "gtk-win32-shell-icon;%s;%d" % (info[3], info[1])
         else:
             icon = "gtk-win32-shell-icon;%s" % sys_encoded_path
         icon_theme = gtk.icon_theme_get_default()
@@ -194,7 +194,7 @@ class MimeInfo:
         iconFlags = [shellcon.SHGFI_SMALLICON, shellcon.SHGFI_LARGEICON]
         try:
             for flag in iconFlags:
-                ret, info = shell.SHGetFileInfo(filepath, 0, shellcon.SHGFI_ICON|flag, 0)
+                ret, info = shell.SHGetFileInfo(filepath, 0, shellcon.SHGFI_ICON | flag, 0)
                 if ret:
                     pixbuf = cgdk.gdk_win32_icon_to_pixbuf_libgtk_only(info[0])
                     if (pixbuf):
@@ -223,34 +223,34 @@ class MimeInfo:
             return None
 
     
-    def __getIconNameGnome__( self, path ):
+    def __getIconNameGnome__(self, path):
         """
         @summary: Gets an icon name from path, matching with its mime.
         @param path: Path to extract icon name.
         @return: string with icon name 
         """
         
-        #Check if path exist
+        # Check if path exist
         if not os.path.exists(path):
             __log__.warning("Path %s does not exist." % path)
             return gtk.STOCK_DIALOG_AUTHENTICATION
  
-        #get mime
-        mime_type = gnomevfs.get_mime_type( path ).replace( '/', '-' )
+        # get mime
+        mime_type = gnomevfs.get_mime_type(path).replace('/', '-')
  
-        #check if mime exists in the cache
+        # check if mime exists in the cache
         if mime_type in self.cache:
             return self.cache[mime_type]
  
-        #try to get a gnome mime
+        # try to get a gnome mime
         items = mime_type.split('-')
-        for aux in xrange(len(items)-1):
-            icon_name = "gnome-mime-" + '-'.join(items[:len(items)-aux])
+        for aux in xrange(len(items) - 1):
+            icon_name = "gnome-mime-" + '-'.join(items[:len(items) - aux])
             if icon_name in self.icons:
                 self.cache[mime_type] = icon_name
                 return icon_name
  
-        #check and try to get a folder
+        # check and try to get a folder
         if os.path.isdir(path):
             icon_name = 'folder'
             if icon_name in self.icons:
@@ -261,26 +261,26 @@ class MimeInfo:
             self.cache[mime_type] = icon_name
             return icon_name
  
-        #try to get a simple mime
-        for aux in xrange(len(items)-1):
-            icon_name = '-'.join(items[:len(items)-aux])
+        # try to get a simple mime
+        for aux in xrange(len(items) - 1):
+            icon_name = '-'.join(items[:len(items) - aux])
             if icon_name in self.icons:
                 self.cache[mime_type] = icon_name
                 return icon_name
  
-        #if there isn't a mime for the path, get file icon
+        # if there isn't a mime for the path, get file icon
         __log__.debug("Icon name of %s not found." % path)
         icon_name = gtk.STOCK_FILE
         self.cache[mime_type] = icon_name
         return icon_name
     
-    def getSize( self, path ):
+    def getSize(self, path):
         """
         @summary: Gets a tuple with size and size description with its units (bytes, Kbytes...)
         @param path: Path to calculate size.
         @return: Tuple with size and size description  
         """
-        #Check if path exist
+        # Check if path exist
         if not os.path.exists(path):
             __log__.warning("Path does not exist. %s" % path)
             return (0, "")        
@@ -295,8 +295,8 @@ class MimeInfo:
  
         
         if (GNOME):
-            #get mime
-            mime_type = gnomevfs.get_mime_type( path )
+            # get mime
+            mime_type = gnomevfs.get_mime_type(path)
      
             uri = "file://%s" % urllib.pathname2url(path)
             fileInfo = gnomevfs.get_file_info(uri)
@@ -309,13 +309,13 @@ class MimeInfo:
                 
         return (size, sizeDescription)
 
-    def getModifyDate( self, path ):
+    def getModifyDate(self, path):
         """
         @summary: Gets a tuple with modify date and modify date description.
         @param path: Path to extract modify date
         @return: Tuple with modify date in long data and string data. 
         """
-        #Check if path exist
+        # Check if path exist
         if not os.path.exists(path):
             return (time.mktime(datetime.now().timetuple()), "")
  
@@ -324,14 +324,14 @@ class MimeInfo:
                         
         return (modify, modifyDate.strftime("%c"))
     
-    def getMime( self, path ):
+    def getMime(self, path):
         """
         @summary: Gets a tuple with mime type and mime description.
         @param path: Path to extract mime.
         @return: Tuple with two string, 
             the first with mime name and the second with mime description.  
         """
-        #Check if path exist
+        # Check if path exist
         if not os.path.exists(path):
             return ("", "")
  
@@ -339,8 +339,8 @@ class MimeInfo:
         mimeDescription = ""
  
         if (GNOME):
-            #get mime
-            mimeType = gnomevfs.get_mime_type( path )
+            # get mime
+            mimeType = gnomevfs.get_mime_type(path)
             mimeDescription = gnomevfs.mime_get_description(mimeType)
         elif (WINDOWS):
             info = self.__getWindowsInfo__(path)

@@ -116,11 +116,11 @@ class Configuration:
         elif(path == None):
             __log__.debug("Set %s as config file" % self.__pathCofig__)
             path = self.__pathConfig__
-        #else:
+        # else:
         #    __log__.debug("Set %s as new config file" % path)
         #    self.__pathConfig__ = path
-        #Now is necessary set save path. 
-        #otherwise Configuration can be saved 
+        # Now is necessary set save path. 
+        # otherwise Configuration can be saved 
             
         config = ConfigParser.SafeConfigParser()
         makeConfig = False

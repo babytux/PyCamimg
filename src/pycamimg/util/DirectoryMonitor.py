@@ -45,10 +45,10 @@ class DirectoryMonitor:
     """
 
     WAIT_TIME = 3000
-    #Types
+    # Types
     DIRECTORY = 0
     FILE = 1
-    #Operations
+    # Operations
     ADD = 0
     DELETE = 1
     
@@ -121,7 +121,7 @@ class DirectoryMonitor:
                             if (self.__directories__.count(direc) == 0):
                                 self.__directories__.append(direc)
                                 self.__raiseEvent__(os.path.join(self.__directory__, direc),
-                                                    self.ADD, 
+                                                    self.ADD,
                                                     self.DIRECTORY)
                     else:
                         for direc in self.__directories__:

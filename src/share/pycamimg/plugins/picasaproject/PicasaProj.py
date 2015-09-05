@@ -38,7 +38,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.core.plugins import IProjectType
@@ -93,8 +93,8 @@ class CamimgPlugin(IProjectType.Project):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(picasaproject.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(picasaproject.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
     
     def __loginEvent__(self, b):
         """
@@ -103,8 +103,8 @@ class CamimgPlugin(IProjectType.Project):
         """
         doLogin = True
         if (self.__gdata__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed in picasa\nDo you like sign in with another user in picasa?"), 
-                                                          title=self.__trans__("Picasa Sign In"), parent=self.__blockWindow__, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed in picasa\nDo you like sign in with another user in picasa?"),
+                                                          title=self.__trans__("Picasa Sign In"), parent=self.__blockWindow__, gtkLock=False,
                                                           returnBoolean=True)
         self.__gdata__.login(parent=self, forceLogin=doLogin, store=False)
         
@@ -222,8 +222,8 @@ class CamimgPlugin(IProjectType.Project):
             try:
                 self.__gdata__.getGdataAccess().InsertPhotoSimple(
                             '/data/feed/api/user/%s/albumid/%s' % (self.__gdata__.getUsername(), self.__targetAlbum__[1]),
-                            'New Photo', 
-                            'Uploaded using PyCamimg', 
+                            'New Photo',
+                            'Uploaded using PyCamimg',
                             source)
                 __log__.info("Photo %s uploaded in album %s created. Id: %s" % (source, self.__targetAlbum__[0], self.__targetAlbum__[1]))
                 os.remove(source)

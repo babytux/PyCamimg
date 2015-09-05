@@ -38,7 +38,7 @@ try:
     import gtk, gobject
     
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.ui import FactoryControls
@@ -86,8 +86,8 @@ class AuthDialog (gtk.Dialog):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(gdatacore.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(gdatacore.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
 
     def __initUI__(self):
         """
@@ -119,7 +119,7 @@ class AuthDialog (gtk.Dialog):
         self.__imgLogin__.set_from_file(os.path.join(__ICONS_FOLDER__, "picasaweblogo.gif"))
         
         hbButton = gtk.HBox()
-        #hbButton.pack_start(self.__imgLogin__, False, False)
+        # hbButton.pack_start(self.__imgLogin__, False, False)
         self.__btAuthentication__.set_image(self.__imgLogin__)
         hbButton.pack_start(self.__btAuthentication__, False, False)
         hbButton.pack_start(self.__btRevoke__, False, False)
@@ -135,7 +135,7 @@ class AuthDialog (gtk.Dialog):
         self.get_child().pack_start(vBox, True, True)
         vBox.show_all()
 
-    def __initData__(self, gtkLock = False):
+    def __initData__(self, gtkLock=False):
         """
         @summary: Set data to dialog.
         """
@@ -153,8 +153,8 @@ class AuthDialog (gtk.Dialog):
         """
         doLogin = True
         if (self.__session__.isLogged()):
-            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up picasa\nDo you like change current user of picasa?"), 
-                                                          title=self.__trans__("Picasa Sign In"), parent=self, gtkLock=False, 
+            doLogin = FactoryControls.getConfirmMessage(self.__trans__("You are signed up picasa\nDo you like change current user of picasa?"),
+                                                          title=self.__trans__("Picasa Sign In"), parent=self, gtkLock=False,
                                                           returnBoolean=True)
         self.__session__.login(parent=self, forceLogin=doLogin)
     

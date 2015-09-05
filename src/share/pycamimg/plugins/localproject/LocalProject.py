@@ -43,12 +43,12 @@ try:
     import pygtk
     pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 try:
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?")
     raise e
 
 import os.path
@@ -80,8 +80,8 @@ class CamimgPlugin(IProjectType.Project):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(localproject.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(localproject.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
 
     def __selectTargetEvent__(self, b):
         """
@@ -217,7 +217,7 @@ class CamimgPlugin(IProjectType.Project):
             if (self.__target__ == None):
                 __log__.debug("There is not target folder")
                 FactoryControls.getMessage(
-                    self.__trans__("Target folder is not defined."), 
+                    self.__trans__("Target folder is not defined."),
                     title=self.__trans__("Execute"),
                     type=gtk.MESSAGE_ERROR,
                     parent=self.__mainWindow__,

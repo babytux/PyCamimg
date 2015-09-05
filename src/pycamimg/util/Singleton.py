@@ -31,5 +31,5 @@ class Singleton(type):
  
     def __call__(tclass, *args, **kw):
         if tclass.__instance__ is None:
-            tclass.__instance__ = type.__call__(tclass, *args,**kw)
+            tclass.__instance__ = type.__call__(tclass, *args, **kw)
         return tclass.__instance__

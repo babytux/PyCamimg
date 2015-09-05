@@ -37,7 +37,7 @@ try:
     if (not (sys.platform == "win32")):
         pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import threading, thread
@@ -50,7 +50,7 @@ from datetime import datetime
 try:
     import gtk, gobject
 except ImportError, ie:
-    __log__.fatal("It can not import gtk, gdk modules. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk, gdk modules. Sure you have installed pygtk?")
     raise ie
 
 import UIUtils
@@ -66,7 +66,7 @@ class FileExplorer:
     file explorer, like nautilus has.
     """
     
-    #Index of each column
+    # Index of each column
     __IMG_COLUMN__ = 0
     __NAME_COLUMN__ = 1
     __PATH_COLUMN__ = 2
@@ -77,14 +77,14 @@ class FileExplorer:
     __MODIFY_DATE_COLUMN__ = 7
     __MODIFY_DATE_DESC_COLUMN__ = 8
     
-    #Separator for splitting drag&drop selection
+    # Separator for splitting drag&drop selection
     SEP = "\n"
-    #ID of data for drag&drop
+    # ID of data for drag&drop
     TARGET_TEXT = 80
-    #Type of drag&drop
+    # Type of drag&drop
     FROM_TEXT = [("text/uri-list", 0, TARGET_TEXT)]
     
-    def __init__(self, showHiddens = True):
+    def __init__(self, showHiddens=True):
         """
         @summary: Create a file explorer.
         @param showHiddens: True if you show hidden files. Default True
@@ -111,7 +111,7 @@ class FileExplorer:
         # Store current thread
         self.__loadThread__ = None
         
-        #Initialize file explorer
+        # Initialize file explorer
         self.__initializeFiles__()
         
         self.__showHiddens__ = showHiddens        
@@ -142,8 +142,8 @@ class FileExplorer:
         __log__.debug("Columns added")
 
         # Enabled as drag source
-        self.__explorer__.enable_model_drag_source(gtk.gdk.BUTTON1_MASK, 
-                                                  self.FROM_TEXT, 
+        self.__explorer__.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
+                                                  self.FROM_TEXT,
                                                   gtk.gdk.ACTION_COPY)
 
         __log__.debug("Drag & Drop enabled")
@@ -154,8 +154,8 @@ class FileExplorer:
         @summary: Gets list model of the file explorer.
         @return: gtk.ListStore with model.
         """
-        list = gtk.ListStore(gtk.gdk.Pixbuf, 
-                             gobject.TYPE_STRING, 
+        list = gtk.ListStore(gtk.gdk.Pixbuf,
+                             gobject.TYPE_STRING,
                              gobject.TYPE_STRING,
                              gobject.TYPE_LONG,
                              gobject.TYPE_STRING,
@@ -232,7 +232,7 @@ class FileExplorer:
         @param path: Path to list.
         """
 
-        #Create a temporal model
+        # Create a temporal model
         if (self.__cBeginLoadCallback__ != None):
             self.__cBeginLoadCallback__()
         
@@ -255,7 +255,7 @@ class FileExplorer:
         # Get monitor of the path
         self.__monitor__ = FactoryDirectoryMonitor.getMonitor(path)
         
-        #Clear every iters in TreeView
+        # Clear every iters in TreeView
         if (self.__checkCurrentPath__(path)):
             UIUtils.clearModelTreeview(self.__flModel__, True)
             __log__.debug("Cleared previous model")
@@ -264,7 +264,7 @@ class FileExplorer:
             UIUtils.setNotifyChildTreeview(self.__explorer__, True)
             if (self.__cEndLoadCallback__ != None):
                 self.__cEndLoadCallback__()
-            UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order = tupleSort[1])
+            UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order=tupleSort[1])
             return False
         
         # Gets folders and files of current path
@@ -285,8 +285,8 @@ class FileExplorer:
                 UIUtils.setNotifyChildTreeview(self.__explorer__, True)
                 if (self.__cEndLoadCallback__ != None):
                     self.__cEndLoadCallback__()
-                    #UIUtils.clearImage(self.__loadControl__)
-                UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order = tupleSort[1])
+                    # UIUtils.clearImage(self.__loadControl__)
+                UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order=tupleSort[1])
                 return False
                 
 
@@ -305,8 +305,8 @@ class FileExplorer:
                 UIUtils.setNotifyChildTreeview(self.__explorer__, True)
                 if (self.__cEndLoadCallback__ != None):
                     self.__cEndLoadCallback__()
-                    #UIUtils.clearImage(self.__loadControl__)
-                UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order = tupleSort[1])
+                    # UIUtils.clearImage(self.__loadControl__)
+                UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order=tupleSort[1])
                 return False
 
         UIUtils.setNotifyChildTreeview(self.__explorer__, True)
@@ -329,7 +329,7 @@ class FileExplorer:
         if (self.__cEndLoadCallback__ != None):
             self.__cEndLoadCallback__()
             
-        UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order = tupleSort[1])
+        UIUtils.setColumnOrder(self.__flModel__, tupleSort[0], order=tupleSort[1])
 
         return False
 
@@ -454,7 +454,7 @@ class FileExplorer:
 
         selection.set_uris(files)
     
-    #PUBLIC METHODS
+    # PUBLIC METHODS
     def setEnterDirectoryCallback(self, callback):
         """
         @summary: Sets callback that will be executed when it enter in a directory.
@@ -500,15 +500,15 @@ class FileExplorer:
         mimeTypeDescription = ""
                 
         size, sizeDescription = self.__factoryIcons__.getSize(fullpath)
-        __log__.debug("Gets size of %s: %d bytes" %(fullpath, size))
+        __log__.debug("Gets size of %s: %d bytes" % (fullpath, size))
         mimeType, mimeTypeDescription = self.__factoryIcons__.getMime(fullpath)
-        __log__.debug("Gets mime of %s: %s" %(fullpath, mimeTypeDescription))
+        __log__.debug("Gets mime of %s: %s" % (fullpath, mimeTypeDescription))
         modify, modifyDescription = self.__factoryIcons__.getModifyDate(fullpath)
-        __log__.debug("Gets modify date of %s: %s" %(fullpath, modifyDescription))
+        __log__.debug("Gets modify date of %s: %s" % (fullpath, modifyDescription))
         
-        return UIUtils.addIterListView(self.__flModel__, (icon, name, fullpath, 
-                                                          size, sizeDescription, 
-                                                          mimeType, mimeTypeDescription, 
+        return UIUtils.addIterListView(self.__flModel__, (icon, name, fullpath,
+                                                          size, sizeDescription,
+                                                          mimeType, mimeTypeDescription,
                                                           modify, modifyDescription), doGObject=async)
     
     def deleteNode (self, iter, glock=True):
@@ -532,7 +532,7 @@ class FileExplorer:
             self.__setCurrentPath__(path)
             
         if (bThrowThread):
-            self.__loadThread__ = Thread(target=self.__fillFiles__, args=(path, ))
+            self.__loadThread__ = Thread(target=self.__fillFiles__, args=(path,))
             self.__loadThread__.start()
         
     def getSelectedFiles(self):

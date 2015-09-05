@@ -26,7 +26,7 @@ from ez_setup import use_setuptools
 use_setuptools()
 
 from distutils.core import setup, Distribution, Command
-#from distutils.core import setup, find_packages
+# from distutils.core import setup, find_packages
 import glob
 import os
 import os.path as path
@@ -57,14 +57,14 @@ try:
   import win32com
   for p in win32com.__path__[1:]:
       modulefinder.AddPackagePath("win32com", p)
-  for extra in ["win32com.shell"]: #,"win32com.mapi"
+  for extra in ["win32com.shell"]:  # ,"win32com.mapi"
       __import__(extra)
       m = sys.modules[extra]
       for p in m.__path__[1:]:
           modulefinder.AddPackagePath(extra, p)
 except ImportError:
     # no build path setup, no worries.
-    print "Error"
+    print("Error")
     pass
 
 
@@ -105,9 +105,9 @@ __copyright__ = version.get("pycamimg", "copyright")
 __filename__ = version.get("pycamimg", "filename")
 __exefilename__ = version.get("pycamimg", "exefilename")
 
-__dependencies__ = ["gtk", 
-                    "gtk.glade", 
-                    "pygtk", 
+__dependencies__ = ["gtk",
+                    "gtk.glade",
+                    "pygtk",
                     "gobject",
                     "PIL",
                     "PIL.ImageOps",
@@ -124,7 +124,7 @@ if (sys.platform == "win32"):
     __dependencies__.append("win32com")
     __dependencies__.append("win32con")
     __dependencies__.append("win32com.shell")
-    #__dependencies__.append("win32com.shellcon")
+    # __dependencies__.append("win32com.shellcon")
 
 __package_data__ = {
     }
@@ -375,7 +375,7 @@ def chop(dist_dir, pathname):
     return pathname[len(dist_dir):]
 
 
-def create_inno_script(name, _lib_dir, dist_dir, exe_files, other_files, version = "1.0"):
+def create_inno_script(name, _lib_dir, dist_dir, exe_files, other_files, version="1.0"):
     if not dist_dir.endswith(os.sep):
         dist_dir += os.sep
     exe_files = [chop(dist_dir, p) for p in exe_files]
@@ -447,8 +447,8 @@ def compile_inno_script(script_path):
     compile_command = shell_compile_command.replace('"%1"', script_path)
     result = os.system(compile_command)
     if result:
-        print "Error compiling iss file"
-        print "Opening iss file, use InnoSetup GUI to compile manually"
+        print("Error compiling iss file")
+        print("Opening iss file, use InnoSetup GUI to compile manually")
         os.startfile(script_path)
         
 class BuildWin32Installer(buildExe):
@@ -466,10 +466,10 @@ class BuildWin32Installer(buildExe):
         buildExe.run(self)
         # create the Installer, using the files py2exe has created.
         exe_files = self.windows_exe_files + self.console_exe_files
-        print "*** creating the inno setup script***"
+        print("*** creating the inno setup script***")
         script_path = create_inno_script(__name__, self.lib_dir, self.dist_dir, exe_files, self.lib_files,
                                          version=self.distribution.metadata.version)
-        print "*** compiling the inno setup script***"
+        print("*** compiling the inno setup script***")
         compile_inno_script(script_path)
         # Note: By default the final setup.exe will be in an Output subdirectory.
 
@@ -526,8 +526,7 @@ def find_gtk_files():
             files = [path.abspath(path.join(dir_name, f)) for f in files]
             if len(files) > 0:
                 data_files.append((strip_leading_path(gtk_path, dir_name), files))
-	
-	files_bin = []
+    files_bin = []
     for dir_name, _, files in os.walk(path.join(gtk_path, 'bin')):
         for file in files:
             if (file.endswith(".dll")):
@@ -579,7 +578,7 @@ def update_configuration(withReturn=False, withPath=False):
         f = open(configFile, "w")
         config.write(f)
     except:
-        print "An error was ocurred when the configuration was saving"
+        print("An error was ocurred when the configuration was saving")
     finally:
         # Checks the file status and closes it.
         if (f != None):
@@ -615,9 +614,9 @@ def add_win32_options(options):
             "dist_dir": path.join("dist", "win32"),
             "includes" : ["cairo", "pango", "pangocairo", "atk", "gobject", "jpeg", "PIL", "PIL.ImageOps"],
             "optimize":   2,
-            #"bundle_files": 1, 
+            # "bundle_files": 1, 
         }
-        py2exe_options['includes'] += ["zipfile"] # Dependencies for the migration and auto-correction plug-ins, respectively.
+        py2exe_options['includes'] += ["zipfile"]  # Dependencies for the migration and auto-correction plug-ins, respectively.
         innosetup_options = py2exe_options.copy()
         options.update({
             "windows": [
@@ -654,7 +653,7 @@ def add_mac_options(options):
         "app": [__script__],
         "options": {
             "py2app": {
-                #"semi_standalone": True,
+                # "semi_standalone": True,
                 "compressed": True,
                 "argv_emulation": True,
                 "plist":  {
@@ -662,14 +661,14 @@ def add_mac_options(options):
                     "CFBundleGetInfoString": __name__,
                     "CFBundleIconFile": "%s.icns" % __filename__,
                     "CFBundleShortVersionString": __version__,
-                    #"LSHasLocalizedDisplayName": "1",
-                    #"LSMinimumSystemVersion": ???,
+                    # "LSHasLocalizedDisplayName": "1",
+                    # "LSMinimumSystemVersion": ???,
                     "NSHumanReadableCopyright": __copyright__,
                     "CFBundleDocumentTypes": [{
                         "CFBundleTypeExtensions": [extention.lstrip("*.") for extention in extentions],
                         "CFBundleTypeIconFile": "%s.icns" % __filename__,
                         "CFBundleTypeMIMETypes": mimetypes,
-                        "CFBundleTypeName": description, #????
+                        "CFBundleTypeName": description,  # ????
                         } for description, extentions, mimetypes in factory.supported_files()]
                     }
                 }
@@ -716,19 +715,19 @@ def add_platform_specific_options(options):
 
 def doSetup(options):
     options = add_platform_specific_options(options)
-    setup(name = __name__,
-          version = __version__,
-          description = __description__,
-          author = __author__,
-          author_email = __email__,
-          maintainer = __author__,
-          maintainer_email = __email__,
-          url = __url__,
-          license = __license__,
+    setup(name=__name__,
+          version=__version__,
+          description=__description__,
+          author=__author__,
+          author_email=__email__,
+          maintainer=__author__,
+          maintainer_email=__email__,
+          url=__url__,
+          license=__license__,
           platforms=["any"],
           **options)
 
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 try:
     doSetup(options)
 finally:

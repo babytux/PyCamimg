@@ -38,17 +38,17 @@ try:
     import pygtk
     pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 try:
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?")
     raise e
 
 try:
     from PIL import Image
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
 
@@ -85,10 +85,10 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(ResizeOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(ResizeOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
       
-    def callbackAction(self, action, currentTab, userData = None):
+    def callbackAction(self, action, currentTab, userData=None):
         """
         @summary: Callback that will be thrown when any action is actived.
         @param action: gtk.Action activated.
@@ -113,8 +113,8 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
             iNRows = len(paths)
             
         if iNRows > 0:
-            resizeDialog = ResizeDialog(callback = self.__doResize__,
-                                        parent = parentWindow)
+            resizeDialog = ResizeDialog(callback=self.__doResize__,
+                                        parent=parentWindow)
             __log__.debug("Resize dialog created. %s" % resizeDialog)
             if (iNRows > 1):
                 resizeDialog.setData(100.0, 100.0, ImageUtils.PERCENT)
@@ -142,7 +142,7 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
                                 srcSize[1] * (size[1] / float(100)))
                             scale = ImageUtils.PIXEL
                             
-                        resizeDialog.setData(size[0],size[1],scale,srcSize)
+                        resizeDialog.setData(size[0], size[1], scale, srcSize)
                         resizeNew = False
                 if (resizeNew):
                     meta = ImgMeta(file)
@@ -152,9 +152,9 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
                 
             resizeDialog.run()
         else:
-            FactoryControls.getMessage(self.__trans__("Select one or more items"), 
+            FactoryControls.getMessage(self.__trans__("Select one or more items"),
                                        title=self.__trans__("Resize"),
-                                       parent = parentWindow)
+                                       parent=parentWindow)
         
         return
     

@@ -37,14 +37,14 @@ try:
     if (not (sys.platform == "win32")):
         pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 try:
     import gtk, gobject
     import gtk.gdk
 except ImportError, ioe:
-    __log__.fatal("It can not import gtk, gdk modules. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk, gdk modules. Sure you have installed pygtk?")
     raise ioe
 
 try:
@@ -254,7 +254,7 @@ def __toggled_callback__ (cell, path, tuple=None):
     iter = model.get_iter(path)
     model.set_value(iter, indexValue, not cell.get_active())
 
-def getPixbufFromStock(iconName, size = gtk.ICON_SIZE_MENU):
+def getPixbufFromStock(iconName, size=gtk.ICON_SIZE_MENU):
     """
     @summary: Gets a pixbuf from stock.
     @param iconName: Name of the icon, if it is in current theme.
@@ -298,7 +298,7 @@ def getPixbufFromStock(iconName, size = gtk.ICON_SIZE_MENU):
 
 def getAbout(
     versionFile,
-    fileLicense, 
+    fileLicense,
     parent=None):
     """
     @summary: Gets PyCamimg about dialog.
@@ -340,14 +340,14 @@ def getAbout(
     h = None
     s = None
     try:
-        h = open(fileLicense,'r')
+        h = open(fileLicense, 'r')
         s = h.readlines()
     except IOError, err:
         __log__.error("An IO error was occurred when it was loading License file [%s]. %s" (fileLicense, err))
     except Exception, e:
         __log__.error("An error was occurred when it was loading License file [%s]. %s" (fileLicense, e))
        
-    def __closeAbout__( w, res):
+    def __closeAbout__(w, res):
         """
         @summary: Handle respsonse of about dialog.
         @param w: GtkDialog that is trying to close.
@@ -386,8 +386,8 @@ def getAbout(
         
     return about
 
-def getMessage(message, 
-               title="PyCamimg", 
+def getMessage(message,
+               title="PyCamimg",
                type=gtk.MESSAGE_INFO,
                show=True,
                parent=None,
@@ -425,8 +425,8 @@ def getMessage(message,
             msg.destroy()
     return msg
 
-def getConfirmMessage(message, 
-                      title="PyCamimg", 
+def getConfirmMessage(message,
+                      title="PyCamimg",
                       type=gtk.MESSAGE_QUESTION,
                       show=True,
                       parent=None,

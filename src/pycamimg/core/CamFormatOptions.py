@@ -40,13 +40,13 @@ except ImportError, e:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
     
 from pycamimg.util import ImageUtils
     
-jpegOptions={"quality" : 95}
+jpegOptions = {"quality" : 95}
 
 def openWithExtraInfo(path, extension):
     """
@@ -67,7 +67,7 @@ def openWithExtraInfo(path, extension):
         
     return (img2do, extraInfo)
 
-def saveWithOptions(img, output, extension, extraInfo = None):
+def saveWithOptions(img, output, extension, extraInfo=None):
     """
     @summary: Gets a dictionary with options for extension.
     @param img: PIL.Image to save.
@@ -75,11 +75,11 @@ def saveWithOptions(img, output, extension, extraInfo = None):
     @param extension: Extension of the output file.   
     """
     try:
-        if (extension  == "JPEG"):
-            img.save(output, extension, 
+        if (extension == "JPEG"):
+            img.save(output, extension,
                      quality=jpegOptions["quality"])
             if (extraInfo != None):
-                __log__.debug("It is a JPEG image. It will set EXIF information..." )
+                __log__.debug("It is a JPEG image. It will set EXIF information...")
                 ImageUtils.setJpegInfo(output, extraInfo)
         else:
             img.save(output, extension)

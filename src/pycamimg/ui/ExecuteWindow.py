@@ -41,12 +41,12 @@ try:
     pygtk.require('2.0')
     import pango
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 try:
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import gtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.core.CamItem import CamItem
@@ -107,7 +107,7 @@ class ExecuteWindow(gtk.Window):
         super(ExecuteWindow, self).connect("delete-event", self.__queryQuitEvent__)
         
         # Add signals
-        #super(ExecuteWindow, self).connect("response", self.__closeEvent__)
+        # super(ExecuteWindow, self).connect("response", self.__closeEvent__)
         if (domain == None):
             domain = pycamimg.gettextName
         self.__domain__ = domain
@@ -225,7 +225,7 @@ class ExecuteWindow(gtk.Window):
             self.__initProjectOptions__()
             
             if (len(self.__core__.getItems()) > 0):
-                self.setData(float(1) / len(self.__core__.getItems()), 
+                self.setData(float(1) / len(self.__core__.getItems()),
                              self.__core__, gtkLock=False)
                 self.__updateOptions__(blockGtk=False)
             else:
@@ -320,12 +320,12 @@ class ExecuteWindow(gtk.Window):
         __log__.info("Enter in __endExecution__ function.")
         
         self.__updateOptions__(mode=__MODE_CLOSE__, blockGtk=False)
-            #close.show()
+            # close.show()
         self.writeLog(_("\nProcess finished"), async=False)
         
         __log__.info("Execution ends.")
 
-    def incProgress (self, async = True):
+    def incProgress (self, async=True):
         """
         @summary: Add a step in progress bar.
         @param async: True to execute as async method. Default value is True 
@@ -345,7 +345,7 @@ class ExecuteWindow(gtk.Window):
         """
         return self.__core__.getState()
 
-    def writeLog (self, message, async = True):
+    def writeLog (self, message, async=True):
         """
         @summary: Write a message in txtLog.
         @param message: Message to write.
@@ -412,9 +412,9 @@ class ExecuteWindow(gtk.Window):
         @summary: Query close.
         """
         if (self.__core__.getState() == STATE_EXEC):               
-            if (gtk.RESPONSE_YES == FactoryControls.getConfirmMessage(_("Current project is running. Are you sure you want to exit?"), 
+            if (gtk.RESPONSE_YES == FactoryControls.getConfirmMessage(_("Current project is running. Are you sure you want to exit?"),
                                                                       title=_("Close execution project"),
-                                                                      parent = self)):
+                                                                      parent=self)):
                 return True
             else:
                 return False
@@ -453,9 +453,9 @@ class ExecuteWindow(gtk.Window):
         @param b: Button that call this function
         """
         if (self.__core__.getState() == STATE_EXEC):
-            if (gtk.RESPONSE_YES == FactoryControls.getConfirmMessage(_("Are you sure you want to cancel project?"), 
-                                                                      title=_("Cancel project"),                    
-                                                                      parent = self)):
+            if (gtk.RESPONSE_YES == FactoryControls.getConfirmMessage(_("Are you sure you want to cancel project?"),
+                                                                      title=_("Cancel project"),
+                                                                      parent=self)):
                 self.__cancelThread__()
                 self.__updateOptions__(mode=__MODE_CLOSE__, blockGtk=False)
         else:
@@ -500,9 +500,9 @@ class ExecuteWindow(gtk.Window):
         """
         if (len(self.__core__.getItems()) <= 0):
             FactoryControls.getMessage(
-                _("There aren't items"), 
+                _("There aren't items"),
                 title=_("Execute"),
-                parent = self.get_transient_for())
+                parent=self.get_transient_for())
             __log__.info("Trying to execute a core without items. Exiting from execute dialog.")
             return
 

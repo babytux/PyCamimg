@@ -26,7 +26,7 @@ from pycamimg.core.operations import Operations
 
 import plugins
 import gettext
-camimgpluginName="ResizeOperation"
+camimgpluginName = "ResizeOperation"
 
 class camimgplugin(ICamimgPlugin):
     """
@@ -52,8 +52,8 @@ class camimgplugin(ICamimgPlugin):
         @summary: Gets name of the plugin.
         @return: String with name of the plugin.
         """
-        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext("Resize Operation")
+        return gettext.translation(camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext("Resize Operation")
     
     def getPluginModule(self):
         """

@@ -38,7 +38,7 @@ try:
     import gtk, gobject
     
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import ConfigParser
@@ -73,7 +73,7 @@ class OptionsDialog (gtk.Dialog):
         
         super(OptionsDialog, self).set_title(_("Preferences"))
         super(OptionsDialog, self).set_flags(gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
-        super(OptionsDialog, self).add_buttons(gtk.STOCK_APPLY, gtk.RESPONSE_APPLY, 
+        super(OptionsDialog, self).add_buttons(gtk.STOCK_APPLY, gtk.RESPONSE_APPLY,
                                                gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                                                gtk.STOCK_OK, gtk.RESPONSE_OK)
         
@@ -159,7 +159,7 @@ class OptionsDialog (gtk.Dialog):
         vBoxTabInterface.pack_start(eImageView, True, True)
         
         vBoxTabInterface.pack_start(gtk.HSeparator(), False, True)
-        #Second expander
+        # Second expander
         fListView = gtk.Frame()
         lFrameListView = gtk.Label()
         lFrameListView.set_use_markup(True)
@@ -319,7 +319,7 @@ class OptionsDialog (gtk.Dialog):
         
         self.__addTab__(_("Photo Album"), vBoxPhotoAlbum)
 
-    def __fillLanguages__(self, gtkLock = False):
+    def __fillLanguages__(self, gtkLock=False):
         """
         @summary: Fill combobox with available languages.
         @param gtkLock: True to lock gtk-loop. 
@@ -469,12 +469,12 @@ class OptionsDialog (gtk.Dialog):
 
             if (config.getboolean("NAVIGATOR", "show_hiddens") != self.__chkHiddenFiles__.get_active()):
                 hasChanged = True
-                config.set("NAVIGATOR", 
-                           "show_hiddens", 
+                config.set("NAVIGATOR",
+                           "show_hiddens",
                            ("%d" % self.__chkHiddenFiles__.get_active()))
             if (config.getboolean("TABPROJECT", "show_image_list") != self.__chkShowImageList__.get_active()):
                 hasChanged = True
-                config.set("TABPROJECT", 
+                config.set("TABPROJECT",
                            "show_image_list",
                            ("%d" % self.__chkShowImageList__.get_active())) 
             if (config.getint("TABPROJECT", "max_height_list") != self.__spMaxHeight__.get_value_as_int()):
@@ -484,8 +484,8 @@ class OptionsDialog (gtk.Dialog):
                            ("%d" % self.__spMaxHeight__.get_value_as_int()))
             if (config.getfloat("TABPROJECT", "resize_percent_list") != self.__spPercentResize__.get_value()):
                 hasChanged = True
-                config.set("TABPROJECT", 
-                           "resize_percent_list", 
+                config.set("TABPROJECT",
+                           "resize_percent_list",
                            ("%f" % self.__spPercentResize__.get_value()))
             if (config.getint("TABPROJECT", "number_of_columns_iconview") != self.__spNumberColumns__.get_value_as_int()):
                 hasChanged = True
@@ -500,7 +500,7 @@ class OptionsDialog (gtk.Dialog):
 
             if (config.getboolean("UI_CORE", "add_recursive") != self.__chkAddRecursive__.get_active()):
                 hasChanged = True
-                config.set("UI_CORE", 
+                config.set("UI_CORE",
                            "add_recursive",
                            ("%d" % self.__chkAddRecursive__.get_active()))
             if (config.getint("UI_CORE", "recursive_level") != self.__spRecursiveLevel__.get_value_as_int()):
@@ -552,5 +552,5 @@ class OptionsDialog (gtk.Dialog):
         @summary: Show option  dialog.
         """
         self.__initData__()
-        super(OptionsDialog,self).run()
+        super(OptionsDialog, self).run()
 

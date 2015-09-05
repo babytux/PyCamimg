@@ -38,17 +38,17 @@ try:
     import pygtk
     pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 try:
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?")
     raise e
 
 try:
     from PIL import Image
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
 
@@ -60,7 +60,7 @@ from pycamimg.ui import FactoryControls
 from pycamimg.util.ImgMeta import ImgMeta
 from pycamimg.util import ImageUtils
 import DateOperation
-#from DateOperation.DateDialog import DateDialog
+# from DateOperation.DateDialog import DateDialog
 from DateOperation import Operation
 
 import gettext
@@ -75,17 +75,17 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         """
         @summary: Creates new rotate operation plugin.
         """
-        #self.__gtkAction__ = gtk.Action("DateAction", self.__trans__("Rotate Images"), self.__trans__("Rotate selected images"), None)
-        #self.__gtkAction__.set_menu_item_type(gtk.ImageMenuItem)
-        #self.__gtkAction__.set_tool_item_type(gtk.ToolButton)
+        # self.__gtkAction__ = gtk.Action("DateAction", self.__trans__("Rotate Images"), self.__trans__("Rotate selected images"), None)
+        # self.__gtkAction__.set_menu_item_type(gtk.ImageMenuItem)
+        # self.__gtkAction__.set_tool_item_type(gtk.ToolButton)
         
-        #self.__gtkActionLeft__ = gtk.Action("RotateLeftAction", self.__trans__("Rotate On Left"), self.__trans__("Rotate selected images on the left"), None)
-        #self.__gtkActionLeft__.set_menu_item_type(gtk.ImageMenuItem)
-        #self.__gtkActionLeft__.set_tool_item_type(gtk.ToolButton)
+        # self.__gtkActionLeft__ = gtk.Action("RotateLeftAction", self.__trans__("Rotate On Left"), self.__trans__("Rotate selected images on the left"), None)
+        # self.__gtkActionLeft__.set_menu_item_type(gtk.ImageMenuItem)
+        # self.__gtkActionLeft__.set_tool_item_type(gtk.ToolButton)
         
-        #self.__gtkActionRight__ = gtk.Action("RotateRightAction", self.__trans__("Rotate On Right"), self.__trans__("Rotate selected images on the right"), None)
-        #self.__gtkActionRight__.set_menu_item_type(gtk.ImageMenuItem)
-        #self.__gtkActionRight__.set_tool_item_type(gtk.ToolButton)
+        # self.__gtkActionRight__ = gtk.Action("RotateRightAction", self.__trans__("Rotate On Right"), self.__trans__("Rotate selected images on the right"), None)
+        # self.__gtkActionRight__.set_menu_item_type(gtk.ImageMenuItem)
+        # self.__gtkActionRight__.set_tool_item_type(gtk.ToolButton)
     
     def __trans__(self, msg):
         """
@@ -93,10 +93,10 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(DateOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)    
+        return gettext.translation(DateOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)    
         
-    def callbackAction(self, action, currentTab, userData = None):
+    def callbackAction(self, action, currentTab, userData=None):
         """
         @summary: Callback that will be thrown when any action is actived.
         @param action: gtk.Action activated.
@@ -128,19 +128,19 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
             elif(action.get_name() == "RotateRightAction"):
                 self.__doRotate__(None, 270)
             elif(action.get_name() == "RotateAction"):
-                rotateDialog = RotateDialog(callback = self.__doRotate__,
-                                            parent = parentWindow)
-                __log__.debug("Rotate dialog created. %s" % rotateDialog )
+                rotateDialog = RotateDialog(callback=self.__doRotate__,
+                                            parent=parentWindow)
+                __log__.debug("Rotate dialog created. %s" % rotateDialog)
                 rotateDialog.run()
             pass
         else:
-            FactoryControls.getMessage(self.__trans__("Select one or more items"), 
+            FactoryControls.getMessage(self.__trans__("Select one or more items"),
                                        title=self.__trans__("Rotate"),
-                                       parent = parentWindow)
+                                       parent=parentWindow)
         
         return
     
-    def __doChangeDate__(self, dialog, degrees, plusDegrees = False):
+    def __doChangeDate__(self, dialog, degrees, plusDegrees=False):
         """
         @summary: Handle response of rotate dialog, 
                     when user want to rotate some images
@@ -186,7 +186,7 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         @return: Dictionary of icons.
         """
         return {}
-        #return {"/ToolsPyCamimg/ActionsToolItems/Rotate": "rotate.png",
+        # return {"/ToolsPyCamimg/ActionsToolItems/Rotate": "rotate.png",
         #        "/ToolsPyCamimg/ActionsToolItems/RotateLeft": "rotateLeft.gif",
         #        "/ToolsPyCamimg/ActionsToolItems/RotateRight": "rotateRight.gif",
         #        "/MenuPyCaming/ToolsMenu/Operations/OperationsMenuAdditions/Rotate": "rotate.png",
@@ -212,5 +212,5 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         @summary: Gets a list of gtk.Action.
         @return: List of gtk.Action with actions of operations. 
         """
-        #return [self.__gtkActionLeft__, self.__gtkActionRight__, self.__gtkAction__]
+        # return [self.__gtkActionLeft__, self.__gtkActionRight__, self.__gtkAction__]
         return []

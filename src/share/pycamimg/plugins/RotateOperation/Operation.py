@@ -35,7 +35,7 @@ except:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
     
@@ -50,7 +50,7 @@ class Rotate(Operation):
     @summary: This class implements a operation of a rotation.
     @see: Operation 
     """
-    def __init__(self, degrees = 0):
+    def __init__(self, degrees=0):
         """
         @summary: Create a rotate operation.
         @param degrees: Degrees that input file will rotate.
@@ -77,7 +77,7 @@ class Rotate(Operation):
         @raise Exception: Raise when it can not rotate image. 
         """        
         try:
-            #imgobj = imgobj.rotate(self.__args__["degrees"], filter=self.__args__["filter"])
+            # imgobj = imgobj.rotate(self.__args__["degrees"], filter=self.__args__["filter"])
             imgobj = imgobj.rotate(self.__args__["degrees"])
             if (path != None):
                 __log__.info("%s Rotated." % path)

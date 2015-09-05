@@ -40,7 +40,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import threading, thread
@@ -64,12 +64,12 @@ class TreeExplorer:
 
     __TEMP_NODE__ = " !TempCamimg"    
     
-    #Index of each column
+    # Index of each column
     __IMG_COLUMN__ = 0
     __NAME_COLUMN__ = 1
     __PATH_COLUMN__ = 2
     
-    def __init__(self, selectCallback = None, showHiddens = True):
+    def __init__(self, selectCallback=None, showHiddens=True):
         """
         @summary: Create new TreeExplorer.
         @param selectCallback: Callback that will call when an item will be selected.
@@ -90,7 +90,7 @@ class TreeExplorer:
         
         self.__HOME_NODE__ = _("home")
         
-        #Initialize TreeView explorer
+        # Initialize TreeView explorer
         self.__initializeExplorer__()
         
         self.__selectCallback__ = selectCallback
@@ -102,11 +102,11 @@ class TreeExplorer:
         """
         # Make a model for TreeView explorer
         self.__model__ = gtk.TreeStore(gtk.gdk.Pixbuf,
-                                       gobject.TYPE_STRING, 
+                                       gobject.TYPE_STRING,
                                        gobject.TYPE_STRING)
         
         __log__.debug("Created model for TreeExplorer.")
-        #Gets home icon
+        # Gets home icon
         iconHome = FactoryControls.getPixbufFromStock(gtk.STOCK_HOME)
         
         # Gets drive icon
@@ -126,10 +126,10 @@ class TreeExplorer:
     
         __log__.debug("Added columns to TreeExplorer")
         
-        #Add home node
+        # Add home node
         self.addDirectory(self.__HOME_NODE__, os.path.expanduser("~"), iconHome, glock=False)
         
-        #Gets drives from the OS
+        # Gets drives from the OS
         for sDrive in self.__ioUtils__.getDrives():
             if (sDrive != None) and (sDrive != ""):
                 self.addDirectory (sDrive, sDrive, icon, glock=False)
@@ -186,7 +186,7 @@ class TreeExplorer:
                             __log__.debug("It can not get index of %s. %s" % (sDirFind, ve))
                             index = -1
                         if (index == -1):
-                            #In case of directory does not exist, it will remove from treeview
+                            # In case of directory does not exist, it will remove from treeview
                             iterDelete = iterStep
                             iterStep = self.__model__.iter_next(iterStep)
                             self.deleteNode(iterDelete)
@@ -194,7 +194,7 @@ class TreeExplorer:
                             
                             doStep = False
                         else:
-                            #In case of directory just exists, it will remove from list
+                            # In case of directory just exists, it will remove from list
                             lDirectories.remove(sDirFind)
                             __log__.debug("%s skipped" % sDirFind)
         
@@ -222,7 +222,7 @@ class TreeExplorer:
             monitor.addDirectories(lDirectories)
             monitor.addListener(self.__handlerDirectoryMonitorEvents__)
             
-        else: #When there isn't any directory
+        else:  # When there isn't any directory
             iterStep = self.__model__.iter_children(iter)
             # Find delete all child 
             while (iterStep != None):
@@ -263,10 +263,10 @@ class TreeExplorer:
         """
         sSubDirs = self.__ioUtils__.getDirectories(directory)
         if (sSubDirs != None) and (len(sSubDirs) > 0):
-                UIUtils.addIter(self.__model__, 
+                UIUtils.addIter(self.__model__,
                                 iter,
                                 (FactoryControls.getPixbufFromStock(gtk.STOCK_EXECUTE) ,
-                                 _("Loading..."), 
+                                 _("Loading..."),
                                  self.__TEMP_NODE__
                                 ),
                                 glock
@@ -360,7 +360,7 @@ class TreeExplorer:
             return -1
         return 0
     
-    #NAVIGATOR TREEVIEW EVENTS
+    # NAVIGATOR TREEVIEW EVENTS
     def __selectRowTvOneClickSignal__ (self, treeview):
         """
         @summary: Handle select row on explorer TreeView.
@@ -431,7 +431,7 @@ class TreeExplorer:
         """
         newIter = None
         if (iter != None):
-            newIter = UIUtils.insertIter(self.__model__, iter, (icon, dirname, fullpath), 
+            newIter = UIUtils.insertIter(self.__model__, iter, (icon, dirname, fullpath),
                                          self.__PATH_COLUMN__, self.__directoryNameComparer__, doGObject=glock)
         else:
             newIter = UIUtils.addIter(self.__model__, None, (icon, dirname, fullpath), glock)
@@ -477,7 +477,7 @@ class TreeExplorer:
         @param path: Path to apply.
         @param selected: True to select TreeIter. Default False. 
         """
-        #Expand path on navigator
+        # Expand path on navigator
         Thread(target=self.__expandPath__, args=(path, selected,)).start()
 
     def sortNavigatorIter (self, iter):

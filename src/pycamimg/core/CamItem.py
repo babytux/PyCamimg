@@ -39,7 +39,7 @@ except:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
 
@@ -141,7 +141,7 @@ class CamItem:
                 self.__metaData__ = None
                 __log__.error("Can not extract metadata from %s. %s" % (self.getPath(), e))
     
-    def waitLoadThumbnail(self, timeout = -1):
+    def waitLoadThumbnail(self, timeout=-1):
         """
         @summary: Waits until thumbnail is loaded.
         @param timeout: Time to wait. 
@@ -274,7 +274,7 @@ class CamItem:
                     description += "\n"
                 else:
                     bFirst = False
-                description += "%s [%s]" %(op.getOp(), op.toString())
+                description += "%s [%s]" % (op.getOp(), op.toString())
         if (description == ""):
             description = ""
         return description
@@ -354,7 +354,7 @@ class CamItem:
         
         if (self.isAddPhotoAlbum()):
             pass
-            #TODO: Add to photo album
+            # TODO: Add to photo album
 
         if (self.__target__ != None):
             head, filename = os.path.split(fileop)
@@ -406,8 +406,8 @@ class CamItem:
         @return: item loaded. 
         """
         path = cPickle.load(fi)
-        target =  cPickle.load(fi)
-        length =  cPickle.load(fi)
+        target = cPickle.load(fi)
+        length = cPickle.load(fi)
         item = CamItem(path, target)
         
         while (length > 0):

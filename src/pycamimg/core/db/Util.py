@@ -72,7 +72,7 @@ def generateDB():
     else:
         __log__.debug('It can not get script to generate database, or %s is empty' % __DB_SCRIPT_FILE__)
         
-def checkDB(generates = False):
+def checkDB(generates=False):
     '''
     @summary: Checks if database exists.
     @param generates: True to generate database when it does not exist. 

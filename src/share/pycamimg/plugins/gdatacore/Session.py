@@ -44,7 +44,7 @@ except ImportError, ie:
 try:
     import gtk
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from gdatacore.LoginDialog import LoginDialog
@@ -65,7 +65,7 @@ class Session(object):
         
         self.load()
         
-    def __initializeGDataSession__(self, checkLogin = False):
+    def __initializeGDataSession__(self, checkLogin=False):
         """
         @summary: Initialize a google session.
         """
@@ -153,10 +153,10 @@ class Session(object):
             f = open(filename, 'r')
             
             self.__username__ = f.readline()
-            self.__username__  = self.__username__[:len(self.__username__)-1]
+            self.__username__ = self.__username__[:len(self.__username__) - 1]
             
             self.__token__ = f.readline()
-            self.__token__  = self.__token__[:len(self.__token__)-1]
+            self.__token__ = self.__token__[:len(self.__token__) - 1]
             
             
             self.__gdata__.source = gdatacore.SOURCE
@@ -212,7 +212,7 @@ class Session(object):
         bFirst = True
         self.__initializeGDataSession__(checkLogin=True)
         if (not self.isLogged() or forceLogin):
-            #Login facebook
+            # Login facebook
             while (not self.isLogged() or (bFirst and forceLogin)):
                 bFirst = False
                 dial = LoginDialog(parent=parent)

@@ -88,9 +88,9 @@ class ConfigurationDB:
             updateQueryString = 'update %s set value = ? where key = ?' % Constants.TBL_PARAMS
             curr = conn.cursor()
             try:
-                curr.execute(updateQueryString, (self.__photoFolder__, Constants.CONFIG_PARAM_PHOTO_DIR, ))
+                curr.execute(updateQueryString, (self.__photoFolder__, Constants.CONFIG_PARAM_PHOTO_DIR,))
                 if (curr.rowcount == 0):
-                    curr.execute(queryString, (Constants.CONFIG_PARAM_PHOTO_DIR, self.__photoFolder__, ))                
+                    curr.execute(queryString, (Constants.CONFIG_PARAM_PHOTO_DIR, self.__photoFolder__,))                
                 conn.commit()
             except Error, e:
                 __log__.error('An error was occurred when it was saving configuration into database. %s', e)

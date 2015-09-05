@@ -30,7 +30,7 @@ import threading
 from threading import Thread
 from threading import Semaphore
 
-#gtk.gdk.threads_init()
+# gtk.gdk.threads_init()
 
 class GIdleThreadSingle(object):
     """
@@ -57,7 +57,7 @@ class GIdleThreadSingle(object):
             will be allowed to happen.
         @param priority: Priority of the thread. 
         """
-        idle_id = gobject.idle_add(self.__generatorExecuter__, 
+        idle_id = gobject.idle_add(self.__generatorExecuter__,
                                    priority=priority)
         self.__semaphore__.acquire()
         self.__idleId__ = idle_id

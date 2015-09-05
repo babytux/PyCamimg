@@ -38,14 +38,14 @@ try:
     if (not (sys.platform == "win32")):
         pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 try:
     import gtk, gobject
     import gtk.gdk
 except ImportError, ioe:
-    __log__.fatal("It can not import gtk, gdk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk, gdk module. Sure you have installed pygtk?")
     raise ioe
 
 try:
@@ -75,7 +75,7 @@ class Explorer:
     """
     @summary: This class is an file system explorer like Nautilus
     """
-    #Widgets
+    # Widgets
     __tvExplorer__ = None
     __fileExplorer__ = None
     __bBack__ = None
@@ -83,13 +83,13 @@ class Explorer:
     __bUp__ = None
     __bHome__ = None
 
-    #Separator for splitting drag&drop selection
+    # Separator for splitting drag&drop selection
     SEP = "\n"
-    #ID of data for drag&drop
+    # ID of data for drag&drop
     TARGET_TEXT = 80
     MAX_STACK = 50
     
-    def __init__(self, showHiddens = True):
+    def __init__(self, showHiddens=True):
         """
         @summary: Create an explorer.
         @param showHiddens: True if you show hidden files. Default True
@@ -208,7 +208,7 @@ class Explorer:
 
         while (len(self.__stackDirs__) > self.__maxStackSize__):
             self.__stackDirs__.pop(0)
-            self.__currPointStack__ -=1
+            self.__currPointStack__ -= 1
 
         if (self.__currPointStack__ < -1):
             self.__currPointStack__ = -1
@@ -258,7 +258,7 @@ class Explorer:
         """
         self.upLevel()
         
-#TREEVIEW EVENTS
+# TREEVIEW EVENTS
     def __selectDirectoryOnTreeNav__(self, path):
         """
         @summary: Runs when directory is selected on navigator.
@@ -266,7 +266,7 @@ class Explorer:
         """
         self.__fileExplorer__.applyPath(path)
         
-#FILE EXPLORER EVENTS
+# FILE EXPLORER EVENTS
     def __enterDirectory__ (self, path):
         """
         @summary: Handle enter in directory.
@@ -322,7 +322,7 @@ class Explorer:
         @param glock: True if gtk loop must be locked. 
         """
         UIUtils.enabledWidget(self.__bBack__, self.__currPointStack__ > 0, glock)
-        UIUtils.enabledWidget(self.__bForward__, self.__currPointStack__ < (len(self.__stackDirs__)-1), glock)
+        UIUtils.enabledWidget(self.__bForward__, self.__currPointStack__ < (len(self.__stackDirs__) - 1), glock)
 
     def refresh(self):
         """

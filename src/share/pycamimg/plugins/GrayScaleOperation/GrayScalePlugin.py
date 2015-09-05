@@ -38,17 +38,17 @@ try:
     import pygtk
     pygtk.require('2.0')
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 try:
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import gtk & glade module. Sure you have installed pygtk?")
     raise e
 
 try:
     from PIL import Image
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
 
@@ -84,10 +84,10 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(GrayScaleOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)    
+        return gettext.translation(GrayScaleOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)    
         
-    def callbackAction(self, action, currentTab, userData = None):
+    def callbackAction(self, action, currentTab, userData=None):
         """
         @summary: Callback that will be thrown when any action is actived.
         @param action: gtk.Action activated.
@@ -114,9 +114,9 @@ class CamimgPlugin(IOperationPlugin.OperationPlugin):
         if iNRows > 0:
             self.__doGrayscale__()
         else:
-            FactoryControls.getMessage(self.__trans__("Select one or more items"), 
+            FactoryControls.getMessage(self.__trans__("Select one or more items"),
                                        title=self.__trans__("GrayScale"),
-                                       parent = parentWindow)
+                                       parent=parentWindow)
         
         return
     

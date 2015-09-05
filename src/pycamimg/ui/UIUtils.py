@@ -37,14 +37,14 @@ try:
         pygtk.require('2.0')
     import gtk, gobject, gtk.gdk
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import os.path
 
 WAIT_PER_OPERATION = 0.005
 
-def addIter(model, iterParent, dataModel, doGObject = True):
+def addIter(model, iterParent, dataModel, doGObject=True):
     """
     @summary: Add an iter at last of the iter.
     @param model: Model of a TreeView.
@@ -64,7 +64,7 @@ def addIter(model, iterParent, dataModel, doGObject = True):
         
         return iterReturn
 
-def addIterListView(model, dataModel, doGObject = True):
+def addIterListView(model, dataModel, doGObject=True):
     """
     @summary: Add an iter at last of the iter.
     @param model: Model of a ListView.
@@ -84,9 +84,9 @@ def addIterListView(model, dataModel, doGObject = True):
         
         return iterReturn
 
-def moveIterAtPathPosition(model, iter, iterRef = None,  
+def moveIterAtPathPosition(model, iter, iterRef=None,
                              position=gtk.TREE_VIEW_DROP_BEFORE,
-                             doGObject = True):
+                             doGObject=True):
     """
     @summary: Add data in a treeview at path position.
     @param model: Model of a TreeView.
@@ -109,9 +109,9 @@ def moveIterAtPathPosition(model, iter, iterRef = None,
             gtk.gdk.threads_leave()
         
 
-def insertIterAtPathPosition(model, data, iter, 
+def insertIterAtPathPosition(model, data, iter,
                              position=gtk.TREE_VIEW_DROP_AFTER,
-                             doGObject = True):
+                             doGObject=True):
     """
     @summary: Add data in a treeview at path position.
     @param model: Model of a TreeView.
@@ -141,7 +141,7 @@ def insertIterAtPathPosition(model, data, iter,
         
         return iterReturn
 
-def insertIter(model, iterParent, dataModel, fieldIndex, callbackComparer, compareUnicode = True, doGObject = True):
+def insertIter(model, iterParent, dataModel, fieldIndex, callbackComparer, compareUnicode=True, doGObject=True):
     """
     @summary: Insert an iter in sorted model.param
     @param model: Model of a TreeView.
@@ -179,7 +179,7 @@ def insertIter(model, iterParent, dataModel, fieldIndex, callbackComparer, compa
         
         return iterReturn
 
-def insertIterListStore(model, iterParent, dataModel, fieldIndex, callbackComparer, compareUnicode = True, doGObject = True):
+def insertIterListStore(model, iterParent, dataModel, fieldIndex, callbackComparer, compareUnicode=True, doGObject=True):
     """
     @summary: Insert an iter in sorted model.
     @param model: Model of a TreeView.
@@ -210,7 +210,7 @@ def insertIterListStore(model, iterParent, dataModel, fieldIndex, callbackCompar
             if (currNode != None):
                 iterReturn = model.insert_before(currNode, dataModel)
             else:
-                iterReturn =  model.append(dataModel)
+                iterReturn = model.append(dataModel)
         except Exception, e:
             __log__.error("An error occurred when it was inserting a new item (%s). %s", (dataModel[2], e))
     finally:
@@ -219,7 +219,7 @@ def insertIterListStore(model, iterParent, dataModel, fieldIndex, callbackCompar
         
         return iterReturn
 
-def setIterData(model, iter, index, data, doGObject = True):
+def setIterData(model, iter, index, data, doGObject=True):
     """
     @summary: Set data at index position in iter of the model.
     @param model: Model of the TreeView.
@@ -235,7 +235,7 @@ def setIterData(model, iter, index, data, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
 
-def deleteIter(model, iter, doGObject = True):
+def deleteIter(model, iter, doGObject=True):
     """
     @summary: Remove a iter from a model.
     @param model: Model of the TreeView.
@@ -252,7 +252,7 @@ def deleteIter(model, iter, doGObject = True):
             if (doGObject):
                 gtk.gdk.threads_leave()
 
-def setColumnOrder(model, indexColumn, order = gtk.SORT_ASCENDING, doGObject = True):
+def setColumnOrder(model, indexColumn, order=gtk.SORT_ASCENDING, doGObject=True):
     """
     @summary: Remove a iter from a model.
     @param model: Model of the TreeView.
@@ -267,7 +267,7 @@ def setColumnOrder(model, indexColumn, order = gtk.SORT_ASCENDING, doGObject = T
         if (doGObject):
             gtk.gdk.threads_leave()
 
-def setModelTreeview(treeview, model, doGObject = True):
+def setModelTreeview(treeview, model, doGObject=True):
     """
     @summary: Sets model to a TreeView.
     @param model: Model of the TreeView.
@@ -281,7 +281,7 @@ def setModelTreeview(treeview, model, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
 
-def clearModelTreeview(model, doGObject = True):
+def clearModelTreeview(model, doGObject=True):
     """
     @summary: Clear model of a TreeView.
     @param model: Model of the TreeView.
@@ -295,7 +295,7 @@ def clearModelTreeview(model, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
 
-def scrollTreeviewToPath(treeview, path, doGObject = True):
+def scrollTreeviewToPath(treeview, path, doGObject=True):
     """
     @summary: Do visible a iter in a TreeView.
     @param path: TreePath where scroll will be moved.
@@ -310,7 +310,7 @@ def scrollTreeviewToPath(treeview, path, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
 
-def enabledWidget(widget, enabled, doGObject = True):
+def enabledWidget(widget, enabled, doGObject=True):
     """
     @summary: Set enabled or disabled a GtkWidget.
     @param enabled: True to enabled GtkWidget.
@@ -325,7 +325,7 @@ def enabledWidget(widget, enabled, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
 
-def expandTreeview(treeview, treepath, doGObject = True):
+def expandTreeview(treeview, treepath, doGObject=True):
     """
     @summary: Expand row at path, expanding any ancestors as needed.
     @param treeview: GtkTreeView where iter to expand is.
@@ -336,12 +336,12 @@ def expandTreeview(treeview, treepath, doGObject = True):
         gtk.gdk.threads_enter()
     try:
         for i in range(len(treepath)):
-            treeview.expand_row(treepath[:i+1], open_all=False)
+            treeview.expand_row(treepath[:i + 1], open_all=False)
     finally:
         if (doGObject):
             gtk.gdk.threads_leave()
             
-def selectPath(selection, treepath, doGObject = True):
+def selectPath(selection, treepath, doGObject=True):
     """
     @summary: Select path in treeview.
     @param selection: Selection that will use to select a TreePath.
@@ -356,7 +356,7 @@ def selectPath(selection, treepath, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
             
-def setActiveIter(widget, iter, doGObject = True):
+def setActiveIter(widget, iter, doGObject=True):
     """
     @summary: Set iter as active iter.
     @param widget: Widget where iter is.
@@ -371,7 +371,7 @@ def setActiveIter(widget, iter, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
     
-def addTab(notebook, child, text, doGObject = True):
+def addTab(notebook, child, text, doGObject=True):
     """
     @summary: Add new tab on notebook.
     @param notebook: GtkNotebook where tab will be added.
@@ -389,7 +389,7 @@ def addTab(notebook, child, text, doGObject = True):
         if (doGObject):
             gtk.gdk.threads_leave()
             
-def addTabControl(notebook, child, tabWidget, doGObject = True):
+def addTabControl(notebook, child, tabWidget, doGObject=True):
     """
     @summary: Add new tab on notebook.
     @param notebook: GtkNotebook where tab will be added.
@@ -509,7 +509,7 @@ def setImageToMenuItem(mi, imagePath, doGObject=True):
         if (doGObject):
             gtk.gdk.threads_leave()
             
-def setImageToToolItem(ti, imagePath, size=gtk.ICON_SIZE_LARGE_TOOLBAR,doGObject=True):
+def setImageToToolItem(ti, imagePath, size=gtk.ICON_SIZE_LARGE_TOOLBAR, doGObject=True):
     """
     @summary: Sets an image in ToolItem.
     @param ti: GtkToolItem where it will add image.

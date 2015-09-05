@@ -38,7 +38,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import gettext

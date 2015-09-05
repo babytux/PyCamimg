@@ -39,7 +39,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import threading, thread
@@ -72,8 +72,8 @@ class MainWindow:
     __DEFAULT_WINDOW_WIDTH__ = 800
     __DEFAULT_WINDOW_HEIGHT__ = 600
     
-    def __init__(self, 
-                 cores, 
+    def __init__(self,
+                 cores,
                  domain=None,
                  languages=None,
                  currentLang=None,
@@ -86,7 +86,7 @@ class MainWindow:
         @param currentLang: Current language of the list.
         @param setLanguage: Function reference to set new language.     
         """
-        #Initialize current tab
+        # Initialize current tab
         self.__lsTabs__ = []
         self.__currentTab__ = None
 
@@ -101,7 +101,7 @@ class MainWindow:
         # Initialize UI
         self.__initUI__(domain)
         
-        #Initialize other treeviews
+        # Initialize other treeviews
         self.__initTargets__(cores)
 
     def __initUI__(self, domain):
@@ -136,7 +136,7 @@ class MainWindow:
         # Enabled navigator buttons (back and forward buttons)
         self.__eExplorer__.enabledNavigationButtons()
         
-        #self.__eExplorer__.goHome()
+        # self.__eExplorer__.goHome()
         __log__.debug("Went to home directory");
         
         self.__operations__ = RegOperations()
@@ -174,7 +174,7 @@ class MainWindow:
         
         vbox.pack_start(self.__statBar__, False)
         
-        #Search project plugins, that define the kind of project.
+        # Search project plugins, that define the kind of project.
         self.__searchPlugins__()
         
         self.__enableOptions__(blockGtk=False)
@@ -188,7 +188,7 @@ class MainWindow:
         
         # Create actions
         actionGroupMenu.add_actions([("FileMenuAction", None, _("_File")),
-                                     ("NewProjectAction", None, _("New Project")), 
+                                     ("NewProjectAction", None, _("New Project")),
                                      ("OpenProjectAction", gtk.STOCK_OPEN, _("_Open"), "<Control>o", _("Open PyCamimg project"), self.__openProjectEvent__),
                                      ("SaveProjectAction", gtk.STOCK_SAVE, _("_Save"), "<Control>s", _("Save current project"), self.__saveProjectEvent__),
                                      ("SaveAsProjectAction", gtk.STOCK_SAVE_AS, _("Save _As"), None, _("Save current project"), self.__saveAsProjectEvent__),
@@ -322,7 +322,7 @@ class MainWindow:
             self.__addNewProject__(core)
         __log__.info("Initialized target projects")
             
-    def __addNewProject__(self, core=None, threadBlock = True, focused = False, projectType=None):
+    def __addNewProject__(self, core=None, threadBlock=True, focused=False, projectType=None):
         """
         @summary: Add new project.
         @param core: Core that will be added. Default value is None
@@ -340,12 +340,12 @@ class MainWindow:
         else:
             text = core.getName()
         __log__.info("Project name %s" % text)
-        tab = TabProject(core, name=text, iconsPath=os.path.join(__ICONS_FOLDER__), 
+        tab = TabProject(core, name=text, iconsPath=os.path.join(__ICONS_FOLDER__),
                          iconName=core.getProjectType().getIconName())
         tab.setCloseCallback(self.__closeProject__)
         __log__.debug("Callbacks set")
         core.setName(text)
-        tab.addToNotebook(self.__nbProjects__, threadBlock = threadBlock, focused = focused)
+        tab.addToNotebook(self.__nbProjects__, threadBlock=threadBlock, focused=focused)
         tab.load()
         
         self.__lsTabs__.append(tab)
@@ -408,7 +408,7 @@ class MainWindow:
         if (mOperations != None):
             if (mOperations.get_submenu() != None):
                 __log__.debug("Enabling operations of operation menu")
-                mOperations.get_submenu().foreach(lambda mi: UIUtils.enabledWidget(mi, enable, blockGtk) )
+                mOperations.get_submenu().foreach(lambda mi: UIUtils.enabledWidget(mi, enable, blockGtk))
             else:
                 __log__.debug("Operation menu does not have menu")
                         
@@ -438,12 +438,12 @@ class MainWindow:
             imiSaveAs.set_sensitive(enable)
             
            
-    def __updateTitle__(self, threadBlock = False):
+    def __updateTitle__(self, threadBlock=False):
         """Update title of the window"""
         title = ""
         if (self.__currentTab__ != None):
             if (self.__currentTab__.getCore().getFilename() != None):
-                title = "%s - %s - %s" % (self.__currentTab__.getCore().getName(), 
+                title = "%s - %s - %s" % (self.__currentTab__.getCore().getName(),
                                           self.__currentTab__.getCore().getFilename(),
                                           self.PYCAMIMG_TITLE)
             else:
@@ -510,23 +510,23 @@ class MainWindow:
                 operationsDialog = OperationsDialog(
                                     item,
                                     iter,
-                                    callback = self.__applyDeleteOperationsItemCallback__,
-                                    parent = self.__mainWindow__)
+                                    callback=self.__applyDeleteOperationsItemCallback__,
+                                    parent=self.__mainWindow__)
         
                 __log__.debug("Operations dialog created. %s" % operationsDialog)
                 operationsDialog.run()
                 del operationsDialog
             else:
                 __log__.error("It can not recover iter from path %s. Abort open delete operations dialog." % path)
-                FactoryControls.getMessage(_("It can not get item"), 
+                FactoryControls.getMessage(_("It can not get item"),
                                            title=_("Delete operations"),
                                            type=gtk.MESSAGE_ERROR,
-                                           parent = self.__mainWindow__)
+                                           parent=self.__mainWindow__)
             
         else:
-            FactoryControls.getMessage(_("Select one item"), 
+            FactoryControls.getMessage(_("Select one item"),
                                        title=_("Delete operations"),
-                                       parent = self.__mainWindow__)
+                                       parent=self.__mainWindow__)
 
     def __applyDeleteOperationsItemCallback__(self, item, iter):
         """
@@ -564,22 +564,22 @@ class MainWindow:
                 meta.show()
             else:
                 __log__.error("It can not recover iter from path %s. Abort preview" % path)
-                FactoryControls.getMessage(_("It can not show image"), 
+                FactoryControls.getMessage(_("It can not show image"),
                                            title=_("Preview"),
                                            type=gtk.MESSAGE_ERROR,
-                                           parent = self.__mainWindow__)
+                                           parent=self.__mainWindow__)
             
         else:
-            FactoryControls.getMessage(_("Select one item"), 
+            FactoryControls.getMessage(_("Select one item"),
                                        title=_("Preview"),
-                                       parent = self.__mainWindow__)
+                                       parent=self.__mainWindow__)
 
     def __openPlunginsEvent__(self, b):
         """
         @summary: Open plugins window.
         @param b: Button that threw event.
         """
-        pluginsDialog = PluginsDialog(parent = self.__mainWindow__)
+        pluginsDialog = PluginsDialog(parent=self.__mainWindow__)
         __log__.debug("Plugins dialog created. %s" % pluginsDialog)
         pluginsDialog.run()
             
@@ -593,8 +593,8 @@ class MainWindow:
         """
         optionsDialog = OptionsDialog(self.__langs__,
                                       self.__currLang__,
-                                      callback = self.__applyConfigurationCallback__,
-                                      parent = self.__mainWindow__)
+                                      callback=self.__applyConfigurationCallback__,
+                                      parent=self.__mainWindow__)
         
         __log__.debug("Option dialog created. %s" % optionsDialog)
         optionsDialog.run()
@@ -624,15 +624,15 @@ class MainWindow:
         """
         if (self.__currentTab__ != None):
             self.__currentTab__.setOrderToCore()
-            exWindow = ExecuteWindow(self.__currentTab__.getCore(), 
-                                     parent = self.__mainWindow__)
+            exWindow = ExecuteWindow(self.__currentTab__.getCore(),
+                                     parent=self.__mainWindow__)
             __log__.debug("Execute window created. %s" % exWindow)            
             exWindow.run()
         else:
             FactoryControls.getMessage(
-                _("There isn't current project"), 
+                _("There isn't current project"),
                 title=_("Execute"),
-                parent = self.__mainWindow__)
+                parent=self.__mainWindow__)
 
     def __activateOperation__ (self, action, callback=None):
         """
@@ -697,14 +697,14 @@ class MainWindow:
             except Exception, e:
                 __log__.error("It could not load project from %s. %s" % (filename, e))
                 FactoryControls.getMessage(_("An error was occurred when it was loading project from %s" % filename),
-                                           type=gtk.MESSAGE_ERROR, 
+                                           type=gtk.MESSAGE_ERROR,
                                            title=_("Open project"),
-                                           parent = self.__mainWindow__)
+                                           parent=self.__mainWindow__)
                 return
             finally:
                 fileSel.destroy()
                 
-            self.__addNewProject__(core = core, threadBlock = False, focused=True)
+            self.__addNewProject__(core=core, threadBlock=False, focused=True)
             __log__.info("Project loaded from %s" % filename)
         else:
             fileSel.destroy()
@@ -726,9 +726,9 @@ class MainWindow:
             except Exception, e:
                 __log__.error("It could not save current project to %s. %s" % (core.getFilename(), e))
                 FactoryControls.getMessage(_("An error was occurred when it was saving current project to %s" % core.getFilename()),
-                                           type=gtk.MESSAGE_ERROR, 
+                                           type=gtk.MESSAGE_ERROR,
                                            title=_("Save project"),
-                                           parent = self.__mainWindow__)
+                                           parent=self.__mainWindow__)
                 return
         else:
             __log__.debug("Current project is not saved yet. Opening save dialog")
@@ -737,9 +737,9 @@ class MainWindow:
             except Exception, e:
                 __log__.error("It could not save current project to %s. %s" % (core.getFilename(), e))
                 FactoryControls.getMessage(_("An error was occurred when it was saving current project to %s" % core.getFilename()),
-                                           type=gtk.MESSAGE_ERROR, 
+                                           type=gtk.MESSAGE_ERROR,
                                            title=_("Save project"),
-                                           parent = self.__mainWindow__)
+                                           parent=self.__mainWindow__)
                 return
         __log__.info("Current project save on %s" % core.getFilename())
     
@@ -782,9 +782,9 @@ class MainWindow:
                 else:
                     __log__.error("It could not save current project to %s. %s" % (filename, e))
                     FactoryControls.getMessage(_("An error was occurred when it was saving current project to %s" % filename),
-                                               type=gtk.MESSAGE_ERROR, 
+                                               type=gtk.MESSAGE_ERROR,
                                                title=_("Save project"),
-                                               parent = self.__mainWindow__)
+                                               parent=self.__mainWindow__)
                     return
             finally:
                 fileSel.destroy()
@@ -826,9 +826,9 @@ class MainWindow:
         @summary: Handle query quit event.
         @param window: GtkWindow that threw event. 
         """
-        if (gtk.RESPONSE_YES == FactoryControls.getConfirmMessage(_("Are you sure you want to close PyCamimg?"), 
+        if (gtk.RESPONSE_YES == FactoryControls.getConfirmMessage(_("Are you sure you want to close PyCamimg?"),
                                                                   title=_("Close PyCamimg"),
-                                                                  parent = self.__mainWindow__)):
+                                                                  parent=self.__mainWindow__)):
             return False
         else:
             return True
@@ -843,7 +843,7 @@ class MainWindow:
         gtk.main_quit()
         __log__.debug("Main window closed.")
         
-#OPTIONS DIALOG
+# OPTIONS DIALOG
 
     def __applyConfigurationCallback__(self, dialog):
         """
@@ -857,7 +857,7 @@ class MainWindow:
             del dialog
 
 
-    def show(self, resetExplorer = True):
+    def show(self, resetExplorer=True):
         """
         @summary: Show main window.
         @param resetExplorer: True to put home directory on explorer. 
@@ -866,7 +866,7 @@ class MainWindow:
         if (resetExplorer):
             self.__eExplorer__.goHome()
 
-#ABOUT DIALOG
+# ABOUT DIALOG
 
     def showAbout(self):
         """
@@ -876,7 +876,7 @@ class MainWindow:
             if (self.__aboutDialog__ == None):
                 self.__aboutDialog__ = FactoryControls.getAbout(
                     __VERSION_FILE__,
-                    self.__closeAbout__, 
+                    self.__closeAbout__,
                     __COPYING_FILE__,
                     parent=self.__mainWindow__)
         else:

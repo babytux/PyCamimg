@@ -35,7 +35,7 @@ except:
 try:
     from PIL import Image
     from PIL import JpegImagePlugin
-    Image._initialized=2
+    Image._initialized = 2
 except ImportError, e:
     __log__.fatal("It could not import Image.PIL. Sure you have installed PIL library. %s" % e)
     
@@ -51,7 +51,7 @@ class ChangeDate(Operation):
     @param newDate New date to apply to picture.
     @see: Operation 
     """
-    def __init__(self, newDate = 0):
+    def __init__(self, newDate=0):
         """
         @summary: Create a rotate operation.
         @param degrees: Degrees that input file will rotate.
@@ -76,13 +76,13 @@ class ChangeDate(Operation):
         @return: PIL.Image object as result of operation.
         @raise Exception: Raise when it can not change date of picture. 
         """        
-        #try:
+        # try:
         #    imgobj = imgobj.rotate(self.__args__["degrees"])
         #    if (path != None):
         #        __log__.info("%s Rotated." % path)
         #    else:
         #        __log__.debug("Rotated")
-        #except Exception, e:
+        # except Exception, e:
         #    if (path != None):
         #        __log__.error("An error has occurred when it was rotating %s. %s" % (path, e))
         #    else:

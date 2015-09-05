@@ -23,7 +23,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 import gettext
@@ -35,8 +35,8 @@ class ImageArea(gtk.DrawingArea):
     @summary: Class that manage image.
     """
     def __init__(self, aspect=True, enlarge=False,
-                 interp=gtk.gdk.INTERP_NEAREST, backcolor=None, 
-                 max=(1600,1200)):
+                 interp=gtk.gdk.INTERP_NEAREST, backcolor=None,
+                 max=(1600, 1200)):
         """
         @summary: Create new image area.
         Parameters:

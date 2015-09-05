@@ -44,7 +44,7 @@ if (len(sys.argv) > 1):
             # TODO: process parameters
             pass
         else:
-            #Parameter with whitespace. Eg. -o python.py
+            # Parameter with whitespace. Eg. -o python.py
             # TODO: process parameters
             pass
 p = None

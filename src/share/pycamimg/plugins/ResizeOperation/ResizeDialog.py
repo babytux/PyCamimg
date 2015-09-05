@@ -38,7 +38,7 @@ try:
         pygtk.require('2.0')
     import gtk, gobject
 except Exception, e:
-    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?" )
+    __log__.fatal("It can not import pygtk module. Sure you have installed pygtk?")
     raise e
 
 from pycamimg.ui import FactoryControls
@@ -55,7 +55,7 @@ class ResizeDialog (gtk.Dialog):
 
     DEFAULT_DPI = 300
 
-    def __init__(self, callback = None, parent=None):
+    def __init__(self, callback=None, parent=None):
         """
         @summary: Create new resizeDialog
         @param callback: Callback that it will do after close dialog.
@@ -85,7 +85,7 @@ class ResizeDialog (gtk.Dialog):
 
         # Init source size in pixels and dpi
         self.__srcSize__ = (0, 0)
-        self.__srcDpi__ = self.DEFAULT_DPI #Default dpi
+        self.__srcDpi__ = self.DEFAULT_DPI  # Default dpi
 
         # Init size dictionary
         self.__lastSizes__ = {
@@ -101,8 +101,8 @@ class ResizeDialog (gtk.Dialog):
         @param msg: str within message. 
         @return: str translated.
         """
-        return gettext.translation(ResizeOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__, 
-                                   languages=[__LANGKEY__], fallback = True).gettext(msg)
+        return gettext.translation(ResizeOperation.camimgplugin.camimgpluginName, __LOCALE_FOLDER__,
+                                   languages=[__LANGKEY__], fallback=True).gettext(msg)
 
     def __initUI__(self):
         """
@@ -186,35 +186,35 @@ class ResizeDialog (gtk.Dialog):
         __log__.debug("Scale: %s" % srcScale)
         if (srcScale == ImageUtils.PERCENT):
             self.__lastSizes__[ImageUtils.PERCENT] = size
-            self.__lastSizes__[ImageUtils.PIXEL]= (
-                self.__srcSize__[0] * (float(size[0]) / 100), 
+            self.__lastSizes__[ImageUtils.PIXEL] = (
+                self.__srcSize__[0] * (float(size[0]) / 100),
                 self.__srcSize__[1] * (float(size[1]) / 100))
             self.__lastSizes__[ImageUtils.CM] = ImageUtils.pixelToCm(
                 self.__lastSizes__[ImageUtils.PIXEL],
                 self.__srcDpi__)
         elif (srcScale == ImageUtils.PIXEL):
-            self.__lastSizes__[ImageUtils.PIXEL]= size
+            self.__lastSizes__[ImageUtils.PIXEL] = size
             self.__lastSizes__[ImageUtils.CM] = ImageUtils.pixelToCm(
-                size, 
+                size,
                 self.__srcDpi__)
 
             if (self.__srcSize__[0] != 0):
                 self.__lastSizes__[ImageUtils.PERCENT] = (
-                    (float(size[0]) / self.__srcSize__[0]) * 100, 
+                    (float(size[0]) / self.__srcSize__[0]) * 100,
                     (float(size[1]) / self.__srcSize__[1]) * 100)
             else:
                 __log__.debug("Source size is 0. It can not possible calculate other scales.")
                 self.__lastSizes__[ImageUtils.PERCENT] = (0, 0)
 
         elif (srcScale == ImageUtils.CM):
-            self.__lastSizes__[ImageUtils.CM]= size
+            self.__lastSizes__[ImageUtils.CM] = size
             self.__lastSizes__[ImageUtils.PIXEL] = ImageUtils.cmToPixel(
-                size, 
+                size,
                 self.__srcDpi__)
 
             if (self.__srcSize__[0] != 0):
                 self.__lastSizes__[ImageUtils.PERCENT] = (
-                    (float(size[0]) / self.__srcSize__[0]) * 100, 
+                    (float(size[0]) / self.__srcSize__[0]) * 100,
                     (float(size[1]) / self.__srcSize__[1]) * 100)
             else:
                 __log__.debug("Source size is 0. It can not possible calculate other scales.")
@@ -291,7 +291,7 @@ class ResizeDialog (gtk.Dialog):
             if (self.__lastSizes__[scale][1] != 0):
                 diff = float(newHeight) / float(self.__lastSizes__[scale][1])
 
-        #Update values only when a change has ocurred
+        # Update values only when a change has ocurred
         if (diff != 1):
             if (scale == ImageUtils.PIXEL):
                 newWidth = round(newWidth)
@@ -312,7 +312,7 @@ class ResizeDialog (gtk.Dialog):
                     newWidth = float(self.__lastSizes__[scale][0])
                        
         
-            #Update last size of a scale
+            # Update last size of a scale
             self.__calculateSize__(scale, (newWidth, newHeight))
             if (upWidth):
                 self.__spWidth__.set_value(newWidth)
@@ -334,18 +334,18 @@ class ResizeDialog (gtk.Dialog):
                 sMessage = self.__trans__("Width must be getter than 0")
                 __log__.info(sMessage)
                 FactoryControls.getMessage(
-                    sMessage, 
-                    title=self.__trans__("Wrong width"), 
+                    sMessage,
+                    title=self.__trans__("Wrong width"),
                     type=gtk.MESSAGE_ERROR,
-                    parent = self)
+                    parent=self)
             if (height <= 0):
                 sMessage = self.__trans__("Height must be getter than 0")
                 __log__.info(sMessage)
                 FactoryControls.getMessage(
-                    sMessage, 
-                    title=self.__trans__("Wrong height"), 
+                    sMessage,
+                    title=self.__trans__("Wrong height"),
                     type=gtk.MESSAGE_ERROR,
-                    parent = self)
+                    parent=self)
     
             if ((self.__callback__ != None) and (width > 0) and (height > 0)):
                 self.__callback__(self, width, height, unit)
@@ -453,7 +453,7 @@ class ResizeDialog (gtk.Dialog):
                 self.__srcSize__ = srcSize
             else:
                 self.__srcSize__ = ImageUtils.cmToPixel(
-                    (float(width), float(height)), 
+                    (float(width), float(height)),
                     self.__srcDpi__)
             self.__setActiveRadios__(True)
         elif (unit == ImageUtils.PERCENT):
